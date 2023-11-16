@@ -13,6 +13,6 @@ for a in Z_15_star:
 
         # Check if the property holds
         if psi[a_odot_15_b] == psi_a_odot_16_psi_b:
-            print(f"Pair ({a}, {b}): \\psi({a} \\odot_{{15}}{b})= {psi[a_odot_15_b]} = \\psi({a}) \\odot_{{16}} \\psi({b})")
+            print(f"$\\psi({a} \\odot_{{15}}{b})= {psi[a_odot_15_b]} = \\psi({a}) \\odot_{{16}} \\psi({b})$")
         else:
             print(f"Pair ({a}, {b}): Property does not hold")
