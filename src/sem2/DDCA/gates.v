@@ -1,4 +1,4 @@
-module gates(input [3:0] a, b output [3:0] y1, y2 , y3, y4, y5);
+module gates(input [3:0] a, input [3:0] b, output [3:0] y1, y2, y3, y4, y5);
 
     // assigns five different two-input logic gates acting on 4 bit busses
     assign y1 = a & b;
