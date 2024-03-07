@@ -1,0 +1,52 @@
+NETHZ: bfeitknecht
+
+Total Percentage: 0%
+
+compile errors: NO
+nondeterministic: NO
+timeout: NO
+
+Trivial (a): 0
+Non-Trivial (a): 0
+Total (a) (only if non-trivial > 0): 0
+Percentage (a): 0%
+Total (b): 0
+Percentage (b): 0%
+
+testABiggerGraphBasic: FAIL
+testADeadStates: FAIL
+testAEmptyPrefix: FAIL
+testAEmptySuffix: FAIL
+testAFullAlphabetMatchBasic: FAIL
+testAFullAlphabetNoResult: FAIL
+testAMultiDAGNum: FAIL
+testAMultiDAGReachable: FAIL
+testAPrefixMixedLenBasic: FAIL
+testASuffixGivenBasic01: FAIL
+testASuffixGivenBasic02: FAIL
+testASuffixLen1Basic: FAIL
+testASuffixLen2Basic: FAIL
+testASuffixOverlap: FAIL
+testATrueDAG: FAIL
+testATrueDAGWords: FAIL
+testBSkipmatch01Basic: FAIL
+testBSkipmatch02Basic: FAIL
+testBSkipmatch03Basic: FAIL
+testBSkipmatch04Basic: FAIL
+testBSkipmatch05Basic: FAIL
+testBSkipmatch07: FAIL
+testBSkipmatch08: FAIL
+testBSkipmatch09Haystack: FAIL
+testBSkipmatch10: FAIL
+testBSkipmatch11: FAIL
+testBSkipmatch12: FAIL
+testBSkipmatch13: FAIL
+testBSkipmatch14: FAIL
+testBSkipmatch15: FAIL
+testBSkipmatchDAG: FAIL
+testBSkipmatchDAGLargeK: FAIL
+testBSkipmatchGiven01: FAIL
+testBSkipmatchGiven02: FAIL
+testBSkipmatchLastHop: FAIL
+
+

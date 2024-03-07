@@ -1,0 +1,23 @@
+1.
+
+P: { n > 7/4 } oder { n >= 2 }  oder  { n > 1.75 }
+S:   m = n * 4;  k = m - 2;
+Q: { n > 0 && k > 5 }
+
+
+2.
+
+P: { n != 0 }
+S:   m = n * n;  k = m * 2;
+Q: { k > 0 }
+
+
+3.
+
+P: { y > x || x > y }  oder { x != y }
+S:   if (x > y) {
+       z = x - y;
+     } else {
+       z = y - x; 
+     }
+Q: { z > 0 }

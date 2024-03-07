@@ -1,0 +1,39 @@
+NETHZ: bfeitknecht
+
+Total Percentage: 0%
+
+compile errors: NO
+timeout: NO
+
+test1: FAIL
+test10: FAIL
+test11: FAIL
+test12: FAIL
+test13: FAIL
+test14: FAIL
+test15: FAIL
+test16: FAIL
+test17: FAIL
+test18: FAIL
+test19: FAIL
+test2: FAIL
+test20: FAIL
+test21: FAIL
+test22: FAIL
+test23: FAIL
+test24: FAIL
+test25: FAIL
+test26: FAIL
+test27: FAIL
+test28: FAIL
+test29: FAIL
+test3: FAIL
+test30: FAIL
+test4: FAIL
+test5: FAIL
+test6: FAIL
+test7: FAIL
+test8: FAIL
+test9: FAIL
+
+

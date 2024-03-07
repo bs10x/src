@@ -1,0 +1,98 @@
+In dieser Aufgabe implementieren Sie eine Contact-Tracing-Applikation, welche es ermöglichen
+soll, Kontakte während eines Virus-Ausbruches nachzuverfolgen. Ihre Implementierung soll
+zunächst Begegnungen zwischen verschiedenen Person-Instanzen anonym protokollieren, so dass
+bei einem positivem Test die Benachrichtigung aller Personen möglich ist, die direkt oder indirekt
+mit einer positiv getesteten Person in Kontakt standen.
+
+
+Anonyme Begegnungen.
+Um Anonymität zu gewährleisten, dürfen zwei Personen A und B bei
+einer Begegnung lediglich anonyme Integer-IDs austauschen, ohne dabei die Identität der jeweils
+anderen Person aufzudecken. Beide Personen speichern hierbei sowohl die eigene ID als auch
+die ID der anderen Person. Bei der positiven Testung von A kann dann mithilfe der anonymen
+IDs, die A genutzt hat, festgestellt werden, ob B einer dieser IDs begegnet ist. Um zu vermeiden,
+dass wiederkehrende IDs die Identifikation einer Person über mehrere Begegnungen hinweg
+ermöglichen, benutzt jede Person für jede Begegnung frische IDs, welche über eine zentrale Klasse
+ContactTracer vergeben werden. Frisch bedeutet hierbei, dass eine ID zuvor noch nie bei einer
+Begegnung verwendet wurde.
+
+
+Direkte und indirekte Kontakte.
+Nachdem eine Reihe an Begegnungen protokolliert wurden,
+wird eine oder mehrere Personen positiv getestet. Mit dem erfassten Netzwerk aus Begegnungen
+soll Ihre Applikation dann zwei verschiedene Arten an Kontaktpersonen bestimmten:
+
+• Als direkte Kontakte gelten alle Personen, die eine Begegnung mit einer positiv getesteten Person hatten.
+	
+• Als indirekte Kontakte hingegen gelten alle Personen, die zwar selbst keine Begegnung
+mit einer positiv getesteten Person hatten, jedoch Kontakt mit mindestens einer anderen
+Person, welche als direkter Kontakt gilt, hatten. Indirekte Kontakte mit mehr als einer
+Zwischenperson müssen Sie dabei nicht berücksichtigen.
+Sie dürfen dabei annehmen, dass zunächst alle Begegnungen erfasst werden und erst dann
+Personen positiv getestet werden. Nach der ersten positiven Testung finden keine weiteren
+Begegnungen mehr statt.
+
+
+Benachrichtigungen.
+Da nicht alle Personen gleichermassen gefährdet sind, soll Ihre Applikation die Benachrichtigung der Kontaktpersonen vom Alter, der Art des Kontaktes, sowie dem
+Testergebnis der jeweiligen Kontaktperson abhängig machen. Dabei soll eine der drei Warnstufen
+Keine Benachrichtigung, Low-Risk-Benachrichtigung oder High-Risk-Benachrichtigung ausgesprochen
+werden. Zu Beginn haben alle Personen die Standard-Warnstufe Keine Benachrichtigung und
+gelten als negativ getestet. Davon ausgehend sollen nach jedem registrierten positiven Test die
+zugehörigen Kontaktpersonen wie folgt benachrichtigen werden:
+
+Testergebnis der Kontaktperson 			Alter der Kontaktperson 		Direkter Kontakt 		Indirekter Kontakt
+Positiv 								- 								Keine Benachr. 			Keine Benachr.
+Negativ 								≤ 60 Jahre alt 					High-Risk 				Keine Benachr.
+Negativ 								> 60 Jahre alt 					High-Risk 				Low-Risk
+
+Eine negativ getestete Person, die höchstens 60 Jahre alt ist und die nur in indirektem Kontakt
+zu einer positiven Person stand, soll beispielsweise keine Benachrichtigung erhalten (Reihe 2).
+Eine negativ getestete Person über 60 Jahre hingegen soll als indirekter Kontakt eine Low-RiskBenachrichtigung erhalten (Reihe 3).
+Wenn mehrere Personen positiv getestet werden, soll Ihre Applikation immer die höchste
+geltende Warnstufe für die anderen, negativ getesteten Personen berechnen. Dabei ist die Ordnung
+der Warnstufen wie folgt definiert: Keine Benachrichtigung < Low-Risk Benachrichtigung < HighRisk Benachrichtigung. Positiv getestete Personen hingegen sollen immer die Warnstufe Keine
+Benachrichtigung erhalten. Im Allgemeinen dürfen Sie zudem annehmen, dass eine Person, die
+einmal positiv getestet wurde, für den Rest der Laufzeit Ihrer Applikation als positiv getestet gilt.
+
+
+Implementierung.
+Erweiteren Sie den vorgegebenen Code für die Klasse ContactTracer und
+das Interface Person wie folgt, um die Contact-Tracing-Applikation umzusetzen:
+Implementieren Sie das Interface Person mit den folgenden public Methoden:
+
+• Person.getUsedIds(). Diese Methode gibt die Liste aller IDs zurück (List<Integer>),
+die für diese Person als frische ID verwendet wurden, um eine Begegnung zu protokollieren. Nach Hinzufügen einer ID in diese Liste muss dieselbe ID in die jeweilige
+Person.getSeenIds()-Liste des Gegenübers eingetragen sein.
+
+• Person.getSeenIds(). Diese Methode gibt die Liste aller IDs zurück (List<Integer>),
+die diese Person als die frische ID des jeweiligen Gegenübers bei einer Begegnung protokolliert hat. Nach Hinzufügen einer ID in diese Liste muss dieselbe ID in die jeweilige
+Person.getUsedIds()-Liste des Gegenübers eingetragen sein.
+
+• Person.getNotification(). Diese Methode gibt den aktuellen Benachrichtigungsstatus
+der Person zurück. Der Rückgabewert soll vom Enum-Typ NotificationType sein, welcher
+vorgegeben ist und die drei möglichen Warnstufen modelliert. NotificationType ist im
+Interface Person definiert und enthält die drei Werte NoNotification (keine Benachrichtigung), LowRiskNotification (Low-Risk-Benachrichtigung) und HighRiskNotification
+(High-Risk-Benachrichtigung).
+
+• Person.setTestsPositively(). Diese Methode wird aufgerufen, um eine Person als positiv getestet zu markieren. Nach dem Aufrufen dieser Methode sollen automatisch alle Kontakte von A benachrichtigt worden sein und die entsprechenden Warnstufe per
+Person.getNotification() zurückgeben.
+
+Implementieren Sie zusätzlich die Klasse ContactTracer, welche die folgenden public Methoden besitzt:
+
+• ContactTracer.registerEncounter(Person p1, Person p2). Mit dieser Methode wird
+eine (beidseitige) Begegnung zwischen Person-Objekten p1 und p2 protokolliert, indem
+die beiden Personen anonyme IDs austauschen. Die ausgetauschten IDs müssen dabei
+unterschiedlich sein. Eine Begegnung zwischen p1 und p2 ist beidseitig und muss somit
+auch als Begegnung zwischen p2 und p1 gewertet werden.
+
+• ContactTracer.createPerson(int age). Diese Methode gibt ein Person-Objekt zurück.
+Das Alter der Person ist durch den age Parameter bestimmt.
+Alle Person-Objekte werden von der Methode ContactTracer.createPerson(int age) erstellt. Der ContactTracer wird über den parameterfreien Konstruktor ContactTracer() instanziiert. Sie dürfen annehmen, dass nie mehr als 1024 Begegnungen zwischen Personen protokolliert
+werden.
+
+Implementieren Sie auf Basis dieser Vorlage eine Lösung für das Contact-Tracing-Problem.
+Tests finden Sie in der Datei “ContactTracerTest.java”. Die Datei “ContactTracerGradingTest.java”
+enthält die Tests, welche wir bei der Prüfung für die Korrektur verwendet haben. Wir empfehlen,
+diese Tests erst zu verwenden, wenn Sie denken, dass Ihre Lösung korrekt ist, damit Sie sehen
+können, wie Sie bei einer Prüfung abgeschnitten hätten.

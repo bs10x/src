@@ -1,0 +1,57 @@
+NETHZ: bfeitknecht
+
+Total: 13%
+
+compile errors: NO
+nondeterministic: NO
+timeout: NO
+
+
+Total a): 18%
+Total b): 8%
+
+testAACreateHuman: PASS
+testAACreateWarrior: PASS
+testABasicHumans01: FAIL
+testAException01: FAIL
+testAException02: FAIL
+testAException03Given: FAIL
+testAWarriorAttack01Given: FAIL
+testAWarriorAttack02: FAIL
+testAWarriorAttack03: FAIL
+testAWarriorAttack04: FAIL
+testAWarriorAttack05: FAIL
+testAWarriorAttack06: FAIL
+testAWarriorSummon01Given: FAIL
+testAWarriorSummon02: FAIL
+testAWarriorSummon03: PASS
+testAWarriorZMixed01: FAIL
+testAWarriorZMixed02: FAIL
+
+testBACreateCleric: PASS
+testBACreateGeneral: PASS
+testBAll01Given: FAIL
+testBClericAttack01: FAIL
+testBClericAttack02: FAIL
+testBClericAttack03: FAIL
+testBClericSummon01: FAIL
+testBClericSummon02: FAIL
+testBClericSummon03: FAIL
+testBClericSummon04: FAIL
+testBClericZAttackSummon01: FAIL
+testBGeneralAttack01GivenFix: FAIL
+testBGeneralAttack02: FAIL
+testBGeneralAttack03: FAIL
+testBGeneralAttack04: FAIL
+testBGeneralAttack05: FAIL
+testBGeneralAttack06: FAIL
+testBGeneralSummon01GivenFix: FAIL
+testBGeneralSummon02: FAIL
+testBGeneralSummon03: FAIL
+testBGeneralSummon04: FAIL
+testBGeneralSummon05: FAIL
+testBGeneralSummon06: FAIL
+testBZMixed01GivenFix: FAIL
+testBZMixed02: FAIL
+
+

@@ -1,0 +1,624 @@
+NETHZ: bfeitknecht
+
+Total Points (max. 5): 5
+
+compile errors: NO
+
+testAlmostExactMatch01: PASS
+testAlmostExactMatch02: PASS
+testAlmostExactMatch03: PASS
+testAlmostExactMatch04: PASS
+testEqualMatricesLarge: PASS
+testEqualMatricesSmall: PASS
+testExactMatchLarge01: PASS
+testExactMatchLarge02: PASS
+testExactMatchSmall01: PASS
+testExactMatchSmall02: PASS
+testExactMatchSmall03: PASS
+testExactMatchSmall04: PASS
+testMatchMultipleChangesNeeded01: PASS
+testMatchMultipleChangesNeeded02: PASS
+testMatchMultipleChangesNeeded03: PASS
+testMultipleExactMatches01: PASS
+testMultipleExactMatches02: PASS
+testNegativeValues: PASS
+testNoMatch01: PASS
+testNoMatch02: PASS
+testNoMatch03: PASS
+testOnlyOneDigitCorrect: PASS
+testOnlyTwoDigitCorrect: PASS
+
+
+Folgende Test-Datei wurde für die Bewertung verwendet:
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class GradingPatternHS23Test {
+	
+	@Test
+	public void testExactMatchSmall01() {
+		int[][] matrix = new int[][]{
+				{1, 2, 3, 4, 1},
+				{3, 4, 2, 3, 4},
+				{4, 3, 2, 1, 2},
+				{3, 2, 2, 3, 2},
+				{4, 3, 4, 3, 4}
+		};
+
+		int[][] search = new int[][]{
+				{1, 2},
+				{3, 4}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(0, record.x);
+		assertEquals(0, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testExactMatchSmall02() {
+		int[][] matrix = new int[][]{
+				{4, 3, 3, 4, 3},
+				{3, 4, 4, 3, 4},
+				{1, 2, 2, 1, 2},
+				{2, 3, 4, 2, 3},
+				{4, 2, 4, 2, 4}
+		};
+
+		int[][] search = new int[][]{
+				{3, 4},
+				{4, 3}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(0, record.x);
+		assertEquals(2, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testExactMatchSmall03() {
+		int[][] matrix = new int[][]{
+				{3, 4, 5, 2, 1},
+				{4, 2, 2, 1, 3},
+				{5, 4, 5, 4, 5},
+				{5, 1, 3, 4, 5},
+				{1, 5, 2, 5, 4}
+		};
+
+		int[][] search = new int[][]{
+				{4, 5},
+				{5, 4}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(3, record.x);
+		assertEquals(3, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testExactMatchSmall04() {
+		int[][] matrix = {
+				{7, 9, 6, 3, 2},
+				{4, 2, 2, 9, 1},
+				{1, 3, 5, 3, 4},
+				{1, 9, 7, 8, 1},
+				{6, 3, 8, 8, 8}
+		};
+
+		int[][] search = {
+				{5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(2, record.x);
+		assertEquals(2, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testExactMatchLarge01() {
+		int[][] matrix = new int[][]{
+				{3, 2, 8, 6, 7, 5, 1, 4, 9, 7},
+				{1, 4, 6, 9, 2, 5, 8, 3, 7, 1},
+				{7, 5, 3, 1, 9, 8, 6, 2, 4, 3},
+				{4, 9, 2, 7, 8, 1, 3, 6, 5, 8},
+				{8, 7, 4, 5, 3, 2, 9, 1, 6, 2},
+				{6, 3, 5, 4, 1, 9, 7, 8, 2, 6},
+				{2, 1, 7, 3, 6, 4, 5, 9, 8, 4},
+				{5, 8, 9, 2, 4, 6, 2, 7, 3, 5},
+				{9, 6, 1, 8, 5, 7, 4, 5, 1, 9},
+				{3, 4, 8, 1, 7, 3, 6, 2, 9, 8}
+		};
+
+		int[][] search = new int[][]{
+				{8, 1, 3, 6},
+				{3, 2, 9, 1},
+				{1, 9, 7, 8},
+				{6, 4, 5, 9}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(3, record.x);
+		assertEquals(4, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testExactMatchLarge02() {
+		int[][] matrix = new int[][]{
+				{4, 1, 8, 8, 3, 5, 8, 1, 9, 7},
+				{8, 7, 3, 9, 6, 5, 9, 2, 2, 9},
+				{9, 3, 5, 6, 8, 7, 1, 1, 7, 5},
+				{8, 8, 3, 6, 4, 1, 4, 7, 2, 2},
+				{2, 6, 6, 4, 7, 2, 7, 5, 7, 5},
+				{2, 4, 1, 1, 1, 4, 5, 2, 3, 4},
+				{6, 4, 8, 2, 5, 8, 3, 8, 5, 6},
+				{8, 1, 5, 2, 7, 2, 5, 6, 1, 5},
+				{6, 5, 2, 5, 6, 6, 3, 4, 3, 2},
+				{7, 7, 4, 8, 2, 7, 6, 4, 1, 4}
+		};
+
+		int[][] search = new int[][]{
+				{1, 1, 1, 4, 5},
+				{8, 2, 5, 8, 3},
+				{5, 2, 7, 2, 5},
+				{2, 5, 6, 6, 3},
+				{4, 8, 2, 7, 6}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(5, record.x);
+		assertEquals(2, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testNoMatch01() {
+		int[][] matrix = new int[][]{
+				{5, 7, 4, 1, 8},
+				{7, 3, 8, 5, 1},
+				{6, 8, 6, 6, 5},
+				{7, 6, 7, 1, 1},
+				{1, 2, 6, 6, 4}
+		};
+
+
+		int[][] search = new int[][]{
+				{-1, -1},
+				{-1, -1},
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		boolean isValidX = record.x >= 0 && record.x <= 3;
+		boolean isValidY = record.y >= 0 && record.y <= 3;
+
+		assertTrue(isValidX && isValidY);
+		assertEquals(4, record.count);
+	}
+
+	@Test
+	public void testNoMatch02() {
+		int[][] matrix = new int[][]{
+				{6, 5, 2, 8, 1},
+				{3, 8, 9, 6, 5},
+				{7, 2, 6, 2, 8},
+				{1, 4, 8, 7, 8},
+				{5, 6, 2, 8, 4}
+		};
+
+		int[][] search = new int[][]{
+				{0, 0, 0},
+				{0, 0, 0},
+				{0, 0, 0}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		boolean isValidX = record.x >= 0 && record.x <= 2;
+		boolean isValidY = record.y >= 0 && record.y <= 2;
+
+		assertTrue(isValidX && isValidY);
+		assertEquals(9, record.count);
+	}
+
+	@Test
+	public void testNoMatch03() {
+		int[][] matrix = {
+				{697, 467, 496, 901, 201, 907, 942, 439, 230, 416},
+				{877, 870, 284, 370, 427, 141, 543, 182, 364, 425},
+				{663, 681, 174, 217, 107, 231, 553, 303, 641, 321},
+				{256, 866, 197, 130, 147, 695, 494, 557, 114, 440},
+				{330, 132, 639, 644, 877, 864, 392, 641, 164, 475},
+				{715, 410, 837, 246, 717, 403, 306, 866, 179, 355},
+				{485, 726, 876, 910, 997, 151, 290, 894, 203, 560},
+				{468, 327, 549, 904, 212, 203, 195, 871, 438, 231},
+				{154, 495, 272, 974, 791, 202, 236, 970, 302, 793},
+				{495, 900, 573, 262, 739, 309, 377, 538, 173, 185}
+		};
+
+		int[][] search = {
+				{999, 999, 999},
+				{999, 999, 999},
+				{999, 999, 999},
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		boolean isValidX = record.x >= 0 && record.x <= 7;
+		boolean isValidY = record.y >= 0 && record.y <= 7;
+
+		assertTrue(isValidX && isValidY);
+		assertEquals(9, record.count);
+	}
+
+	@Test
+	public void testMultipleExactMatches01() {
+		int[][] matrix = {
+				{3, 7, 1, 4, 9},
+				{3, 5, 5, 7, 9},
+				{1, 5, 5, 5, 6},
+				{6, 3, 5, 5, 6},
+				{2, 7, 4, 5, 6}
+		};
+
+		int[][] search = {
+				{5, 5},
+				{5, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		boolean isValidCoordinates = (record.x == 1 && record.y == 1) || (record.x == 2 && record.y == 2);
+		assertTrue(isValidCoordinates);
+		assertEquals(0, record.count);
+
+	}
+
+	@Test
+	public void testMultipleExactMatches02() {
+		int[][] matrix = {
+				{ 6, 6, 3, 6, 9, 1, 8, 7, 2, 2 },
+				{ 1, 6, 9, 4, 6, 9, 6, 2, 3, 8 },
+				{ 9, 3, 0, 0, 0, 0, 0, 0, 4, 9 },
+				{ 1, 3, 0, 0, 0, 0, 0, 0, 3, 9 },
+				{ 9, 2, 0, 0, 0, 0, 0, 0, 5, 2 },
+				{ 8, 6, 0, 0, 0, 0, 0, 0, 4, 7 },
+				{ 7, 9, 0, 0, 0, 0, 0, 0, 4, 9 },
+				{ 9, 6, 2, 1, 8, 4, 9, 6, 7, 9 },
+				{ 1, 3, 8, 9, 5, 1, 5, 7, 5, 3 },
+				{ 6, 6, 2, 8, 9, 9, 4, 9, 6, 3 }
+		};
+
+		int[][] search = {
+				{0, 0, 0},
+				{0, 0, 0},
+				{0, 0, 0}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		boolean isValidX = record.x >= 2 && record.x <= 4;
+		boolean isValidY = record.y >= 2 && record.y <= 5;
+
+		assertTrue(isValidX && isValidY);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testAlmostExactMatch01() {
+		int[][] matrix = {
+				{ 1, 2, 3, 3, 4 },
+				{ 2, 4, 3, 5, 5 },
+				{ 5, 3, 1, 5, 4 },
+				{ 2, 1, 5, 5, 2 },
+				{ 4, 3, 3, 2, 1 }
+		};
+
+		int[][] search = {
+				{5, 5},
+				{5, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+		
+		boolean isValid = (record.x == 2 && record.y == 2) || (record.x == 1 && record.y == 3);
+		
+		assertTrue(isValid);
+		assertEquals(1, record.count);
+	}
+
+	@Test
+	public void testAlmostExactMatch02() {
+		int[][] matrix = {
+				{3, 7, 1},
+				{3, 6, 4},
+				{1, 5, 5},
+		};
+
+		int[][] search = {
+				{3, 5},
+				{1, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(1, record.x);
+		assertEquals(0, record.y);
+		assertEquals(1, record.count);
+	}
+
+	@Test
+	public void testAlmostExactMatch03() {
+		int[][] matrix = {
+				{4, 7, 2, 9, 6},
+				{1, 8, 5, 3, 4},
+				{5, 3, 1, 7, 2},
+				{9, 8, 4, 6, 5},
+				{7, 3, 2, 8, 9}
+		};
+
+		int[][] search = {
+				{5, 3, 1},
+				{1, 7, 2},
+				{4, 6, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(1, record.x);
+		assertEquals(2, record.y);
+		assertEquals(1, record.count);
+	}
+
+	@Test
+	public void testAlmostExactMatch04() {
+		int[][] matrix = {
+				{3, 7, 1, 5, 8, 2, 4, 9, 6, 3},
+				{5, 2, 3, 7, 4, 8, 1, 5, 7, 6},
+				{1, 4, 9, 2, 3, 5, 6, 7, 8, 9},
+				{2, 7, 1, 4, 8, 3, 5, 9, 2, 1},
+				{8, 2, 3, 7, 4, 1, 6, 5, 7, 9},
+				{3, 5, 9, 2, 6, 7, 4, 1, 8, 3},
+				{7, 2, 4, 5, 9, 3, 1, 6, 7, 2},
+				{6, 8, 7, 4, 5, 9, 2, 3, 1, 4},
+				{5, 3, 2, 8, 6, 7, 9, 4, 5, 1},
+				{9, 6, 7, 3, 2, 1, 4, 8, 5, 7}
+		};
+
+		int[][] search = {
+				{6, 8, 7},
+				{5, 3, 2},
+				{2, 6, 7}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(7, record.x);
+		assertEquals(0, record.y);
+		assertEquals(1, record.count);
+	}
+
+	@Test
+	public void testMatchMultipleChangesNeeded01() {
+		int[][] matrix = {
+				{7, 3, 1},
+				{5, 3, 4},
+				{1, 5, 5},
+		};
+
+		int[][] search = {
+				{3, 2},
+				{3, 9}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(0, record.x);
+		assertEquals(1, record.y);
+		assertEquals(2, record.count);
+	}
+
+	@Test
+	public void testMatchMultipleChangesNeeded02() {
+		int[][] matrix = {
+				{3, 7, 1, 2, 8},
+				{4, 5, 4, 6, 9},
+				{1, 5, 3, 2, 7},
+				{6, 8, 7, 4, 5},
+				{5, 3, 2, 8, 6},
+
+		};
+
+		int[][] search = {
+				{1, 4, 6},
+				{5, 1, 2},
+				{8, 7, 1}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(1, record.x);
+		assertEquals(1, record.y);
+		assertEquals(3, record.count);
+	}
+
+	@Test
+	public void testMatchMultipleChangesNeeded03() {
+		int[][] matrix = {
+				{3, 7, 1, 2, 8, 4, 9, 6, 7, 3, 5, 2},
+				{4, 5, 4, 6, 9, 1, 5, 2, 3, 7, 4, 8},
+				{1, 5, 3, 2, 7, 6, 8, 7, 4, 9, 2, 1},
+				{6, 8, 7, 4, 5, 5, 3, 2, 8, 6, 7, 9},
+				{5, 3, 2, 8, 6, 9, 6, 7, 3, 1, 4, 8},
+				{9, 6, 7, 3, 1, 2, 7, 1, 4, 5, 9, 3},
+				{2, 8, 5, 4, 5, 5, 5, 5, 5, 4, 5, 6},
+				{7, 3, 2, 2, 5, 5, 1, 5, 5, 9, 4, 7},
+				{8, 4, 9, 3, 5, 1, 1, 1, 5, 8, 2, 1},
+				{3, 7, 1, 4, 5, 5, 1, 5, 5, 4, 7, 5},
+				{4, 5, 4, 6, 5, 5, 5, 5, 5, 8, 9, 3},
+				{1, 2, 3, 4, 2, 6, 7, 8, 9, 1, 2, 3}
+		};
+
+		int[][] search = {
+				{5, 5, 5, 5, 5},
+				{5, 5, 5, 5, 5},
+				{5, 5, 5, 5, 5},
+				{5, 5, 5, 5, 5},
+				{5, 5, 5, 5, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+		
+		assertEquals(6, record.x);
+		assertEquals(4, record.y);
+		assertEquals(5, record.count);
+	}
+
+	@Test
+	public void testOnlyOneDigitCorrect() {
+		int[][] matrix = {
+				{3, 7, 1},
+				{4, 5, 4},
+				{1, 5, 3}
+		};
+
+		int[][] search = {
+				{7, 0},
+				{0, 0}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+		
+		assertEquals(0, record.x);
+		assertEquals(1, record.y);
+		assertEquals(3, record.count);
+	}
+
+
+	@Test
+	public void testOnlyTwoDigitCorrect() {
+		int[][] matrix = {
+				{3, 7, 1, 5},
+				{4, 5, 4, 8},
+				{1, 5, 3, 9},
+				{3, 7, 1, 5},
+		};
+
+		int[][] search = {
+				{5, 4, 0},
+				{0, 0, 0},
+				{0, 0, 0},
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(1, record.x);
+		assertEquals(1, record.y);
+		assertEquals(7, record.count);
+	}
+
+	@Test
+	public void testEqualMatricesSmall() {
+		int[][] matrix = {
+				{3, 7},
+				{4, 5}
+
+		};
+
+		int[][] search = {
+				{3, 7},
+				{4, 5}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(0, record.x);
+		assertEquals(0, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testEqualMatricesLarge() {
+		int[][] matrix = {
+				{1, 2, 3, 4, 5},
+				{6, 7, 8, 9, 1},
+				{2, 3, 4, 5, 6},
+				{7, 8, 9, 1, 2},
+				{3, 4, 5, 6, 7}
+
+		};
+
+		int[][] search = {
+				{1, 2, 3, 4, 5},
+				{6, 7, 8, 9, 1},
+				{2, 3, 4, 5, 6},
+				{7, 8, 9, 1, 2},
+				{3, 4, 5, 6, 7}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(0, record.x);
+		assertEquals(0, record.y);
+		assertEquals(0, record.count);
+	}
+
+	@Test
+	public void testNegativeValues() {
+		int[][] matrix = {
+			{-1, 10,  2, -3,  4},
+			{-6, 11, -7,  8, -9},
+			{-2, 12,  3, -4,  5},
+			{ 7, 13, -8,  9, -1},
+			{20, 21, 22, 23, 24}
+		};
+
+		int[][] search = {
+			{-6,  8, -9},
+			{3,  -4, 5},
+			{-8,  -9,  1}
+		};
+
+		MatchRecord record = Pattern.match(matrix, search);
+		assertNotNull(record);
+
+		assertEquals(1, record.x);
+		assertEquals(2, record.y);
+		assertEquals(3, record.count);
+	}
+
+}

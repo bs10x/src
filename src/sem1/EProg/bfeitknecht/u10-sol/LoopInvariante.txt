@@ -1,0 +1,28 @@
+Schreiben Sie hier Ihre Loop Invariante:
+
+s != null && 0 <= x && x <= s.length && 
+((0 <= i && i < s.length() && s.charAt(i) == c) || (i < 0 && count(s.substring(0, x), c) == 0))
+
+Es gibt noch weitere Loesungen. Zum Beispiel:
+
+s != null &&0 <= x && x <= s.length &&  (i < 0 || (i < s.length() && s.charAt(i) == c)) && (i >= 0 || count(s.substring(0, x), c) == 0))
+
+oder
+
+s != null &&0 <= x && x <= s.length && i < s.length() && (i < 0 || s.charAt(i) == c)) && (i >= 0 || count(s.substring(0, x), c) == 0))
+
+oder
+
+s != null &&0 <= x && x <= s.length && i < s.length() && (i >= 0 ? s.charAt(i) == c : count(s.substring(0, x), c) == 0)
+
+und viele weitere.
+
+
+Folgendes ist falsch:
+
+s != null && 0 <= x && x <= s.length && 
+((0 <= i && i < s.length() && s.charAt(i) == c) || count(s.substring(0, x), c) == 0)
+
+Das Problem ist, dass nach dem Loop x == s.length() nur dann definitiv gilt, wenn i < 0.
+Wenn i >= 0, dann koennte x < s.length() gelten. 
+Beachten Sie, dass (0 <= i && i < s.length() && s.charAt(i) == c) nicht impliziert, dass i < 0 gilt.

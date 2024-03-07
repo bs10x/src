@@ -1,0 +1,42 @@
+1.
+// EBNF beschreibung von <geradezahl>
+<geradezahl> <= [+|-] [{0|1|2|3|4|5|6|7|8|9}] (2|4|6|8) [{0}]
+
+
+
+2.
+// entscheidungs tabelle die "28" als <geradezahl> erkennt
+<geradezahl> <= [+|-] [{0|1|2|3|4|5|6|7|8|9}] (2|4|6|8) [{0}]
+<geradezahl> <= [{0|1|2|3|4|5|6|7|8|9}] (2|4|6|8) [{0}]
+<geradezahl> <= 2 (2|4|6|8) [{0}]
+<geradezahl> <= 2 8 [{0}]
+<geradezahl> <= 28
+
+
+
+3.
+// EBNF beschreibung von <x2ygemischt>
+<x2ygemischt> <= (X [<x2ygemischt>] YY) | (YY [<x2ygemischt>] X)
+
+
+
+4.
+// beweis der nicht equivalaenz durch *kuerzestmoegliches* symbol
+<beispiel1> <= [A] [B]
+<beispiel2> <= [A [B]]
+/*
+*	<beispiel1> <= [A][B]
+*	<beispiel1> <= [B]
+*	<beispiel1> <= B
+*
+*	<beispiel2> <= [A [B]]
+*	<beispiel2> <= A [B]
+*	<beispiel2> <= AB
+*/ 
+//	B nicht moeglich *ohne* A
+
+
+
+5.
+// EBNF beschreibung von <doppelt>
+<doppelt> <= X [<doppelt>] YY

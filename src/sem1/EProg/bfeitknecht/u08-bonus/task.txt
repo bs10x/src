@@ -1,0 +1,24 @@
+In dieser Aufgabe implementieren Sie ein Program, das bestimmte Graphen generiert.
+Die Klasse Node representiert einen Knoten eines Graphen. Die Methode Node.getNeighbors() gibt alle
+Nachbarn eines Knotens zurück. Ein Knoten B ist ein Nachbar von A, falls es im Graphen eine
+gerichtete Kante von A zu B gibt.
+
+Ein Hyperwürfel mit n-Dimensionen ist ein Graph mit 2^n Knoten. Um den Graphen zu erklären,
+weisen wir jedem Knoten ein einzigartiges Label zu. Als Label verwenden wir Sequenzen aus 0, 1
+der Länge n, e.g. für n = 3 mit 8 Knoten sind die Labels 000, 001, 010, 011, 100, 101, 110, 111.
+Für ein Label x ist x_i das i-te Element der Sequenz (beginnend bei 0). Ein Knoten A mit Label x hat
+eine Kante zu einem Knoten B mit Label y genau dann wenn, die Labels x und y sich nur an einer Stelle unterscheiden.
+
+Das heisst, Σ_{i=0}^{i<ns}|x_i − y_i| = 1 gilt. Das folgende Bild zeigt Hyperwürfel für n
+gleich 0 (links) bis 4 (rechts). Die Punkte stellen Knoten dar, welche durch Kanten verbunden sind.
+Bei dem Graphen für n = 4 benutzen wir für die leichtere Verständlichkeit zwei verschiedene
+Farben für die Kanten. Die Farben haben keine weitere Bedeutung.
+Implementieren Sie die Methode Graphs.cube(int n). Die Methode gibt einen Knoten zurück
+von einem Hyperwürfel mit n Dimensionen. Sie dürfen annehmen, dass n nicht negativ ist.
+
+Die Methode darf einen beliebigen Knoten des Hyperwürfels zurückgeben.
+
+Tipp: Vielleicht implementieren Sie die Methode rekursiv.
+
+Die Datei GraphsTest.java enthält Tests. Wir geben als Unterstützung für den Entwicklungsprozess
+zusätzlich eine Methode Graphs.printGraph(Node node), welche den Graphen von node als String über die Konsole ausgibt.

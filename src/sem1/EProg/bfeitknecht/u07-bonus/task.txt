@@ -1,0 +1,142 @@
+In dieser Aufgabe sollen Sie einen Teil des Systems implementieren, das für den lokalen Stromversorger die Rechnungen erstellt.
+Vervollständigen Sie die process-Methode in der Klasse Bills. Die Methode hat zwei Argumente:
+einen Scanner, von dem Sie den Inhalt der Eingabedatei lesen sollen, und einen PrintStream, in welchen Sie die unten beschriebenen Informationen schreiben.
+Ihr Programm muss nur korrekt formatierte Eingabedateien unterstützen. Ein Beispiel einer solchen Datei finden Sie im Projekt unter dem Namen “Data.txt”.
+Exceptions im Zusammenhang mit Ein- und Ausgabe können Sie ignorieren.
+
+Eine valide Eingabedatei enthält Zeilen, die entweder den Tarif, der angewendet werden soll,
+oder die Daten für den Stromverbrauch eines Kunden beschreiben. Der Verbrauch eines Kunden
+ist niemals grösser als 100000 Kilowattstunden.
+
+Eine Tarifbeschreibung hat folgendes Format:
+
+Tarif n l1 p1 . . . ln pn
+
+Folgendes gilt für die Parameter:
+• Tarif (so geschrieben) ist ein Keyword, das angibt, dass die Zeile einen Tarif beschreibt.
+• n is eine positive ganze Zahl, welche die Anzahl der Intervalle angibt, für welche ein Strompreis festgelegt ist.
+• Auf n folgt eine Folge von n Paaren von ganzen Zahlen (l1 p1 . . . ln pn). Die erste Zahl eines
+Paares gibt die Obergrenze des Intervalls an und die zweite den Preis für diesen Verbrauch;
+für ein i, so dass 1 ≤ i ≤ n, ist li also der Verbrauch (in Kilowattstunden), bis zu welchem
+der Strompreis pi (in Rappen pro Kilowattstunde) zur Anwendung kommt (li > 0 und pi ≥ 0).
+
+Die Paare sind jeweils mit einem Whitespace voneinander getrennt (und li und pi jeweils voneinander auch).
+Hier sind einige Beispiele für Tarifbeschreibungen:
+
+1. Tarif 1 100000 30
+Es gibt ein Intervall und für jede Kilowattstunde müssen 30 Rappen bezahlt werden.
+
+2. Tarif 2 1000 10 100000 30
+Es gibt zwei Intervalle. Die ersten 1000 Kilowattstunden kosten 10 Rappen pro Kilowattstunde. Der Rest kostet 30 Rappen pro Kilowattstunde.
+
+3. Tarif 3 100 40 1000 10 100000 30
+Es gibt drei Intervalle.
+Die ersten 100 Kilowattstunden kosten 40 Rappen pro Kilowattstunde.
+Die nächsten 1000 Kilowattstunden kosten 10 Rappen pro Kilowattstunde.
+Der Rest kostet 30 Rappen pro Kilowattstunde.
+
+Wenn ein Kunde im Jahr 2000 Kilowattstunden verbraucht, so beträgt die Rechung für das
+erste Beispiel 600 Franken, im zweiten Beispiel 400 Franken und 410 Franken im dritten.
+Die Beschreibung des Stromverbrauchs eines Kunden hat folgendes Format:
+
+ID vq1 vq2 vq3 vq4
+
+
+Hierbei gilt für die Parameter:
+• ID ist eine positive ganze Zahl.
+
+• vq1
+ist eine ganze Zahl, die den Verbrauch im ersten Quartal in Kilowattstunden angibt (vq1 ≥ 0).
+
+• vq2
+ist eine ganze Zahl, die den Verbrauch im zweiten Quartal in Kilowattstunden angibt (vq2 ≥ 0)
+
+• vq3
+ist eine ganze Zahl, die den Verbrauch im dritten Quartal in Kilowattstunden angibt (vq3 ≥ 0).
+
+• vq4
+ist eine ganze Zahl, die den Verbrauch im vierten Quartal in Kilowattstunden angibt (vq4 ≥ 0).
+
+
+Hier ist ein Beispiel für eine Verbrauchbeschreibung:
+115 0 0 0 2000
+Der Kunde mit ID 115 hat nur im vierten Quartal Strom verbraucht. Da waren es 2000
+Kilowattstunden.
+
+Ein einmal gelesener Tarif wird für alle Kunden angewendet, die nach dieser Tarifinformation in
+der Eingabedatei erscheinen. Wenn ein neuer Tarif erscheint, dann gilt der danach für die weiteren
+Kunden bis auf Weiteres. Sie können davon ausgehen, dass eine Kunden-ID nur einmal in der
+Eingabedatei vorkommen kann und dass die erste Zeile der Eingabedatei eine Tarifbeschreibung ist.
+Die Methode process soll die Eingabedatei verarbeiten und für jeden Kunden eine Zeile
+
+ID b
+
+in den der Methode in output übergebenen PrintStream schreiben. ID ist die ID des Kunden
+(int) und b ist eine ganze Zahl, die die jeweilige Rechnung für den Jahresverbrauch in Franken
+angibt. (Zuerst muss der Jahresverbrauch berechnet werden, dann kann der entsprechende
+Tarif angewendet werden.) Berechnen Sie den Rechnungsbetrag und runden Sie das Resultat
+anschliessend (vor der Ausgabe, aber nach den Berechnungen) auf die nächste ganze Zahl. Sie
+können hierfür die Methode Math.round(double a) verwenden. Die Ausgabe darf keine weiteren
+Zeichen enthalten. Sie können den Betrag so ausgeben, wie er von der println-Anweisung
+herausgegeben wird, d.h. Sie brauchen das Ergebnis nicht zu formatieren.
+In der Datei “BillsTest.java” finden Sie einen einfachen Test, um das Format Ihres Outputs zu
+testen.
+
+Tipp: Sie können die Aufgabe ohne weitere Vorgaben implementieren. Wir empfehlen, dass
+Sie sich überlegen, was sinnvolle Klassen sein könnten und was für Teilaufgaben (die dann als
+Methode implementiert werden können) zweckmässig sind.
+
+
+
+
+
+
+///////////////////////////////////////
+///////////////////////////////////////
+input.txt
+///////////////////////////////////////
+
+Tarif 4 1 1000 100 10 1000 5 100000 20
+345 0 0 0 0 										// -> 0 * 1000 = 0
+346 0 0 0 1											// -> 1 * 1000 = 1000 								-> / 100 = 10.-
+456 0 0 0 51										// -> (1 * 1000) + (50 * 10) = 1500					-> / 100 = 15.-
+789 0 0 0 100										// -> (1 * 1000) + (99 * 10) = 1990					-> / 100 = 19.9		-> 20.-
+110 0 0 0 101										// -> (1 * 1000) + (100 * 10) = 2000				-> / 100 = 20.-
+109 0 0 0 112										// -> (1 * 1000) + (100 * 10) + (11 * 5) = 2055		-> / 100 = 20.5		-> 21.-
+111 0 0 0 1099										// -> (1 * 1000) + (100 * 10) + (999 * 5) = 6995	-> / 100 = 69.95	-> 70.-
+112 0 0 0 1100
+113 0 0 0 1101
+114 0 0 0 1102
+Tarif 1 100000 30
+116 0 0 0 2000
+Tarif 2 1000 10 100000 30
+117 0 0 0 2000
+Tarif 3 100 40 1000 10 100000 30
+118 0 0 0 2000
+
+
+
+///////////////////////////////////////
+///////////////////////////////////////
+output.txt
+///////////////////////////////////////
+
+345 0				
+346 1000
+456 0 0 0 51
+789 0 0 0 100
+110 0 0 0 101
+109 0 0 0 112
+111 0 0 0 1099
+112 0 0 0 1100
+113 0 0 0 1101
+114 0 0 0 1102
+
+116 0 0 0 2000
+
+117 0 0 0 2000
+
+118 0 0 0 2000
+
+
+

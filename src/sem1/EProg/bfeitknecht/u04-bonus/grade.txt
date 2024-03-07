@@ -1,0 +1,166 @@
+NETHZ: bfeitknecht
+
+Total Points: 4.090909091
+Total Percentage: 0.818181818
+
+Nontrivial Tests: 7
+Trivial Tests: 11
+
+compile errors: 0
+timeout: 0
+
+testAdvancedMultipleMatchesShortMAndAIsZero: PASS
+testAdvancedNoMatchShortMAndA: PASS
+testAdvancedShortMHHeadMatch: PASS
+testAdvancedShortMIsZero: FAIL
+testAdvancedShortMMultipleMatches: FAIL
+testAdvancedShortMMultipleMatchesMIsZero: PASS
+testAdvancedShortMNoMatch: PASS
+testAdvancedShortMSingleMatch: PASS
+testAdvancedSingleMatchShortMAndA: PASS
+testAdvancedSmallAMIsZero: FAIL
+testBasicFullAFullMDoubleMidMatch: PASS
+testBasicFullAFullMHeadMatch: PASS
+testBasicFullAFullMMidMatch: PASS
+testBasicFullAFullMMultiMatch: PASS
+testBasicFullAFullMNoMatch: PASS
+testBasicFullAFullMSingleMatch: PASS
+testBasicFullAFullMSingleMatchOffset: PASS
+testBasicFullMSmallA: FAIL
+testBasicGiven01: PASS
+testBasicGiven02: PASS
+testBasicGiven03: PASS
+testBasicGiven04: PASS
+
+
+Folgende Test-Datei wurde für die Bewertung verwendet:
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+public class GradingMatchTest {
+
+	@Test
+	public void testBasicGiven01() {
+		assertEquals(1, Match.matchNumber(32857890, 789));
+	}
+	
+	@Test
+	public void testBasicGiven02() {
+		assertEquals(1, Match.matchNumber(37897890, 789));
+	}
+	
+	@Test
+	public void testBasicGiven03() {
+		// test positive and negative cases together
+		assertEquals(2, Match.matchNumber(1800765, 7));
+		assertEquals(-1,Match.matchNumber(1800765, 8));
+	}
+	
+	@Test
+	public void testBasicGiven04() {
+		assertEquals(1, Match.matchNumber(75, 7));
+	}
+	
+	@Test
+	public void testAdvancedSmallAMIsZero() {
+		assertEquals(1, Match.matchNumber(1, 0));
+	}
+
+	@Test
+	public void testBasicFullMSmallA() {
+		assertEquals(-1, Match.matchNumber(1, 123));
+		// prevents empty solutions from winning points
+		assertEquals(0, Match.matchNumber(1, 1));
+	}
+
+	@Test
+	public void testBasicFullAFullMNoMatch() {
+		assertEquals(-1, Match.matchNumber(123123, 124));
+		// prevents empty solutions from winning points
+		assertEquals(0, Match.matchNumber(1, 1));
+	}
+
+	@Test
+	public void testBasicFullAFullMSingleMatch() {
+		assertEquals(0, Match.matchNumber(123124, 124));
+	}
+	
+	@Test
+	public void testBasicFullAFullMSingleMatchOffset() {
+		assertEquals(1, Match.matchNumber(1231249, 124));
+	}
+
+	@Test
+	public void testBasicFullAFullMMultiMatch() {
+		assertEquals(0, Match.matchNumber(124124, 124));
+	}
+	
+	@Test
+	public void testBasicFullAFullMHeadMatch() {
+		assertEquals(3, Match.matchNumber(124123, 124));
+	}
+	
+	@Test
+	public void testBasicFullAFullMMidMatch() {
+		assertEquals(3, Match.matchNumber(123124123, 124));
+	}
+	
+	@Test
+	public void testBasicFullAFullMDoubleMidMatch() {
+		assertEquals(1, Match.matchNumber(11241249, 124));
+	}
+	
+	@Test
+	public void testAdvancedNoMatchShortMAndA() {
+		assertEquals(-1, Match.matchNumber(12, 3));
+		// prevents empty solutions from winning points
+		assertEquals(0, Match.matchNumber(1, 1));
+	}
+
+	@Test
+	public void testAdvancedSingleMatchShortMAndA() {
+		assertEquals(1, Match.matchNumber(78, 7));
+	}
+
+	@Test
+	public void testAdvancedMultipleMatchesShortMAndAIsZero() {
+		assertEquals(0, Match.matchNumber(0, 0));
+	}
+
+	@Test
+	public void testAdvancedShortMIsZero() {
+		assertEquals(6, Match.matchNumber(361238, 0));
+	}
+
+	@Test
+	public void testAdvancedShortMMultipleMatchesMIsZero() {
+		assertEquals(2, Match.matchNumber(361200038, 0));
+	}
+
+	@Test
+	public void testAdvancedShortMNoMatch() {
+		assertEquals(-1, Match.matchNumber(362100038, 12));
+		// prevents empty solutions from winning points
+		assertEquals(0, Match.matchNumber(1, 1));
+	}
+
+	@Test
+	public void testAdvancedShortMSingleMatch() {
+		assertEquals(5, Match.matchNumber(601210003, 12));
+	}
+
+
+	@Test
+	public void testAdvancedShortMMultipleMatches() {
+		assertEquals(5, Match.matchNumber(1201210003, 12));	
+	}
+	
+	@Test
+	public void testAdvancedShortMHHeadMatch() {
+		// based on leading zeros (012), '12' only matches at the head
+		assertEquals(7, Match.matchNumber(121210003, 12));	
+	}
+
+}
