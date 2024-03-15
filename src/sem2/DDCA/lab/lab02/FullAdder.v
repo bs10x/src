@@ -1,4 +1,4 @@
-module FullAdder (input a, input b, input ci, output s, output co);
+module FullAdder (input a, input b, input ci, output s, output co);s
 wire y, c, x;
 HalfAdder ab(.a(a), .b(b), .s(y), .c(c));
 HalfAdder abci(.a(y), .b(ci), .s(s), .c(x));
