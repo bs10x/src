@@ -1,13 +1,14 @@
 module TwoOneMux(
-    input a,
-    input b,
+    input d0,
+    input d1,
     input s,
     output o
 );
-    wire sA, sB, sN;
-    not nS(s, nS);
-    and A(a, s, sA);
-    and B(b, sN, sB);
-    or OUT(sA, sB, o);
+    wire d0s, d1s, ns;
+
+    not NOTSEL(s, ns);
+    and d0(d0, ns, d0s);
+    and d0(d1, s, d1s);
+    or OUT(d0s, d1s, o);
 
 endmodule
