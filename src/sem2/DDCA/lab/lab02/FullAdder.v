@@ -1,8 +1,8 @@
 module FullAdder (input a, input b, input ci, output s, output co);s
     
-    wire abs, abc, abscic;
-    HalfAdder HF0(.a(a), .b(b), .s(abs), .c(abc));
-    HalfAdder HF1(.a(abs), .b(ci), .s(s), .c(abscic));
-    or CARRY (abc, abscic, co);
+    wire s0, c0, c1;
+    HalfAdder HF0(.a(a), .b(b), .s(s0), .c(c0));
+    HalfAdder HF1(.a(s0), .b(ci), .s(s), .c(c1));
+    or CARRY (c0, c1, co);
 
 endmodule
