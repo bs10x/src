@@ -4,10 +4,10 @@ module TwoOneMux(
     input s,
     output o
 );
-    wire sA, sB, nS;
+    wire sA, sB, sN;
     not nS(s, nS);
     and A(a, s, sA);
-    and B(b, nS, sB);
+    and B(b, sN, sB);
     or OUT(sA, sB, o);
 
 endmodule
