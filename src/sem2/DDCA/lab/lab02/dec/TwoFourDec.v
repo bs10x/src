@@ -4,10 +4,10 @@ module TwoFourDec (
 );
 
     wire ns0, ns1;
-
+    
     not NOTSEL0(s[0], ns0);
     not NOTSEL1(s[1], ns1);
-    
+
     and D0(ns0, ns1, o[0]);
     and D1(s[0], ns1, o[1]);
     and D2(ns0, s[1], o[2]);
