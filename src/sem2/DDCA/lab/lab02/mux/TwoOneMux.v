@@ -8,7 +8,7 @@ module TwoOneMux(
 
     not NOTSEL(s, ns);
     and d0(d0, ns, d0s);
-    and d0(d1, s, d1s);
+    and d1(d1, s, d1s);
     or OUT(d0s, d1s, o);
 
 endmodule
