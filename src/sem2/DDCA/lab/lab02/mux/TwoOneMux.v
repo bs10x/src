@@ -5,7 +5,6 @@ module TwoOneMux(
     output o
 );
     wire d0s, d1s, ns;
-
     not NOTSEL(s, ns);
     
     and d0(d0, ns, d0s);

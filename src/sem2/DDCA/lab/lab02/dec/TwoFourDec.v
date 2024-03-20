@@ -4,7 +4,6 @@ module TwoFourDec (
 );
 
     wire ns0, ns1;
-    
     not NOTSEL0(s[0], ns0);
     not NOTSEL1(s[1], ns1);
 

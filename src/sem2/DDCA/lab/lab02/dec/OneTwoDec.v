@@ -4,7 +4,6 @@ module OneTwoDec (
 );
     
     wire ns;
-    
     not NOTSEL(s, ns);
 
     and O0(ns, ns, o[0]);
