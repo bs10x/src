@@ -1,13 +1,13 @@
-module FullAdder (input a, input b, input ci, output s, output co);s
+module FullAdder (input a, input b, input ci, output s, output co);
     
-    wire s0, c0, c1;
+    wire so0, co0, co1;
 
-    xor s0 (a, b, s0);
-    xor SUM (s0, ci, s);
-
-    and c0 (a, b, c0);
-    and c1 (s0, ci, c1);
-    or CARRY (c0, c1, co);
+    xor s0 (so0, a, b);
+    xor SUM (s, s0, ci);
+    
+    and c0 (co0, a, b);
+    and c1 (co1, s0, ci);
+    or CARRY (co, c0, c1);
 
 endmodule
 
@@ -17,9 +17,3 @@ endmodule
     S = a XOR b XOR ci
     CO = a AND b OR (a XOR b) AND ci
 */
-
-// module instantiation method 
-// wire s0, c0, c1;
-// HalfAdder HA0(.a(a), .b(b), .s(s0), .c(c0));
-// HalfAdder HA1(.a(s0), .b(ci), .s(s), .c(c1));
-// or CARRY (c0, c1, co);
