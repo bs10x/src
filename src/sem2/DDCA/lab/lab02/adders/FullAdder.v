@@ -7,3 +7,8 @@ module FullAdder (input a, input b, input ci, output s, output co);s
     or CARRY (c0, c1, co);
 
 endmodule
+
+/*
+    CO = AND(ci, OR(a, b))
+    S = XOR(ci, XOR(a, b))
+*/
