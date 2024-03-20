@@ -1,4 +1,4 @@
-# s[1:0], d[3:0]
+# input s[1:0], output o[3:0]
 
 set_property PACKAGE_PIN V17 [get_ports {s[0]}]
 set_property PACKAGE_PIN V16 [get_ports {s[1]}]
