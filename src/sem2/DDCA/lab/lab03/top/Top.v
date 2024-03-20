@@ -18,8 +18,8 @@ module Top(
     input [1:0] s,
     output [3:0] AN
 );
-
-    TwoFourDec SEL (.o(AN), .s(s));
+    // 2:4 DEC, input s[1:0], output not AN[3:0]
+    TwoFourDec SEL (.s(s), .o(AN));
 
 
 endmodule
