@@ -21,9 +21,9 @@ module Top(
     wire [3:0] bus;
 
     // 2:4 DEC, input s[1:0], output not AN[3:0]
-    TwoFourDec SEL (.s(s), .o(out));
+    TwoFourDec SEL (.s(s[1:0]), .o(bus[3:0]));
 
-    assign AN = ~out;
+    assign AN = ~bus;
 
 
 endmodule
