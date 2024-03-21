@@ -48,7 +48,8 @@ module BinaryTo7Seg(
         .a(S[3:0]),
         .D(D)
     );
-    assign OVERFLOW = D[7];
+    
+    assign OVERFLOW = S[4];
     assign DISPLAY = D[6:0];
 endmodule
 
