@@ -70,7 +70,6 @@ module BinaryTo7Seg(
     assign DISPLAY = D[6:0];
 endmodule
 
-
 /*
 AN[3:0]
 ///////////////////////////
