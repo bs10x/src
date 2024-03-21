@@ -1,6 +1,6 @@
 module TwoFourDec (
     input [1:0] s,
-    output [3:0] o
+    output wire [3:0] o
 );
     wire ns0, ns1;
     not NOTSEL0 (s[0], ns0);
@@ -13,7 +13,7 @@ module TwoFourDec (
 endmodule
 
 module Top(
-    input [1:0] s,
+    input wire [1:0] s,
     output [3:0] AN
 );
     wire [1:0] sel;
@@ -25,7 +25,7 @@ module Top(
     // 2:4 DEC, input s[1:0], output not AN[3:0]
     TwoFourDec SEL (
         .s(sel),
-        .o({bus[3:0]})
+        .o(bus[3:0])
         );
 
     assign AN = ~bus;
