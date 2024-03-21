@@ -26,7 +26,12 @@ module Select7Seg(
     assign AN = ~INVSEL;
 endmodule
 
-module FullAdder (input a, input b, input ci, output s, output co);
+module FullAdder (
+    input a,
+    input b,
+    input ci,
+    output s,
+    output co);
     
     wire so0, co0, co1;
     xor s0 (so0, a, b);
@@ -119,6 +124,5 @@ module BinaryToSelect7Seg (
         .DISPLAY(DISPLAY[6:0]),
         .OVERFLOW(OVERFLOW)
     );
-
-
 endmodule
+

@@ -17,7 +17,7 @@ module Select7Seg(
 
     wire [3:0] INVSEL;
     
-    // 2:4 DEC, input s[1:0], output NOT AN[3:0]
+    // 2:4 DEC, input s[1:0], output INV AN[3:0]
     TwoFourDec SEL (
         .s(s[1:0]),
         .o(INVSEL[3:0])
