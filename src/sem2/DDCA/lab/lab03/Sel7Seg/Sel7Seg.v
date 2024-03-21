@@ -27,3 +27,14 @@ module Sel7Seg(
 
     assign AN = ~AN;    // ~NOTAN;
 endmodule
+
+/*
+    a
+    -
+ f | | b
+ g  -
+ e | | c
+    -
+    d
+    
+*/
