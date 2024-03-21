@@ -25,7 +25,7 @@ module Top(
     // 2:4 DEC, input s[1:0], output not AN[3:0]
     TwoFourDec SEL (
         .s(s[1:0]),
-        .o(bus[3:0]),
+        .o(bus[3:0])
     );
 
     assign AN = ~bus;
