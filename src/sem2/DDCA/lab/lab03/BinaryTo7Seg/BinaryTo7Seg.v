@@ -22,34 +22,29 @@ endmodule
 
 module Drive7Seg(
     input wire [3:0] S,
-    output wire [6:0] D
+    output reg [6:0] D
 );
-    reg [3:0] SUM;
-    reg [6:0] DISPL;
-
     always @(*) begin
-        assign SUM = S;
-        case (SUM)
-            4'b0000: DISPL = 7'b1000000;    // 0
-            4'b0001: DISPL = 7'b1111001;    // 1
-            4'b0010: DISPL = 7'b0100100;    // 2
-            4'b0011: DISPL = 7'b0110000;    // 3
-            4'b0100: DISPL = 7'b0011001;    // 4
-            4'b0101: DISPL = 7'b0010010;    // 5
-            4'b0110: DISPL = 7'b0000010;    // 6
-            4'b0111: DISPL = 7'b1111000;    // 7
-            4'b1000: DISPL = 7'b0000000;    // 8
-            4'b1001: DISPL = 7'b0010000;    // 9
-            4'b1010: DISPL = 7'b0001000;    // a
-            4'b1011: DISPL = 7'b0000011;    // b
-            4'b1100: DISPL = 7'b1000110;    // c
-            4'b1101: DISPL = 7'b0100001;    // d
-            4'b1110: DISPL = 7'b0000110;    // e
-            4'b1111: DISPL = 7'b0001110;    // f
-            default: DISPL = 7'b1111111;    // f+1
+        case (S)
+            4'b0000: D = 7'b1000000;    // 0
+            4'b0001: D = 7'b1111001;    // 1
+            4'b0010: D = 7'b0100100;    // 2
+            4'b0011: D = 7'b0110000;    // 3
+            4'b0100: D = 7'b0011001;    // 4
+            4'b0101: D = 7'b0010010;    // 5
+            4'b0110: D = 7'b0000010;    // 6
+            4'b0111: D = 7'b1111000;    // 7
+            4'b1000: D = 7'b0000000;    // 8
+            4'b1001: D = 7'b0010000;    // 9
+            4'b1010: D = 7'b0001000;    // a
+            4'b1011: D = 7'b0000011;    // b
+            4'b1100: D = 7'b1000110;    // c
+            4'b1101: D = 7'b0100001;    // d
+            4'b1110: D = 7'b0000110;    // e
+            4'b1111: D = 7'b0001110;    // f
+            default: D = 7'b1111111;    // f+1
         endcase
     end
-    assign D = DISPL;
 endmodule
 
 module BinaryTo7Seg(
