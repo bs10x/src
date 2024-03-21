@@ -31,26 +31,25 @@ endmodule
 module BinaryTo7Seg(
     input wire [3:0] a,
     input wire [3:0] b,
-    output wire [6:0] D,
-    output wire overflow
+    output wire [6:0] DISPLAY,
+    output wire OVERFLOW
 );
 
-
-    wire SUM [4:0];
-    wire [7:0] DISPL;
+    wire [4:0] S;
+    wire [7:0] D;
 
     FourBitAdder ADD (
         .a(a),
         .b(b),
-        .s(SUM)
+        .s(S)
     );
 
     Drive7Seg DRIVER (
-        .a(SUM[4:0]),
-        .D(DISPL),
-    )
-
-
+        .a(S),
+        .D(D)
+    );
+    assign OVERFLOW = D[7];
+    assign DISPLAY = D[6:0];
 endmodule
 
 
