@@ -1,6 +1,6 @@
 module FullAdder (input a, input b, input ci, output s, output co);
+    
     wire so0, co0, co1;
-
     xor s0 (so0, a, b);
     xor SUM (s, s0, ci);
     and c0 (co0, a, b);
@@ -22,8 +22,8 @@ endmodule
 
 module Drive7Seg(
     input wire [3:0] S,
-    output reg [6:0] D
-);
+    output reg [6:0] D);
+
     always @(*) begin
         case (S)
             4'b0000: D = 7'b1000000;    // 0
@@ -51,22 +51,19 @@ module BinaryTo7Seg(
     input wire [3:0] a,
     input wire [3:0] b,
     output wire [6:0] DISPLAY,
-    output wire OVERFLOW
-);
-    // TODO: documentation
+    output wire OVERFLOW);
+
     wire [4:0] S;
     wire [6:0] D;
 
     FourBitAdder ADD (
         .a(a),
         .b(b),
-        .s(S)
-    );
+        .s(S[4:0]));
 
     Drive7Seg DRIVER (
         .S(S[3:0]),
-        .D(D[6:0])
-    );
+        .D(D[6:0]));
     
     assign OVERFLOW = S[4];
     assign DISPLAY = D[6:0];
