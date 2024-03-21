@@ -59,11 +59,12 @@ module BinaryTo7Seg(
     FourBitAdder ADD (
         .a(a),
         .b(b),
-        .s(S[4:0]));
-
+        .s(S[4:0])
+    );
     Drive7Seg DRIVER (
         .S(S[3:0]),
-        .D(D[6:0]));
+        .D(D[6:0])
+    );
     
     assign OVERFLOW = S[4];
     assign DISPLAY = D[6:0];
