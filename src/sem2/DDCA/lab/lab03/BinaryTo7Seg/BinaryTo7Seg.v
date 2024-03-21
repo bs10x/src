@@ -8,32 +8,47 @@ module FullAdder (input a, input b, input ci, output s, output co);
     or CARRY (co, c0, c1);
 endmodule
 
-
 module FourBitAdder(
     input wire [3:0] a,
     input wire [3:0] b,
-    output wire [4:0] s
-);
-    wire c0, c1, c2;
+    output wire [4:0] s);
 
+    wire c0, c1, c2;
     FullAdder FA0(.a(a[0]), .b(b[0]), .ci(), .s(s[0]), .co(c0));
     FullAdder FA1(.a(a[1]), .b(b[1]), .ci(c0), .s(s[1]), .co(c1));
     FullAdder FA2(.a(a[2]), .b(b[2]), .ci(c1), .s(s[2]), .co(c0));
     FullAdder FA3(.a(a[3]), .b(b[3]), .ci(c2), .s(s[3]), .co(s[4]));
 endmodule
 
+module Drive7Seg(
+    input wire [4:0] a,
+    output wire [7:0] D
+);
+
+    wire [6:0] DISPL;
+endmodule
+
 module BinaryTo7Seg(
     input wire [3:0] a,
     input wire [3:0] b,
-    output wire [7:0] D
+    output wire [6:0] D,
+    output wire overflow
 );
-    wire [6:0] DISPL;
 
-    FourBitAdder SUM(
+
+    wire SUM [4:0];
+    wire [7:0] DISPL;
+
+    FourBitAdder ADD (
         .a(a),
         .b(b),
-        .s()
+        .s(SUM)
     );
+
+    Drive7Seg DRIVER (
+        .a(SUM[4:0]),
+        .D(DISPL),
+    )
 
 
 endmodule
@@ -54,6 +69,10 @@ endmodule
 s[4:0]
 16 8 4 2 1
 
+idea:
+    instantiate FourBitAdder ADD
+    build driver module that takes a 5 bit number(x[4:0])
+    instantiate driver module, input is ADD.s, output is 
 
 D[6:0]      {g, f, e, d, c, b, a}
 0   -->     {1, 0, 0, 0, 0, 0, 0}
