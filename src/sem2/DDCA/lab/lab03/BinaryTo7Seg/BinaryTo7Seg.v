@@ -54,24 +54,17 @@ endmodule
 
 
 /*
-    a
-    -
- f | | b
- g  -
- e | | c
-    -
-    d  
-*/
 
-
-/*
-s[4:0]
-16 8 4 2 1
-
-idea:
-    instantiate FourBitAdder ADD
-    build driver module that takes a 5 bit number(x[4:0])
-    instantiate driver module, input is ADD.s, output is 
+AN[3:0]
+/////////////////
+//      a      //
+//      -      //
+//   f | | b   //
+//   g  -      //
+//   e | | c   //
+//      -      //
+//      d      //
+/////////////////
 
 
 ?       S[4:0]                      D[6:0]
