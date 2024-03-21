@@ -30,6 +30,7 @@ module Drive7Seg(
     // assign each segment appropriate hex output, given input a[3:0]
     // if (a == {0, 0, 0, 0}) assign D = 7'b0000000;
 
+
 endmodule
 
 module BinaryTo7Seg(
