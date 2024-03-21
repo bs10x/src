@@ -46,7 +46,7 @@ module BinaryTo7Seg(
 
     Drive7Seg DRIVER (
         .a(S[3:0]),
-        .D(D)
+        .D(D[6:0])
     );
     
     assign OVERFLOW = S[4];
