@@ -46,10 +46,10 @@ module B16X4 (
         .a(a[15:12]),
         .D(D[27:21])
     );
-    assign AN[0] = 0;//~(|a[15:0] );   // x >= 0, always
-    assign AN[1] = ~|a[7:0];   // x >= 16
-    assign AN[2] = ~|a[11:0];    // x
-    assign AN[3] = ~|a[15:11];    //
+    assign AN[0] = ~|a[15:0] && &a[15:0];   // x >= 0, always
+    assign AN[1] = ~|a[15:4];               // x >= 16
+    assign AN[2] = ~|a[15:8];               // x >= 256
+    assign AN[3] = ~|a[15:12];              // x >= 1024
 endmodule
 
 /*
