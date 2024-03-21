@@ -27,7 +27,7 @@ module BinaryTo7Seg(
     input wire [3:0] b,
     output wire [4:0] s
 );
-    FourBitAdder f4ADD(
+    FourBitAdder SUM(
         .a(a),
         .b(b),
         .s(s)
