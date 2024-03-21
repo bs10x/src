@@ -25,8 +25,11 @@ module Drive7Seg(
     output wire [6:0] D
 );
     wire [6:0] DISPL;
+    
     // TODO:
-    // assign each segment appropriate hex output, given input a[3:0] 
+    // assign each segment appropriate hex output, given input a[3:0]
+    // if (a == {0, 0, 0, 0}) assign D = 7'b0000000;
+
 endmodule
 
 module BinaryTo7Seg(
