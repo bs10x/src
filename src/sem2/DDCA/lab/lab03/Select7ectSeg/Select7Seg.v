@@ -25,5 +25,5 @@ module Select7Seg(
         .o(AN[3:0])     // .o(NOTAN)
     );
 
-    assign AN = ~AN;    // ~NOTAN;
+    assign AN = ~AN;    // ~NOTAN; // ~~AN = AN
 endmodule
