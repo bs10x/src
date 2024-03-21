@@ -16,15 +16,13 @@ module Select7Seg(
     input wire [1:0] s,
     output wire [3:0] AN
 );
-    wire [1:0] sel;
-    // TODO: documentation
-    // wire [3:0] NOTAN;
+    wire [3:0] NOTAN;
 
     // 2:4 DEC, input s[1:0], output NOT AN[3:0]
     TwoFourDec SEL (
         .s(s[1:0]),
-        .o(AN[3:0])     // .o(NOTAN)
+        .o(NOTAN[3:0])
     );
 
-    assign AN = ~AN;    // ~NOTAN; // ~~AN = AN
+    assign AN = ~NOTAN;
 endmodule
