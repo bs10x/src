@@ -3,6 +3,7 @@ module TwoFourDec (
     output wire [3:0] o
 );
     wire ns0, ns1;
+    
     not NOTSEL0 (ns0, s[0]);
     not NOTSEL1 (ns1, s[1]);
     and OUT0 (o[0], ns0, ns1);

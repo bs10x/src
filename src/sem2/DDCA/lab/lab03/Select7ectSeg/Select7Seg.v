@@ -12,7 +12,7 @@ module TwoFourDec (
     and OUT3 (o[3], s[0], s[1]);
 endmodule
 
-module Sel7Seg(
+module Select7Seg(
     input wire [1:0] s,
     output wire [3:0] AN
 );
@@ -27,14 +27,3 @@ module Sel7Seg(
 
     assign AN = ~AN;    // ~NOTAN;
 endmodule
-
-/*
-    a
-    -
- f | | b
- g  -
- e | | c
-    -
-    d
-    
-*/
