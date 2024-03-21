@@ -19,8 +19,7 @@ module Top(
     wire [1:0] sel;
     wire [3:0] bus;
 
-    assign sel = {s[1], s[0]};
-
+    // assign sel = {s[1], s[0]};
     
     // 2:4 DEC, input s[1:0], output not AN[3:0]
     TwoFourDec SEL (
