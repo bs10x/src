@@ -24,11 +24,12 @@ module Drive7Seg(
     input wire [3:0] S,
     output wire [6:0] D
 );
-    wire [6:0] DISPL;
-    
+    reg [3:0] SUM;
+    reg [6:0] DISPL;
+
     always @(*) begin
-        reg [3:0] S;
-        case (S)
+        assign SUM = S;
+        case (SUM)
             4'b0000: DISPL = 7'b1000000;    // 0
             4'b0001: DISPL = 7'b1111001;    // 1
             4'b0010: DISPL = 7'b0100100;    // 2
@@ -48,8 +49,7 @@ module Drive7Seg(
             default: DISPL = 7'b1111111;    // f+1
         endcase
     end
-
-
+    assign D = DISPL;
 endmodule
 
 module BinaryTo7Seg(
@@ -69,7 +69,7 @@ module BinaryTo7Seg(
     );
 
     Drive7Seg DRIVER (
-        .a(S[3:0]),
+        .S(S[3:0]),
         .D(D[6:0])
     );
     
