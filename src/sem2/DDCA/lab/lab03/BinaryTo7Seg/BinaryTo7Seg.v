@@ -25,7 +25,7 @@ module Drive7Seg(
     output wire [6:0] D
 );
     wire [6:0] DISPL;
-    // !!TODO!! //
+    // TODO:
     // assign each segment appropriate hex output, given input a[3:0] 
 endmodule
 
@@ -35,7 +35,7 @@ module BinaryTo7Seg(
     output wire [6:0] DISPLAY,
     output wire OVERFLOW
 );
-
+    // TODO: documentation
     wire [4:0] S;
     wire [6:0] D;
 
@@ -56,7 +56,6 @@ endmodule
 
 
 /*
-
 AN[3:0]
 ///////////////////////////
 //           a           //
@@ -69,7 +68,6 @@ AN[3:0]
 //                       //  
 //           d           //
 ///////////////////////////
-
 
 ?       S[4:0]                      D[6:0]
 x:     {16, 8, 4, 2, 1}     -->     {g, f, e, d, c, b, a}   {a, b, c, d, e, f, g}

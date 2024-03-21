@@ -17,6 +17,7 @@ module Select7Seg(
     output wire [3:0] AN
 );
     wire [1:0] sel;
+    // TODO: documentation
     // wire [3:0] NOTAN;
 
     // 2:4 DEC, input s[1:0], output NOT AN[3:0]

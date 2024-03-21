@@ -10,5 +10,4 @@ module TwoOneMux(
     and d0sel(d0s, d0, ns);
     and d1sel(d1s, d1, s);
     or OUT(o, d0s, d1s);
-
 endmodule
