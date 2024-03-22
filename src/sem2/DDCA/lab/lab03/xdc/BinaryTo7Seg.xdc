@@ -13,11 +13,11 @@ set_property PACKAGE_PIN W14 [get_ports {b[2]}]
 set_property PACKAGE_PIN W13 [get_ports {b[3]}]
 
 # output s[4:0] to LD[4:0]
-set_property PACKAGE_PIN U16 [get_ports {s[0]}]
-set_property PACKAGE_PIN E19 [get_ports {s[1]}]
-set_property PACKAGE_PIN U19 [get_ports {s[2]}]
-set_property PACKAGE_PIN V19 [get_ports {s[3]}]
-set_property PACKAGE_PIN W18 [get_ports {s[4]}]
+# set_property PACKAGE_PIN U16 [get_ports {s[0]}]
+# set_property PACKAGE_PIN E19 [get_ports {s[1]}]
+# set_property PACKAGE_PIN U19 [get_ports {s[2]}]
+# set_property PACKAGE_PIN V19 [get_ports {s[3]}]
+# set_property PACKAGE_PIN W18 [get_ports {s[4]}]
 
 # output DISPLAY[6:0] to AN0 (assuming DISPLAY[0] == a, DISPLAY[1] == b, etc.)
 set_property PACKAGE_PIN W7 [get_ports {DISPLAY[0]}]
