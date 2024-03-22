@@ -4,7 +4,7 @@ module TwoOneMux(
     output Y);
 
     wire [1:0] sd;
-    not NOTSEL (ns, s);
+    not ns0 (ns, s);
     
     and sd0 (sd[0], d[0], ns);
     and sd1 (sd[1], d[1], s);
