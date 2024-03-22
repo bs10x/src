@@ -30,19 +30,19 @@ module B16X4 (
     output wire [3:0] AN,
     output wire [27:0] D);
 
-    B4X1 X0 (
+    B4X1 AN0 (
         .a(a[3:0]),
         .D(D[6:0])
     );
-    B4X1 X1 (
+    B4X1 AN1 (
         .a(a[7:4]),
         .D(D[13:7])
     );
-    B4X1 X2 (
+    B4X1 AN2 (
         .a(a[11:8]),
         .D(D[20:14])
     );
-    B4X1 X3 (
+    B4X1 AN3 (
         .a(a[15:12]),
         .D(D[27:21])
     );
