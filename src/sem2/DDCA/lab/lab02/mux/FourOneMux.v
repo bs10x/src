@@ -4,12 +4,14 @@ module TwoOneMux(
     output Y);
 
     wire [1:0] sd;
-    not NOTSEL(ns, s);
+    not NOTSEL (ns, s);
     
-    and sd0(sd[0], d[0], ns);
-    and sd1(sd[1], d[1], s);
-    or Y0(Y, sd[0], sd[1]);
+    and sd0 (sd[0], d[0], ns);
+    and sd1 (sd[1], d[1], s);
+    or Y0 (Y, sd[0], sd[1]);
 endmodule
+
+///////////////////////////////////////////////////////////////
 
 module FourOneMux(
     input [3:0] d,
