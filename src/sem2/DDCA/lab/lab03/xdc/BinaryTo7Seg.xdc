@@ -12,6 +12,7 @@ set_property PACKAGE_PIN V15 [get_ports {b[1]}]
 set_property PACKAGE_PIN W14 [get_ports {b[2]}]
 set_property PACKAGE_PIN W13 [get_ports {b[3]}]
 
+# DOESN'T WORK IF NOT DECLARED AS OUTPUT
 # output s[4:0] to LD[4:0]
 # set_property PACKAGE_PIN U16 [get_ports {s[0]}]
 # set_property PACKAGE_PIN E19 [get_ports {s[1]}]
@@ -31,4 +32,4 @@ set_property PACKAGE_PIN U7 [get_ports {DISPLAY[6]}]
 # output OVERFLOW to LD15
 set_property PACKAGE_PIN L1 [get_ports {OVERFLOW}]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {a b s DISPLAY OVERFLOW}]
+set_property IOSTANDARD LVCMOS33 [get_ports {a b DISPLAY OVERFLOW}]
