@@ -56,7 +56,7 @@ module BinaryTo7Seg(
     output wire OVERFLOW);
 
     wire [4:0] S;
-    wire [6:0] D;
+    // wire [6:0] D;
 
     FourBitAdder ADD (
         .a(a),
@@ -65,11 +65,11 @@ module BinaryTo7Seg(
     );
     Drive7Seg DRIVER (
         .S(S[3:0]),
-        .D(D[6:0])
+        .D(DISPLAY[6:0])
     );
     
     assign OVERFLOW = S[4];
-    assign DISPLAY = D[6:0];
+    // assign DISPLAY = D[6:0];
 endmodule
 
 /*

@@ -1,12 +1,12 @@
 # input a[3:0], input b[3:0], output s[4:0]
 
-# input a[3:0] from SW[?:?]
+# input a[3:0] from SW[3:0]
 set_property PACKAGE_PIN V17 [get_ports {a[0]}]
 set_property PACKAGE_PIN V16 [get_ports {a[1]}]
 set_property PACKAGE_PIN W16 [get_ports {a[2]}]
 set_property PACKAGE_PIN W17 [get_ports {a[3]}]
 
-# input b[3:0] from SW[?:?]
+# input b[3:0] from SW[7:4]
 set_property PACKAGE_PIN W15 [get_ports {b[0]}]
 set_property PACKAGE_PIN V15 [get_ports {b[1]}]
 set_property PACKAGE_PIN W14 [get_ports {b[2]}]
