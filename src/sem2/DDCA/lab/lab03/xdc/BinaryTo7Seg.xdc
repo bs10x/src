@@ -20,7 +20,7 @@ set_property PACKAGE_PIN W13 [get_ports {b[3]}]
 # set_property PACKAGE_PIN V19 [get_ports {s[3]}]
 # set_property PACKAGE_PIN W18 [get_ports {s[4]}]
 
-# output DISPLAY[6:0] to AN0 (assuming DISPLAY[0] == a, DISPLAY[1] == b, etc.)
+# output DISPLAY[6:0] to AN0 (DISPLAY[0] == a, DISPLAY[1] == b, ...)
 set_property PACKAGE_PIN W7 [get_ports {DISPLAY[0]}]
 set_property PACKAGE_PIN W6 [get_ports {DISPLAY[1]}]
 set_property PACKAGE_PIN U8 [get_ports {DISPLAY[2]}]
