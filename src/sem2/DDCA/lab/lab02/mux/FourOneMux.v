@@ -1,14 +1,13 @@
 module TwoOneMux(
-    input d0,
-    input d1,
+    input [1:0] d,
     input s,
     output Y);
 
     wire [1:0] sd;
     not NOTSEL(ns, s);
     
-    and sd0(sd[0], d0, ns);
-    and sd1(sd[1], d1, s);
+    and sd0(sd[0], d[0], ns);
+    and sd1(sd[1], d[1], s);
     or Y0(Y, sd[0], sd[1]);
 endmodule
 
@@ -20,20 +19,17 @@ module FourOneMux(
     wire [1:0] sd;
 
     TwoOneMux M0a(
-        .d0(d[0]),
-        .d1(d[1]),
+        .d(d[1:0]),
         .s(s[0]),
         .Y(sd[0])
     );
     TwoOneMux M0b(
-        .d0(d[2]),
-        .d1(d[3]),
+        .d(d[3:2]),
         .s(s[0]),
         .Y(sd[1])
     );
     TwoOneMux M1(
-        .d0(sd[0]),
-        .d1(sd[1]),
+        .d({sd[1], sd[0]}),
         .s(s[1]),
         .Y(Y)
     );
