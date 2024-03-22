@@ -19,7 +19,7 @@ module Select7Seg(
     wire [3:0] INVSEL;
     
     // 2:4 DEC, input s[1:0], output INV AN[3:0]
-    TwoFourDec SEL (
+    TwoFourDec NOTAN (
         .s(s[1:0]),
         .Y(INVSEL[3:0])
     );
