@@ -12,8 +12,8 @@ endmodule
 module FourBitAdder(
     input wire [3:0] a,
     input wire [3:0] b,
-    output wire [4:0] s
-);
+    output wire [4:0] s);
+    
     wire c0, c1, c2;
 
     FullAdder FA0(.a(a[0]), .b(b[0]), .ci(), .s(s[0]), .co(c0));

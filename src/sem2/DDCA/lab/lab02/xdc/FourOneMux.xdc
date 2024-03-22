@@ -1,4 +1,4 @@
-# input [3:0] d, input [1:0] s, output o
+# input [3:0] d, input [1:0] s, output Y
 
 # input d[3:0] from SW12, SW13, SW14, SW15
 set_property PACKAGE_PIN W2 [get_ports {d[0]}]
@@ -20,7 +20,7 @@ set_property PACKAGE_PIN V16 [get_ports {s[1]}]
 set_property PACKAGE_PIN U16 [get_ports {s[0]}]
 set_property PACKAGE_PIN E19 [get_ports {s[1]}]
 
-# output o to LD2
-set_property PACKAGE_PIN U19 [get_ports {o}]
+# output Y to LD2
+set_property PACKAGE_PIN U19 [get_ports {Y}]
 
-set_property IOSTANDARD LVCMOS33 [get_ports {a b s}]
+set_property IOSTANDARD LVCMOS33 [get_ports {a b s Y}]
