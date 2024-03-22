@@ -12,14 +12,14 @@ endmodule
 module FourBitAdder(
     input [3:0] a,
     input [3:0] b,
-    output wire [4:0] s);
+    output wire [4:0] S);
     
     wire [2:0] c;
 
-    FullAdder FA0(.a(a[0]), .b(b[0]), .ci(), .so(s[0]), .co(c[0]));
-    FullAdder FA1(.a(a[1]), .b(b[1]), .ci(c[0]), .so(s[1]), .co(c[1]));
-    FullAdder FA2(.a(a[2]), .b(b[2]), .ci(c[1]), .so(s[2]), .co(c[2]));
-    FullAdder FA3(.a(a[3]), .b(b[3]), .ci(c[2]), .so(s[3]), .co(s[4]));
+    FullAdder FA0(.a(a[0]), .b(b[0]), .ci(), .so(S[0]), .co(c[0]));
+    FullAdder FA1(.a(a[1]), .b(b[1]), .ci(c[0]), .so(S[1]), .co(c[1]));
+    FullAdder FA2(.a(a[2]), .b(b[2]), .ci(c[1]), .so(S[2]), .co(c[2]));
+    FullAdder FA3(.a(a[3]), .b(b[3]), .ci(c[2]), .so(S[3]), .co(S[4]));
 endmodule
 
 module Drive7Seg(
@@ -61,7 +61,7 @@ module BinaryTo7Seg(
     FourBitAdder ADD (
         .a(a),
         .b(b),
-        .s(S[4:0])
+        .S(S[4:0])
     );
     Drive7Seg DRIVER (
         .S(S[3:0]),
