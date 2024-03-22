@@ -1,12 +1,12 @@
 module FullAdder (input a, input b, input ci, output s, output co);
     wire sum;
-    wire [1:0] carry;
+    wire [1:0] c;
 
-    xor s0 (s0, a, b);
-    xor SUM (s, s0, ci);
-    and c0 (carry[0], a, b);
-    and c1 (carry[1], s0, ci);
-    or CARRY (co, carry[0], carry[1]);
+    xor s0 (sum, a, b);
+    xor SUM (s, sum, ci);
+    and c0 (c[0], a, b);
+    and c1 (c[1], sum, ci);
+    or CARRY (co, c[0], c[1]);
 endmodule
 
 
