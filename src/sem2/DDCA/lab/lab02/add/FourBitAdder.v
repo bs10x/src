@@ -10,9 +10,9 @@ module FullAdder (input a, input b, input ci, output so, output co);
 endmodule
 
 module FourBitAdder(
-    input wire [3:0] a,
-    input wire [3:0] b,
-    output wire [4:0] s);
+    input [3:0] a,
+    input [3:0] b,
+    output [4:0] s);
     
     wire [2:0] c;
 

@@ -19,18 +19,22 @@ module FourOneMux(
 
     wire [1:0] sd;
 
-    TwoOneMux M0(
+    TwoOneMux M0a(
         .d0(d[0]),
         .d1(d[1]),
         .s(s[0]),
         .Y(sd[0])
     );
-    TwoOneMux M1(
+    TwoOneMux M0b(
         .d0(d[2]),
         .d1(d[3]),
-        .s(s[1]),
+        .s(s[0]),
         .Y(sd[1])
     );
-    or Y0(sd[0], sd[1], Y);
-
+    TwoOneMux M1(
+        .d0(sd[0]),
+        .d1(sd[1]),
+        .s(s[1]),
+        .Y(Y)
+    );
 endmodule

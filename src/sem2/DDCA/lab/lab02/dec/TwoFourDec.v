@@ -1,6 +1,6 @@
 module TwoFourDec (
-    input wire [1:0] s,
-    output wire [3:0] Y);
+    input [1:0] s,
+    output [3:0] Y);
 
     wire [1:0] ns;
     not NOTSEL0 (ns[0], s[0]);
