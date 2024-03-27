@@ -49,9 +49,10 @@ module Drive7Seg(
     end
 endmodule
 
-module BinaryTo7Seg(
+module BinaryToSelect7Seg(
     input [3:0] a,
     input [3:0] b,
+    output [3:0] AN,
     output [6:0] DISPLAY,
     output OVERFLOW);
 
@@ -68,6 +69,8 @@ module BinaryTo7Seg(
     );
     
     assign OVERFLOW = S[4];
+    assign AN[3:1] = 1;
+    assign AN[0] = 0;
 endmodule
 
 /*
