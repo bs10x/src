@@ -21,10 +21,8 @@ module FSM(
         .clk_en(clk_en)
     );
 
-
     integer state;
     reg [2:0] pattern;
-
 
     always @ (posedge clk_en) begin
         if (rst) state <= 0;
@@ -40,6 +38,17 @@ module FSM(
 endmodule
 
 /*
+////////////////////////////////////////
+// PROBLEM
+
+L[2:0] can be in state 2 when R[0:2] is in state 3
+-> decouple the two
+
+
+
+
+
+
 state diagram:
     0 -> 000   // 0
     1 -> 001   // 1
