@@ -12,7 +12,8 @@ endmodule
 module dimmer (
     input clk,
     input rst,
-    input r,
+    input u,
+    input d,
     output A, B, C);
     
     wire clk_en;
@@ -25,4 +26,9 @@ module dimmer (
 
 
 
+
+
+    /*
+
+    */
 endmodule

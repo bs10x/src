@@ -14,15 +14,17 @@ module FSM(
     input r,
     output LA, LB, LC, RA, RB,RC);
 
-    integer state;
-    reg [2:0] pattern;
     wire clk_en;
-
     clk_div CLKDIV (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
     );
+
+
+    integer state;
+    reg [2:0] pattern;
+
 
     always @ (posedge clk_en) begin
         if (rst) state <= 0;
