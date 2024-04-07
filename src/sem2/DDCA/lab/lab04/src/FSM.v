@@ -10,14 +10,15 @@ endmodule
 module FSM(
     input clk,
     input rst,
-    input [1:0] LR,
-    output [2:0] LED);
+    input L,
+    input R,
+    output LA, LB, LC, RA, RB,RC);
 
-    reg [2:0] now_state, next_state;
+    integer state;
 
     always @ (posedge clk) begin
-        if (rst) now_state <= 3'b000;
-        else now_state <= next_state;
+        if (rst) state <= 3'b000;
+        else state <= (state++) % 4;
     end
 
 endmodule
