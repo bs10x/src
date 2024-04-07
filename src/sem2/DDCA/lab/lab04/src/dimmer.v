@@ -9,6 +9,20 @@ module clk_div #(parameter ratio = 1) (
     assign clk_en = &clk_count;
 endmodule
 
-module moduleName (input clk, input r, output A, B, C);
+module dimmer (
+    input clk,
+    input rst,
+    input r,
+    output A, B, C);
     
+    wire clk_en;
+
+    clk_div CLKDIV (
+        .clk(clk),
+        .rst(rst),
+        .clk_en(clk_en)
+    );
+
+
+
 endmodule
