@@ -30,11 +30,10 @@ module FSM(
 
         pattern <= (1 << state) - 1;
 
-        
-
         // non blocking, so both can happen at the same time
-        // assign {LA, LB, LC} = (l) ? pattern[2:0] : 3'b000;
-        // assign {RA, RB, RC} = (r) ? pattern[0:2] : 3'b000;
+        // need to be reg? idk..
+        // {LA, LB, LC} <= (l) ? pattern[2:0] : 3'b000;
+        // {RA, RB, RC} <= (r) ? pattern[0:2] : 3'b000;
     end
 endmodule
 
