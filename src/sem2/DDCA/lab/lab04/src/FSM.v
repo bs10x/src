@@ -1,5 +1,8 @@
 module clk_div #(parameter ratio = 1) (
-    input clk, input rst, output clk_en);
+    input clk,
+    input rst,
+    output clk_en
+    );
     
     reg [ratio-1:0] clk_count;
     always @ (posedge clk) begin
@@ -12,16 +15,18 @@ endmodule
 module FSM (
     input clk,
     input rst,
-    input l,
-    input r,
-    output LA, LB, LC, RA, RB,RC);
+    input left,
+    input right,
+    output LA, LB, LC,
+    output RA, RB, RC
+    );
 
     wire clk_en;
     clk_div #(.ratio(32)) CLKDIV (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
-    );
+        );
 
     integer state;
     reg [2:0] pattern;
@@ -48,8 +53,7 @@ endmodule
 //     input left,
 //     input right,
 //     output LA, LB, LC, RA, RB, RC);
-// )
-
+// 
 // endmodule
 
 /*
