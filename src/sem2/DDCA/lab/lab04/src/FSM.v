@@ -17,8 +17,8 @@ module FSM (
     input rst,
     input l,
     input r,
-    output LA, LB, LC,
-    output RA, RB, RC
+    output reg LA, LB, LC,
+    output reg RA, RB, RC
     );
 
     wire clk_en;
@@ -31,33 +31,27 @@ module FSM (
 
     integer sL, sR;
     reg [2:0] pL, pR;
-
+    
     always @ (posedge clk_en) begin
         
         if (rst) begin
             sL <= 0;
             sR <= 0;
         end
-        else begin  
+
+        else begin
+            if (l) sL <= (sL + 1) % 4;
+            if (r) sR <= (sR + 1) % 4;
+            
+            pL <= (1 << sL) - 1;
+            pR <= (1 << sR) - 1;
+
+            // LA <= pL[0];
+            // LB <= pL[1];
+            // LC <= pL[2];
+            {LA, LB, LC} <= pL[2:0];
+            // {RA, RB, RC} <= pR[0:2];
         end
-
-        if (l) begin
-            if (sL == 3) sL <= 0;
-            else sL <= sL + 1;
-        end
-
-        if (r) begin
-            if (sR == 3) sR <= 0;
-            else sR <= sR + 1;
-        end
-        
-
-        pL <= (1 << sL) - 1;
-
-        // non blocking, so both can happen at the same time
-        // need to be reg? idk..
-        // {LA, LB, LC} <= (l) ? pattern[2:0] : 3'b000;
-        // {RA, RB, RC} <= (r) ? pattern[0:2] : 3'b000;
     end
 endmodule
 
