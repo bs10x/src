@@ -9,7 +9,7 @@ module clk_div #(parameter ratio = 1) (
     assign clk_en = &clk_count;
 endmodule
 
-module FSM(
+module FSM (
     input clk,
     input rst,
     input l,
@@ -17,7 +17,7 @@ module FSM(
     output LA, LB, LC, RA, RB,RC);
 
     wire clk_en;
-    clk_div CLKDIV #(.ratio(32)) (
+    clk_div #(.ratio(32)) CLKDIV (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
@@ -38,6 +38,19 @@ module FSM(
         // {RA, RB, RC} <= (r) ? pattern[0:2] : 3'b000;
     end
 endmodule
+
+
+
+
+// module thunderbird (
+//     input clk,
+//     input rst,
+//     input left,
+//     input right,
+//     output LA, LB, LC, RA, RB, RC);
+// )
+
+// endmodule
 
 /*
 
