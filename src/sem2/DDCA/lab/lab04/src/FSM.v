@@ -29,19 +29,30 @@ module FSM (
         );
 
 
-    integer l_s, r_s;
-    reg [2:0] l_p, r_p;
+    integer sL, sR;
+    reg [2:0] pL, pR;
 
     always @ (posedge clk_en) begin
+        
+        if (rst) begin
+            sL <= 0;
+            sR <= 0;
+        end
+        else begin  
+        end
 
-        // always @(l) begin
-        //     if (rst) l_s <= 0;
-        //     else l_s <= (l_s + 1) % 4;
-        // end
+        if (l) begin
+            if (sL == 3) sL <= 0;
+            else sL <= sL + 1;
+        end
 
+        if (r) begin
+            if (sR == 3) sR <= 0;
+            else sR <= sR + 1;
+        end
         
 
-        l_p <= (1 << l_s) - 1;
+        pL <= (1 << sL) - 1;
 
         // non blocking, so both can happen at the same time
         // need to be reg? idk..
