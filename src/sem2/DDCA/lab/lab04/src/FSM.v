@@ -1,5 +1,7 @@
-module clk_div(input clk, input rst, output clk_en);
-    reg [24:0] clk_count;
+module clk_div #(parameter ratio = 1) (
+    input clk, input rst, output clk_en);
+    
+    reg [ratio-1:0] clk_count;
     always @ (posedge clk) begin
         if (rst) clk_count <= 0;
         else clk_count <= clk_count + 1;
@@ -15,7 +17,7 @@ module FSM(
     output LA, LB, LC, RA, RB,RC);
 
     wire clk_en;
-    clk_div CLKDIV (
+    clk_div CLKDIV #(.ratio(32)) (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
@@ -66,4 +68,12 @@ pattern = (1 << state) - 1
     0110
     0111    *
     1000
+
+
+
+always @ clk posedge
+    if (rst) state <= 0;
+    else
+        if (l)
+        if (r)
 */
