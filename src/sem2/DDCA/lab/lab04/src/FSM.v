@@ -15,8 +15,8 @@ endmodule
 module FSM (
     input clk,
     input rst,
-    input left,
-    input right,
+    input l,
+    input r,
     output LA, LB, LC,
     output RA, RB, RC
     );
@@ -28,14 +28,20 @@ module FSM (
         .clk_en(clk_en)
         );
 
-    integer state;
-    reg [2:0] pattern;
+
+    integer l_s, r_s;
+    reg [2:0] l_p, r_p;
 
     always @ (posedge clk_en) begin
-        if (rst) state <= 0;
-        else state <= state++ % 4;
 
-        pattern <= (1 << state) - 1;
+        // always @(l) begin
+        //     if (rst) l_s <= 0;
+        //     else l_s <= (l_s + 1) % 4;
+        // end
+
+        
+
+        l_p <= (1 << l_s) - 1;
 
         // non blocking, so both can happen at the same time
         // need to be reg? idk..
