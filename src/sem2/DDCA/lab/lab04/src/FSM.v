@@ -28,7 +28,17 @@ module FSM (
         .clk_en(clk_en)
         );
 
-    //
+    reg [2:0] state_l, state_r;
+    reg [1:0] selection;
+    always @ (l, r) begin
+    end
+
+    always @ () begin
+    end
+
+    always @ () begin
+    end
+
 
 
 
