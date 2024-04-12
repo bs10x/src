@@ -53,7 +53,7 @@ module FSM (
             RA <= pR[2];
             RB <= pR[1];
             RC <= pR[0];
-            // {LA, LB, LC} <= pL[2:0];
+            {LA, LB, LC} <= pL[2:0];
             // {RA, RB, RC} <= pR[0:2];
         end
     end
@@ -166,3 +166,6 @@ state diagram:
     2 -> 110   // 6
     3 -> 111   // 7
 */
+
+
+
