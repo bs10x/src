@@ -30,13 +30,20 @@ module FSM (
 
     reg [2:0] state_l, state_r;
     reg [1:0] selection;
-    always @ (l, r) begin
+
+    always @ (rst, posedge l, posedge r) begin
+        if (rst) selection <= 0;
+        else begin
+            if (l) selection[1] <= 1;
+            if (r) selection[0] <= 1;
+        end
     end
 
-    always @ () begin
+    always @ (selection) begin
+
     end
 
-    always @ () begin
+    always @ (*) begin
     end
 
 
