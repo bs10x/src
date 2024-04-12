@@ -28,6 +28,63 @@ module FSM (
         .clk_en(clk_en)
         );
 
+    //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     integer sL, sR = 0;
     reg [2:0] pL, pR;
@@ -38,7 +95,7 @@ module FSM (
             sL <= 0;
             sR <= 0;
         end
-        
+
         // nomal ahluegä
         else begin
             if (sL < 4) sL <= sL + 1;
