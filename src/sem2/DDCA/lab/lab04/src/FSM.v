@@ -23,7 +23,7 @@ module FSM (
 
     // clock divisor
     wire clk;
-    ClockDivisor #(.ratio(26)) clk_div (
+    ClockDivisor #(.ratio(32)) clk_div (
         .clk_in(clk_sys),
         .reset(reset),
         .clk_out(clk)
@@ -32,6 +32,7 @@ module FSM (
     // state holding registers
     reg [2:0] state_left, state_right;
     reg [1:0] selection;
+    
     always @ (posedge reset, posedge left, posedge right) begin
         if (reset) selection <= 0;
         else begin
