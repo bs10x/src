@@ -190,18 +190,11 @@ always @ clk
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+if rst state = 0
+else beign
+    if (sL < 4) sL = sL + 1
+    if (sR < 4) sR = sR + 1
+end
 */
 
 
