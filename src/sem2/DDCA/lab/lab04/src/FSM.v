@@ -14,9 +14,9 @@ endmodule
 
 module FSM (
     input clk,
-    input rst,
-    input l,
-    input r,
+    input reset,
+    input left,
+    input right,
     output reg LA, LB, LC,
     output reg RA, RB, RC
     );
@@ -28,34 +28,34 @@ module FSM (
         .clk_en(clk_en)
         );
 
-    reg [2:0] state_l, state_r;
+    reg [2:0] state_left, state_right;
     reg [1:0] selection;
 
-    always @ (rst, posedge l, posedge r) begin
+    always @ (reset, posedge left, posedge right) begin
         if (rst) selection <= 0;
         else begin
-            if (l) selection[1] <= 1;
-            if (r) selection[0] <= 1;
+            if (left) selection[1] <= 1;
+            if (right) selection[0] <= 1;
         end
     end
 
-    always @ (clk_en) begin
+    always @ (posedge clk_en) begin
         if (rst) begin
-            state_l <= 0;
-            state_r <= 0;
+            state_left <= 0;
+            state_right <= 0;
         end
         else begin
             if (selection[1]) begin
-                if (state_l < 4) state_l <= state_l + 1;
+                if (state_left < 4) state_left <= state_left + 1;
                 else begin
-                    state_l <= 0;
+                    state_left <= 0;
                     selection[1] <= 0;
                 end
             end
             if (selection[0]) begin
-                if (state_r < 4) state_r <= state_r + 1;
+                if (state_right < 4) state_right <= state_right + 1;
                 else begin
-                    state_r <= 0;
+                    state_right <= 0;
                     selection[0] <= 0;
                 end
             end
@@ -63,9 +63,10 @@ module FSM (
 
     end
 
-    always @ (state_l, state_r) begin
-        {LC, LB, LA} <= (1 << state_l) - 1;
-        {RC, RB, RA} <= (1 << state_r) - 1;
+    // output logic
+    always @ (state_left, state_right) begin
+        {LC, LB, LA} <= (1 << state_left) - 1;
+        {RC, RB, RA} <= (1 << state_right) - 1;
     end
 
 
