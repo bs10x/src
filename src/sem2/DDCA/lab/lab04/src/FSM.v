@@ -34,23 +34,19 @@ module FSM (
     
     always @ (posedge clk_en) begin
         
-        if (rst) begin
+        if (rst) begin 
             sL <= 0;
             sR <= 0;
         end
-
-        else begin
-            
-            if (l && sL == 0) sL <= 1;  
-            else if(sL != 0) sL = sL + 1;
-            if (r && sR == 0) sR <= 1; 
-            else if(sR != 0) sR = sR + 1;
-            
-            
-            // assign {LA, LB, LC} = pL[2:0];
-            // assign {RA, RB, RC} = pR[0:2];
-        end
         
+        // nomal ahluegä
+        else begin
+            if (sL < 4) sL <= sL + 1;
+            else sL <= 0;
+            if (sR < 4) sR <= sR + 1;
+            else sR <= 0;
+        end
+
         pL <= (1 << sL) - 1;
         pR <= (1 << sR) - 1;
 
@@ -195,7 +191,9 @@ if (rst) sL, sR = 0
 
 else begin
     if (sL < 4) sL = sL + 1
+    else sL = 0
     if (sR < 4) sR = sR + 1
+    else sR = 0
 end
 
 
