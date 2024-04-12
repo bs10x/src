@@ -32,7 +32,7 @@ module FSM (
     // state holding registers
     reg [2:0] state_left, state_right;
     reg [1:0] selection;
-    always @ (reset, posedge left, posedge right) begin
+    always @ (posedge reset, posedge left, posedge right) begin
         if (reset) selection <= 0;
         else begin
             if (left) selection[1] <= 1;
