@@ -40,10 +40,31 @@ module FSM (
     end
 
     always @ (selection) begin
+        if (rst) begin
+            state_l <= 0;
+            state_r <= 0;
+        end
+        else begin
+            if (selection[1]) begin
+                if (state_l < 4) state_l <= state_l + 1;
+                else begin
+                    state_l <= 0;
+                    selection[1] <= 0;
+                end
+            end
+            if (selection[0]) begin
+                if (state_r < 4) state_r <= state_r + 1;
+                else begin
+                    state_r <= 0;
+                    selection[0] <= 0;
+                end
+            end
+        end
 
     end
 
-    always @ (*) begin
+    always @ (state_l, state_r) begin
+
     end
 
 
