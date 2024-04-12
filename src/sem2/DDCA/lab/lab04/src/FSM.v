@@ -62,8 +62,8 @@ module FSM (
             // RB <= pR[1];
             // RC <= pR[0];
             
-            assign {LA, LB, LC} = pL[2:0];
-            assign {RA, RB, RC} = pR[0:2];
+            // assign {LA, LB, LC} = pL[2:0];
+            // assign {RA, RB, RC} = pR[0:2];
         end
     end
 endmodule
