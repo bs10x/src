@@ -29,7 +29,7 @@ module FSM (
         );
 
 
-    integer sL, sR;
+    integer sL, sR = 0;
     reg [2:0] pL, pR;
     
     always @ (posedge clk_en) begin
