@@ -22,7 +22,7 @@ module FSM (
     );
 
     wire clk_en;
-    clk_div #(.ratio(32)) CLKDIV (
+    clk_div #(.ratio(26)) CLKDIV (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
