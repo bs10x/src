@@ -33,19 +33,25 @@ module FSM (
     reg [2:0] state_left, state_right;
     reg [1:0] selection;
     
-    always @ (posedge reset, posedge left, posedge right) begin
-        if (reset) selection <= 0;
-        else begin
-            if (left) selection[1] <= 1;
-            if (right) selection[0] <= 1;
-        end
-    end
+    // always @ (posedge reset, posedge left, posedge right) begin
+    //     if (reset) selection <= 0;
+    //     else begin
+    //         if (left) selection[1] <= 1;
+    //         if (right) selection[0] <= 1;
+    //     end
+    // end
 
     // next state logic
-    always @ (posedge clk) begin
+    always @ (posedge clk, posedge reset, posedge left, posedge right) begin
+
+        selection[1] <= left;
+        selection[0] <= right;
+
+
         if (reset) begin
             state_left <= 0;
             state_right <= 0;
+            selection  <= 0;
         end
         else begin
             if (selection[1]) begin
