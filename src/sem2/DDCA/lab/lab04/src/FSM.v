@@ -39,7 +39,7 @@ module FSM (
         end
     end
 
-    always @ (selection) begin
+    always @ (clk_en) begin
         if (rst) begin
             state_l <= 0;
             state_r <= 0;
@@ -64,7 +64,8 @@ module FSM (
     end
 
     always @ (state_l, state_r) begin
-
+        {LC, LB, LA} <= (1 << state_l) - 1;
+        {RC, RB, RA} <= (1 << state_r) - 1;
     end
 
 
