@@ -46,20 +46,21 @@ module FSM (
             if (r && sR == 0) sR <= 1; 
             else if(sR != 0) sR = sR + 1;
             
-            pL <= (1 << sL) - 1;
-            pR <= (1 << sR) - 1;
-
-            LA <= pL[0];
-            LB <= pL[1];
-            LC <= pL[2];
-
-            RA <= pR[2];
-            RB <= pR[1];
-            RC <= pR[0];
             
             // assign {LA, LB, LC} = pL[2:0];
             // assign {RA, RB, RC} = pR[0:2];
         end
+        
+        pL <= (1 << sL) - 1;
+        pR <= (1 << sR) - 1;
+
+        LA <= pL[0];
+        LB <= pL[1];
+        LC <= pL[2];
+
+        RA <= pR[2];
+        RB <= pR[1];
+        RC <= pR[0];
     end
 endmodule
 
@@ -196,6 +197,10 @@ else begin
     if (sL < 4) sL = sL + 1
     if (sR < 4) sR = sR + 1
 end
+
+
+
+
 */
 
 
