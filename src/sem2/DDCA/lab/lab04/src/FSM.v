@@ -13,7 +13,7 @@ module ClockDivisor #(parameter ratio = 1) (
 endmodule
 
 module FSM (
-    input clk,
+    input clk_sys,
     input reset,
     input left,
     input right,
@@ -22,18 +22,18 @@ module FSM (
     );
 
     // clock divisor
-    wire clk_en;
+    wire clk;
     ClockDivisor #(.ratio(26)) clk_div (
-        .clk(clk),
-        .rst(rst),
-        .clk_en(clk_en)
+        .clk(clk_sys),
+        .rst(reset),
+        .clk_en(clk)
         );
 
     // state holding registers
     reg [2:0] state_left, state_right;
     reg [1:0] selection;
     always @ (reset, posedge left, posedge right) begin
-        if (rst) selection <= 0;
+        if (reset) selection <= 0;
         else begin
             if (left) selection[1] <= 1;
             if (right) selection[0] <= 1;
@@ -41,8 +41,8 @@ module FSM (
     end
 
     // next state logic
-    always @ (posedge clk_en) begin
-        if (rst) begin
+    always @ (posedge clk) begin
+        if (reset) begin
             state_left <= 0;
             state_right <= 0;
         end
@@ -63,106 +63,14 @@ module FSM (
         {LC, LB, LA} <= (1 << state_left) - 1;
         {RC, RB, RA} <= (1 << state_right) - 1;
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    integer sL, sR = 0;
-    reg [2:0] pL, pR;
-    
-    always @ (posedge clk_en) begin
-        
-        if (rst) begin 
-            sL <= 0;
-            sR <= 0;
-        end
-
-        // nomal ahluegä
-        else begin
-            if (sL < 4) sL <= sL + 1;
-            else sL <= 0;
-            if (sR < 4) sR <= sR + 1;
-            else sR <= 0;
-        end
-
-        pL <= (1 << sL) - 1;
-        pR <= (1 << sR) - 1;
-
-        LA <= pL[0];
-        LB <= pL[1];
-        LC <= pL[2];
-
-        RA <= pR[2];
-        RB <= pR[1];
-        RC <= pR[0];
-    end
 endmodule
+
+
 
 /*
 
 ////////////////////////////////////////
 // PROBLEM
-
-L[2:0] can be in state 2 when R[0:2] is in state 3
--> decouple the two
-
-
-
-
 
 l
 state diagram:
@@ -184,7 +92,13 @@ pattern = (1 << state) - 1
 
 
 r
-pattern = (8 >>> state) ~& 8
+state diagram:
+    0 -> 000   // 0
+    1 -> 100   // 4
+    2 -> 110   // 6
+    3 -> 111   // 7
+r
+pattern = [(1 << state) - 1] reversed
     0000    *
     0001
     0010
@@ -195,102 +109,15 @@ pattern = (8 >>> state) ~& 8
     0111    *
     1000
 
-============================    0
-    0001 << 0001
-    0010
-  - 0001
-
-    0001
-    
-    &
-
-    1110
-    ~
-    0001
-    0001 << 0000
-
-============================    1
-    0001 << 0010
-    0100
-  - 0001
-
-    0011
-    
-    &
-
-    1101
-    ~
-    0010
-    0001 << 0001
-
-
-
-111 -> 111  // 7 -> 7
-110 -> 011  // 6 -> 3
-101 -> 001  // 5 -> 1
-100 -> 000  // 4 -> 0
-
-
-0 // 000 ->
-1 // 001 ->
-2 // 010 ->
-3 // 011 ->
-
-7 // 111 ->
-6 // 110 ->
-5 // 101 ->
-4 // 100 ->
-
-0 // 000
-4 // 100
-6 // 110
-7 // 111
 
 
 
 r
-state diagram:
-    0 -> 000   // 0
-    1 -> 100   // 4
-    2 -> 110   // 6
-    3 -> 111   // 7
 
 
 
 
-
-
-
-
-
-
-
-
-always @ clk
-    if (rst)
-        state <- 0
-    else
-        if (l && state == 0)
-            state <- state + 1
-        else
-            if ()
-
-
-
-
-
-if (rst) sL, sR = 0
-
-else begin
-    if (sL < 4) sL = sL + 1
-    else sL = 0
-    if (sR < 4) sR = sR + 1
-    else sR = 0
-end
-
-
-
-
+////////////////////////////////////////
 */
 
 

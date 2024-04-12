@@ -1,13 +1,13 @@
 # clock signal
-set_property PACKAGE_PIN W5 [get_ports clk]
-set_property IOSTANDARD LVCMOS33 [get_ports clk]
-create_clock -period 10 -waveform {0 5} [get_ports clk]
+set_property PACKAGE_PIN W5 [get_ports clk_sys]
+set_property IOSTANDARD LVCMOS33 [get_ports clk_sys]
+create_clock -period 10 -waveform {0 5} [get_ports clk_sys]
 
 # buttons
-set_property PACKAGE_PIN W19 [get_ports left]
-set_property PACKAGE_PIN U18 [get_ports reset]
-set_property PACKAGE_PIN T17 [get_ports right]
-set_property IOSTANDARD LVCMOS33 [get_ports {l rst r}]
+set_property PACKAGE_PIN W19 [get_ports l]
+set_property PACKAGE_PIN U18 [get_ports rst]
+set_property PACKAGE_PIN T17 [get_ports r]
+set_property IOSTANDARD LVCMOS33 [get_ports {left reset right}]
 
 # LEDs
 set_property PACKAGE_PIN U14 [get_ports LC]
