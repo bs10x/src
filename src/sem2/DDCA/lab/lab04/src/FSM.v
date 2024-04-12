@@ -1,4 +1,4 @@
-module clk_div #(parameter ratio = 1) (
+module ClockDivisor #(parameter ratio = 1) (
     input clk,
     input rst,
     output clk_en
@@ -22,7 +22,7 @@ module FSM (
     );
 
     wire clk_en;
-    clk_div #(.ratio(26)) CLKDIV (
+    ClockDivisor #(.ratio(26)) clk_div (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
@@ -173,6 +173,42 @@ state diagram:
     1 -> 100   // 4
     2 -> 110   // 6
     3 -> 111   // 7
+
+
+
+
+
+
+
+
+
+
+
+
+always @ clk
+    if (rst)
+        state <- 0
+    else
+        if (l && state == 0)
+            state <- state + 1
+        else
+            if ()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 */
 
 
