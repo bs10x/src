@@ -17,8 +17,8 @@ module FSM (
     input rst,
     input l,
     input r,
-    output reg LA, LB, LC,
-    output reg RA, RB, RC
+    output LA, LB, LC,
+    output RA, RB, RC
     );
 
     wire clk_en;
@@ -54,15 +54,16 @@ module FSM (
             pL <= (1 << sL) - 1;
             pR <= (1 << sR) - 1;
 
-            LA <= pL[0];
-            LB <= pL[1];
-            LC <= pL[2];
+            // LA <= pL[0];
+            // LB <= pL[1];
+            // LC <= pL[2];
 
-            RA <= pR[2];
-            RB <= pR[1];
-            RC <= pR[0];
-            {LA, LB, LC} <= pL[2:0];
-            // {RA, RB, RC} <= pR[0:2];
+            // RA <= pR[2];
+            // RB <= pR[1];
+            // RC <= pR[0];
+            
+            assign {LA, LB, LC} = pL[2:0];
+            assign {RA, RB, RC} = pR[0:2];
         end
     end
 endmodule
