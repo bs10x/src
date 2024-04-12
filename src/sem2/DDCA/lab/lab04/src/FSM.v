@@ -1,15 +1,15 @@
 module ClockDivisor #(parameter ratio = 1) (
-    input clk,
-    input rst,
-    output clk_en
+    input clk_in,
+    input reset,
+    output clk_out
     );
     
     reg [ratio-1:0] clk_count;
-    always @ (posedge clk) begin
-        if (rst) clk_count <= 0;
+    always @ (posedge clk_in) begin
+        if (reset) clk_count <= 0;
         else clk_count <= clk_count + 1;
     end
-    assign clk_en = &clk_count;
+    assign clk_out = &clk_count;
 endmodule
 
 module FSM (
@@ -24,9 +24,9 @@ module FSM (
     // clock divisor
     wire clk;
     ClockDivisor #(.ratio(26)) clk_div (
-        .clk(clk_sys),
-        .rst(reset),
-        .clk_en(clk)
+        .clk_in(clk_sys),
+        .reset(reset),
+        .clk_out(clk)
         );
 
     // state holding registers
