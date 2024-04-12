@@ -42,6 +42,13 @@ module FSM (
         else begin
             if (l) sL <= (sL + 1) % 4;
             if (r) sR <= (sR + 1) % 4;
+
+            // case (sL)
+            //     0: sL <= 1;
+            //     1: sL <= 2;
+            //     2: sL <= 3;
+            //     3: sL <= 0;
+            // endcase
             
             pL <= (1 << sL) - 1;
             pR <= (1 << sR) - 1;
