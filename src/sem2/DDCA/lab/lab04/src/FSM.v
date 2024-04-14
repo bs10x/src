@@ -24,7 +24,7 @@ module FSM (
     // clock divisor
     wire clk;
     ClockDivisor #(.ratio(32)) clk_div (
-        .reset(),  // no reset needed, right?
+        .reset(reset),
         .clk_in(clk_sys),
         .clk_out(clk)
         );
@@ -33,41 +33,40 @@ module FSM (
     reg [2:0] state_left, state_right;
     reg [1:0] selection;
     
+    // update states based on inputs 
+    always (left, right) begin
+        selection[1] <= left;
+        selection[0] <= right;
+    end
+
+
     // next state logic
     always @ (posedge clk, posedge reset) begin
 
-        selection[1] <= left;
-        selection[0] <= right;
+        // selection[1] <= left;
+        // selection[0] <= right;
 
 
-        if (reset) begin
-            state_left <= 0;
-            state_right <= 0;
-            selection  <= 0;
-        end
-        else begin
-            if (selection[1]) begin
-                if (~state_left) selection[1] <= 0;
-                state_left <= state_left + 1;
-            end
-            if (selection[0]) begin
-                if (~state_right) selection[0] <= 0;
-                state_right <= state_right + 1;
-            end
-        end
+        // if (reset) begin
+        //     state_left <= 0;
+        //     state_right <= 0;
+        //     selection  <= 0;
+        // end
+        // else begin
+        //     if (selection[1]) begin
+        //         if (~state_left) selection[1] <= 0;
+        //         state_left <= state_left + 1;
+        //     end
+        //     if (selection[0]) begin
+        //         if (~state_right) selection[0] <= 0;
+        //         state_right <= state_right + 1;
+        //     end
+        // end
     end
 
     // output logic
     assign {LC, LB, LA} = state_left;
     assign {RA, RB, RC} = state_right;
-
-
-    
-
-    // always @ (state_left, state_right) begin
-        // {LC, LB, LA} <= (1 << state_left) - 1;
-        // {RC, RB, RA} <= (1 << state_right) - 1;
-    // end
 endmodule
 
 
