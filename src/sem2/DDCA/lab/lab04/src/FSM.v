@@ -39,9 +39,24 @@ module FSM (
         selection[0] <= right;
     end
 
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b011;
+    parameter S3 = 3'b111;
 
     // next state logic
     always @ (posedge clk, posedge reset) begin
+
+        if (selection[1]) begin
+            case (state_left)
+                S0: state_left <= S1;
+                S1: state_left <= S2;
+                S2: state_left <= S3;
+                S3: state_left <= S0;
+            endcase
+            if (~state_left) selection[1] <= 0;
+            state_left <= state_left + 1;
+        end
 
         // selection[1] <= left;
         // selection[0] <= right;
