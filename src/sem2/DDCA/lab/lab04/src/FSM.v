@@ -30,7 +30,7 @@ module FSM (
         );
 
     // state holding registers
-    reg [2:0] state_left, state_right;
+    reg [2:0] state_left, state_right, nextstate;
     reg [1:0] selection;
     
     // update states based on inputs 
@@ -39,24 +39,31 @@ module FSM (
         selection[0] <= right;
     end
 
-    parameter S0 = 3'b000;
-    parameter S1 = 3'b001;
-    parameter S2 = 3'b011;
-    parameter S3 = 3'b111;
+    reg [2:0] S0 = 3'b000;
+    reg [2:0] S1 = 3'b001;
+    reg [2:0] S2 = 3'b011;
+    reg [2:0] S3 = 3'b111;
 
     // next state logic
     always @ (posedge clk, posedge reset) begin
 
         if (selection[1]) begin
             case (state_left)
-                S0: state_left <= S1;
-                S1: state_left <= S2;
-                S2: state_left <= S3;
-                S3: state_left <= S0;
+                S0: nextstate <= S1;
+                S1: nextstate <= S2;
+                S2: nextstate <= S3;
+                S3: nextstate <= S0;
             endcase
-            if (~state_left) selection[1] <= 0;
-            state_left <= state_left + 1;
         end
+        if (selection[0]) begin
+            case (state_right)
+                S0: nextstate <= S1;
+                S1: nextstate <= S2;
+                S2: nextstate <= S3;
+                S3: nextstate <= S0;
+            endcase
+        end
+
 
         // selection[1] <= left;
         // selection[0] <= right;
@@ -80,8 +87,8 @@ module FSM (
     end
 
     // output logic
-    assign {LC, LB, LA} = state_left;
-    assign {RA, RB, RC} = state_right;
+    assign {LC, LB, LA} = nextstate;
+    assign {RA, RB, RC} = nextstate;
 endmodule
 
 
