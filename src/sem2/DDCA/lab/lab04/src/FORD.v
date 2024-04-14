@@ -77,12 +77,12 @@ module FORD(
 
     // right state machine
     FSM RIGHT (
-    .clk(clk),
-    .reset(reset),
-    .enable(right),
-    .L(RA),
-    .M(RB),
-    .R(RC)
-    );
+        .clk(clk),
+        .reset(reset),
+        .enable(right),
+        .L(RA),
+        .M(RB),
+        .R(RC)
+        );
 
 endmodule

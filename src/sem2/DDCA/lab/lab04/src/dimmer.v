@@ -1,4 +1,4 @@
-module clk_div #(parameter ratio = 1) (
+module ClockDivisor #(parameter ratio = 1) (
     input clk, input rst, output clk_en);
     
     reg [ratio-1:0] clk_count;
@@ -9,7 +9,7 @@ module clk_div #(parameter ratio = 1) (
     assign clk_en = &clk_count;
 endmodule
 
-module dimmer (
+module Dimmer (
     input clk,
     input rst,
     input u,
@@ -18,7 +18,7 @@ module dimmer (
     
     wire clk_en;
 
-    clk_div CLKDIV (
+    ClockDivisor CLKDIV (
         .clk(clk),
         .rst(rst),
         .clk_en(clk_en)
