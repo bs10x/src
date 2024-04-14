@@ -12,8 +12,8 @@ module FSM (
     reg [2:0] S2 = 3'b011;
     reg [2:0] S3 = 3'b111;
     
-    // update state_ps based on inputs 
-    always @ (posedge enable) begin
+    // update state based on inputs 
+    always @ (posedge state_p) begin
         case (state_p)
             S0: state_n <= S1;
             S1: state_n <= S2;
