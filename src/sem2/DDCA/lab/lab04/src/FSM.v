@@ -34,7 +34,7 @@ module FSM (
     reg [1:0] selection;
     
     // update states based on inputs 
-    always (left, right) begin
+    always @ (left, right) begin
         selection[1] <= left;
         selection[0] <= right;
     end
