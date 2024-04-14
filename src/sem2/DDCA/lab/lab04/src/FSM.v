@@ -34,7 +34,7 @@ module FSM (
     reg [1:0] selection;
     
     // next state logic
-    always @ (posedge clk_en, posedge reset, posedge left, posedge right) begin
+    always @ (posedge clk_en, posedge reset) begin
 
         selection[1] <= left;
         selection[0] <= right;
@@ -58,9 +58,12 @@ module FSM (
     end
 
     // output logic
-    always @ (state_left, state_right) begin
-        {LC, LB, LA} <= (1 << state_left) - 1;
-        {RC, RB, RA} <= (1 << state_right) - 1;
+    always @ (reset, state_left, state_right) begin
+        if (reset) {LA, LB, LC, RA, RB, RC} <= 0;
+        else begin
+            {LA, LB, LC} <= (1 << state_left) - 1;
+            {RA, RB, RC} <= (1 << state_right) - 1;
+        end
     end
 endmodule
 
