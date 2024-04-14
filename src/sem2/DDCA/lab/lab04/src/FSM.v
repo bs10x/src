@@ -7,19 +7,18 @@ module FSM (
 
     // state holding registers
     reg [2:0] state_p, state_n;
-    reg [2:0] S0 = 3'b000;
-    reg [2:0] S1 = 3'b001;
-    reg [2:0] S2 = 3'b011;
-    reg [2:0] S3 = 3'b111;
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b011;
+    parameter S3 = 3'b111;
     
     // update state based on inputs 
     always @ (posedge state_p) begin
+        if (enable) state_n <= S1;
         case (state_p)
-            S0: state_n <= S1;
             S1: state_n <= S2;
             S2: state_n <= S3;
             S3: state_n <= S0;
-            default: state_n = S0;
         endcase
     end
 
