@@ -13,7 +13,7 @@ module ClockDivisor #(parameter ratio = 1) (
 endmodule
 
 module FSM (
-    input clk,
+    input clk_sys,
     input reset,
     input left,
     input right,
@@ -22,11 +22,11 @@ module FSM (
     );
 
     // clock divisor
-    wire clk_en;
+    wire clk;
     ClockDivisor #(.ratio(32)) clk_div (
         .reset(),  // no reset needed, right?
-        .clk_in(clk),
-        .clk_out(clk_en)
+        .clk_in(clk_sys),
+        .clk_out(clk)
         );
 
     // state holding registers
@@ -34,7 +34,7 @@ module FSM (
     reg [1:0] selection;
     
     // next state logic
-    always @ (posedge clk_en, posedge reset) begin
+    always @ (posedge clk, posedge reset) begin
 
         selection[1] <= left;
         selection[0] <= right;
@@ -58,12 +58,9 @@ module FSM (
     end
 
     // output logic
-    always @ (reset, state_left, state_right) begin
-        if (reset) {LA, LB, LC, RA, RB, RC} <= 0;
-        else begin
-            {LA, LB, LC} <= (1 << state_left) - 1;
-            {RA, RB, RC} <= (1 << state_right) - 1;
-        end
+    always @ (state_left, state_right) begin
+        {LC, LB, LA} <= (1 << state_left) - 1;
+        {RC, RB, RA} <= (1 << state_right) - 1;
     end
 endmodule
 
