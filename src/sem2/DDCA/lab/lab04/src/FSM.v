@@ -17,8 +17,8 @@ module FSM (
     input reset,
     input left,
     input right,
-    output reg LA, LB, LC,
-    output reg RA, RB, RC
+    output LA, LB, LC,
+    output RA, RB, RC
     );
 
     // clock divisor
@@ -58,6 +58,7 @@ module FSM (
     end
 
     // output logic
+    assign {LC, LB, LA} = state_left;
     always @ (state_left, state_right) begin
         {LC, LB, LA} <= (1 << state_left) - 1;
         {RC, RB, RA} <= (1 << state_right) - 1;
