@@ -14,8 +14,8 @@ module FSM (
     
     // update state based on inputs 
     always @ (posedge state_p) begin
-        if (enable) state_n <= S1;
         case (state_p)
+            S0: state_n <= (enable) ? S1 : S0;
             S1: state_n <= S2;
             S2: state_n <= S3;
             S3: state_n <= S0;
@@ -32,52 +32,3 @@ module FSM (
     // output logic
     assign {L, M, R} = state_n;
 endmodule
-
-
-
-/***************************************
-////////////////////////////////////////
-// PROBLEM
-
-l
-state diagram:
-    0 -> 000   // 0
-    1 -> 001   // 1
-    2 -> 011   // 3
-    3 -> 111   // 7
-l
-pattern = (1 << state) - 1
-    0000    *
-    0001    *
-    0010
-    0011    *
-    0100
-    0101
-    0110
-    0111    *
-    1000
-
-
-r
-state diagram:
-    0 -> 000   // 0
-    1 -> 100   // 4
-    2 -> 110   // 6
-    3 -> 111   // 7
-r
-pattern = [(1 << state) - 1] reversed
-    0000    *
-    0001
-    0010
-    0011
-    0100    *
-    0101
-    0110    *
-    0111    *
-    1000
-
-////////////////////////////////////////
-***************************************/
-
-
-
