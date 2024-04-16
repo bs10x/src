@@ -1,12 +1,15 @@
 module ClockDivisor #(parameter ratio = 1) (
-    input clk, input rst, output clk_en);
+    input reset,
+    input clk_in,
+    output clk_out
+    );
     
-    reg [ratio-1:0] clk_count;
-    always @ (posedge clk) begin
-        if (rst) clk_count <= 0;
-        else clk_count <= clk_count + 1;
+    reg [ratio-1:0] count;
+    always @ (posedge clk_in) begin
+        if (reset) count <= 0;
+        else count <= count + 1;
     end
-    assign clk_en = &clk_count;
+    assign clk_out = &count;
 endmodule
 
 module Dimmer (
@@ -24,11 +27,4 @@ module Dimmer (
         .clk_en(clk_en)
     );
 
-
-
-
-
-    /*
-
-    */
 endmodule

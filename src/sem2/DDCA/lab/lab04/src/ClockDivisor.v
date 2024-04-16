@@ -4,10 +4,10 @@ module ClockDivisor #(parameter ratio = 1) (
     output clk_out
     );
     
-    reg [ratio-1:0] clk_count;
+    reg [ratio-1:0] count;
     always @ (posedge clk_in) begin
-        if (reset) clk_count <= 0;
-        else clk_count <= clk_count + 1;
+        if (reset) count <= 0;
+        else count <= count + 1;
     end
-    assign clk_out = &clk_count;
+    assign clk_out = &count;
 endmodule
