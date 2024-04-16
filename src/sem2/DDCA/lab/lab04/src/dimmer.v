@@ -14,16 +14,19 @@ endmodule
 
 module Dimmer (
     input clk_sys,
-    input rst,
-    input u,
-    input d,
-    output A, B, C);
+    input reset,
+    output D);
     
     wire clk;
     ClockDivisor #(.ratio(25)) clk_div (
         .clk_in(clk_sys),
-        .reset(rst),
+        .reset(reset),
         .clk_out(clk)
     );
+
+    always @ (posedge clk) begin
+        // Dimmer logic
+    end
+
 
 endmodule
