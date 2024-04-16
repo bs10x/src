@@ -5,28 +5,27 @@ module FSM (
     output A, B, C
     );
 
-    // state holding registers
     reg [2:0] state_prev, state_next;
-    parameter idle = 3'b000;
-    parameter frst = 3'b001;
-    parameter scnd = 3'b011;
-    parameter thrd = 3'b111;
-    
-    // update state based on inputs 
-    always @ (posedge state_prev) begin
-        case (state_prev)
-            idle: state_next <= (enable) ? frst : idle;
-            frst: state_next <= scnd;
-            scnd: state_next <= thrd;
-            thrd: state_next <= idle;
-        endcase
+
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b011;
+    parameter S3 = 3'b111;
+
+    // state holding register
+    always @ (posedge clk, posedge reset) begin
+        if (reset) state_prev <= S0;
+        else state_prev <= state_next;
     end
 
-
-    // next state logic
-    always @ (posedge clk, posedge reset) begin
-        if (reset) state_prev <= idle;
-        else state_prev <= state_next;
+    // next state logic 
+    always @ (posedge state_prev) begin
+        case (state_prev)
+            S0: state_next <= (enable) ? S1 : S0;
+            S1: state_next <= S2;
+            S2: state_next <= S3;
+            S3: state_next <= S0;
+        endcase
     end
 
     // output logic
@@ -35,8 +34,8 @@ endmodule
 
 
 /*
-idle
-frst
-scnd
-thrd
+S0
+S1
+S2
+S3
 */
