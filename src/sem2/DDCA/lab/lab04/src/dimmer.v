@@ -13,18 +13,17 @@ module ClockDivisor #(parameter ratio = 1) (
 endmodule
 
 module Dimmer (
-    input clk,
+    input clk_sys,
     input rst,
     input u,
     input d,
     output A, B, C);
     
-    wire clk_en;
-
-    ClockDivisor CLKDIV (
-        .clk(clk),
-        .rst(rst),
-        .clk_en(clk_en)
+    wire clk;
+    ClockDivisor #(.ratio(25)) clk_div (
+        .clk_in(clk_sys),
+        .reset(rst),
+        .clk_out(clk)
     );
 
 endmodule
