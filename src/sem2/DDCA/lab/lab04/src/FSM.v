@@ -23,7 +23,7 @@ module FSM (
     end
 
 
-    // next state_prev logic
+    // next state logic
     always @ (posedge clk, posedge reset) begin
         if (reset) state_prev <= idle;
         else state_prev <= state_next;
