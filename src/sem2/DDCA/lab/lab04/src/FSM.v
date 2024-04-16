@@ -30,7 +30,7 @@ module FSM (
     end
 
     // output logic
-    assign {L, M, R} = state_next;
+    assign {L, M, R} = state_prev;
 endmodule
 
 
