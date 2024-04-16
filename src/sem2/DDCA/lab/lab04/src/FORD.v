@@ -59,7 +59,7 @@ module FORD(
 
     // clock divisor
     wire clk;
-    ClockDivisor #(.ratio(32)) clk_div (
+    ClockDivisor #(.ratio(24)) clk_div (
         .reset(reset),
         .clk_in(clk_sys),
         .clk_out(clk)
@@ -76,13 +76,13 @@ module FORD(
         );
 
     // right state machine
-    FSM RIGHT (
-        .clk(clk),
-        .reset(reset),
-        .enable(right),
-        .L(RA),
-        .M(RB),
-        .R(RC)
-        );
+    // FSM RIGHT (
+    //     .clk(clk),
+    //     .reset(reset),
+    //     .enable(right),
+    //     .L(RA),
+    //     .M(RB),
+    //     .R(RC)
+    //     );
 
 endmodule
