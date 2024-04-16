@@ -4,7 +4,7 @@ module FSM (
     input enable,
     output L, M, R
     );
-
+    
     // state holding registers
     reg [2:0] state_p, state_n;
     parameter S0 = 3'b000;
