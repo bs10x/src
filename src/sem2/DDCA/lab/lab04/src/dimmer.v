@@ -17,6 +17,8 @@ module Dimmer (
     input reset,
     output D);
     
+    // reg[]
+
     wire clk;
     ClockDivisor #(.ratio(25)) clk_div (
         .clk_in(clk_sys),
@@ -24,8 +26,9 @@ module Dimmer (
         .clk_out(clk)
     );
 
-    always @ (posedge clk) begin
+    always @ (posedge clk_sys) begin
         // Dimmer logic
+
     end
 
 
