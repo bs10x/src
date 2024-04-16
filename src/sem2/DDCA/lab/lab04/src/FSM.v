@@ -14,14 +14,14 @@ module FSM (
 
     // state holding register
     always @ (posedge clk, posedge reset) begin
-        if (reset) state_prev <= S0;
+        if (reset == '1') state_prev <= S0;
         else state_prev <= state_next;
     end
 
     // next state logic 
     always @ (*) begin
         case (state_prev)
-            S0: state_next <= (enable) ? S1 : S0;
+            S0: state_next <= (enable == '1') ? S1 : S0;
             S1: state_next <= S2;
             S2: state_next <= S3;
             S3: state_next <= S0;
