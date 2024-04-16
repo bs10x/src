@@ -2,7 +2,7 @@ module FSM (
     input clk,
     input reset,
     input enable,
-    output L, M, R
+    output A, B, C
     );
 
     // state holding registers
@@ -30,7 +30,7 @@ module FSM (
     end
 
     // output logic
-    assign {L, M, R} = state_prev;
+    assign {A, B, C} = state_prev;
 endmodule
 
 
@@ -39,3 +39,4 @@ idle
 frst
 scnd
 thrd
+*/

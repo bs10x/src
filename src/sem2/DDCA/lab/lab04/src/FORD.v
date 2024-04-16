@@ -16,7 +16,7 @@ module FSM (
     input clk,
     input reset,
     input enable,
-    output L, M, R
+    output A, B, C
     );
 
     // state holding registers
@@ -44,7 +44,7 @@ module FSM (
     end
 
     // output logic
-    assign {L, M, R} = state_n;
+    assign {A, B, Cs} = state_n;
 endmodule
 
 
@@ -65,24 +65,24 @@ module FORD(
         .clk_out(clk)
         );
 
-    // left state machine
+    // left blinker
     FSM LEFT (
         .clk(clk),
         .reset(reset),
         .enable(left),
-        .L(LC),
-        .M(LB),
-        .R(LA)
+        .A(LA),
+        .B(LB),
+        .C(LC)
         );
 
-    // right state machine
+    // right blinker
     // FSM RIGHT (
     //     .clk(clk),
     //     .reset(reset),
     //     .enable(right),
-    //     .L(RA),
-    //     .M(RB),
-    //     .R(RC)
+    //     .A(RA),
+    //     .B(RB),
+    //     .C(RC)
     //     );
 
 endmodule
