@@ -5,7 +5,7 @@
 #       
 
 .data                                   # data declaration section
-hw:  .asciiz "\nHello, World!\n"        # string to be printed
+hw: .asciiz "\nHello, World!\n"         # string to be printed
 
 .text                                   # code section
 main:                                   # start of main function
