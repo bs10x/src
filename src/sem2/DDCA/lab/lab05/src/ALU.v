@@ -19,12 +19,20 @@ module ALU (
     output reg Z
     );
 
+    wire [31:0] out_AL;
     Arithmetic AL (
-                    .op(op[1:0]),
-                    .A(A),
-                    .B(B),
-                    .Y(Y)
-                );
+        .op(op[1:0]),
+        .A(A),
+        .B(B),
+        .Y(out_AL)
+        );
+
+    Logic LL (
+        .op(op[1:0]),
+        .A(A),
+        .B(B),
+        .Y(Y)
+        );
 
     always @ (*) begin
         case (op[3:2])
