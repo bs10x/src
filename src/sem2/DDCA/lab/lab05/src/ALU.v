@@ -67,7 +67,8 @@ module ALU (
     output Z
     );
 
-    wire [31:0] out_AU, out_LU, out_AL, out_SLT;
+    wire [31:0] out_AU, out_LU, out_SLT;
+    wire [31:0] out_AL, out_SLTZ;
 
     Arithmetic AU (
         .op(op[1]),
@@ -89,40 +90,48 @@ module ALU (
         .Y(out_AL)
     );
 
-    Mux #(.data(32)) SLT_Z (
-        .s(op[0]),
-        .A(XOR),
-        .B(NOR),
-        .Y(XORNOR)
+    Mux #(.data(32)) SLTZ (
+        .s(op[2]),
+        .A(out_SLT),
+        .B(32'b0),
+        .Y(out_SLTZ)
     );
     
     Mux #(.data(32)) operation (
-        .s(op[1]),
-        .A(ANDOR),
-        .B(XORNOR),
+        .s(op[3]),
+        .A(out_AL),
+        .B(out_SLTZ),
         .Y(Y)
     );
+
+    assign Z = ~|Y;
 
 endmodule
 
 
-    // parameter ADD = 4'b0000;
-    // parameter SUB = 4'b0010;
-    // parameter AND = 4'b0100;
-    // parameter OR  = 4'b0101;
-    // parameter XOR = 4'b0110;
-    // parameter NOR = 4'b0111;
-    // parameter SLT = 4'b1010;
-    // always @ (*) begin
-    //     case (op)
-    //         ADD: Y <= A  + B;
-    //         SUB: Y <= A  - B;
-    //         AND: Y <= A  & B;
-    //         OR:  Y <= A  | B;
-    //         XOR: Y <= A  ^ B;
-    //         NOR: Y <= A ~| B;
-    //         SLT: Y <= (A - B < 0) ? 32'b1 : 32'b0;
-    //         default: Y <= 32'b0;
-    //     endcase
-    //     Z <= |Y;
-    // end
+
+///////////////////////////////////////////////////////
+// better solution?
+//
+
+// parameter ADD = 4'b0000;
+// parameter SUB = 4'b0010;
+// parameter AND = 4'b0100;
+// parameter OR  = 4'b0101;
+// parameter XOR = 4'b0110;
+// parameter NOR = 4'b0111;
+// parameter SLT = 4'b1010;
+
+// always @ (*) begin
+//     case (op)
+//         ADD: Y <= A  + B;
+//         SUB: Y <= A  - B;
+//         AND: Y <= A  & B;
+//         OR:  Y <= A  | B;
+//         XOR: Y <= A  ^ B;
+//         NOR: Y <= A ~| B;
+//         SLT: Y <= (A - B < 0) ? 32'b1 : 32'b0;
+//         default: Y <= 32'b0;
+//     endcase
+//     Z <= ~|Y;
+// end
