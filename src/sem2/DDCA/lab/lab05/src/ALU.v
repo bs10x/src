@@ -53,7 +53,7 @@ module Logic (
         .Y(XORNOR)
         );
     
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) andorxornor (
         .s(op[1]),
         .A(ANDOR),
         .B(XORNOR),
