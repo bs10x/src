@@ -1,7 +1,7 @@
 module ALU (
     input [3:0] OP,
     input [31:0] A, B,
-    output [31:0] Y,
+    output reg [31:0] Y,
     output Z
 );
     parameter ADD = 4'b0000;
@@ -12,18 +12,18 @@ module ALU (
     parameter NOR = 4'b0111;
     parameter SLT = 4'b1010;
 
-    case (OP)
-        // ADD: Y = A + B;
-        // SUB: Y = A - B;
-        // AND: Y = A & B;
-        // OR:  Y = A | B;
-        // XOR: Y = A ^ B;
-        // NOR: Y = ~(A | B);
-        // SLT: Z = (A < B);
-        // default: Y = 32'b0;
-        
-    endcase
-
+    always @ (*) begin
+        case (OP)
+            ADD: Y = A + B;
+            SUB: Y = A - B;
+            AND: Y = A & B;
+            OR:  Y = A | B;
+            XOR: Y = A ^ B;
+            NOR: Y = ~(A | B);
+            SLT: Z = (A < B);
+            default: Y = 32'b0;
+        endcase
+    end
 
     
 
