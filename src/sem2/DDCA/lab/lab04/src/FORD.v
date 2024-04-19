@@ -56,7 +56,7 @@ module Ford (
     output RA, RB, RC
     );
 
-    wire [2:0] L, R;
+    wire L, R;
 
     // clock divisor
     wire clk;
@@ -70,20 +70,20 @@ module Ford (
     FSM LEFT (
         .clk(clk),
         .reset(reset),
-        .enable(left && !R[0]),
-        .C(L[2]),
-        .B(L[1]),
-        .A(L[0])
+        .enable(left && !R),
+        .C(LC),
+        .B(LB),
+        .A(L)
         );
 
     // right blinker
     FSM RIGHT (
         .clk(clk),
         .reset(reset),
-        .enable(right && !L[0]),
-        .C(R[2]),
-        .B(R[1]),
-        .A(R[0])
+        .enable(right && !L),
+        .C(RC),
+        .B(RB),
+        .A(R)
         );
 
         assign {LC, LB, LA} = L;
