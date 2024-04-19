@@ -24,12 +24,12 @@ module ALU (
     // parameter SLT = 4'b1010;
     // always @ (*) begin
     //     case (op)
-    //         ADD: Y <= A + B;
-    //         SUB: Y <= A - B;
-    //         AND: Y <= A & B;
-    //         OR:  Y <= A | B;
-    //         XOR: Y <= A ^ B;
-    //         NOR: Y <= ~(A | B);
+    //         ADD: Y <= A  + B;
+    //         SUB: Y <= A  - B;
+    //         AND: Y <= A  & B;
+    //         OR:  Y <= A  | B;
+    //         XOR: Y <= A  ^ B;
+    //         NOR: Y <= A ~| B;
     //         SLT: Y <= (A - B < 0) ? 32'b1 : 32'b0;
     //         default: Y <= 32'b0;
     //     endcase
