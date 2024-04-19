@@ -8,7 +8,6 @@ module FullAdder (input a, input b, input ci, output so, output co);
     and c0 (co0, a, b);
     and c1 (co1, s0, ci);
     or CARRY (co, c0, c1);
-
 endmodule
 
 module Adder (
@@ -52,43 +51,3 @@ module Adder (
     FullAdder FA30(.a(A[30]), .b(B[30]), .ci(c[29]), .so(S[30]), .co(c[30]));
     FullAdder FA31(.a(A[31]), .b(B[31]), .ci(c[30]), .so(S[31]), .co(overflow));
 endmodule
-
-module Adder (
-    input [31:0] A, B,
-    output [31:0] Y
-    );
-
-    assign Y = A + B;
-
-
-endmodule
-
-
-// 4
-// 5
-// 6
-// 7
-// 8
-// 9
-// 10
-// 11
-// 12
-// 13
-// 14
-// 15
-// 16
-// 17
-// 18
-// 19
-// 20
-// 21
-// 22
-// 23
-// 24
-// 25
-// 26
-// 27
-// 28
-// 29
-// 30
-// 31
