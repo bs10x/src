@@ -7,7 +7,7 @@ module Mux #(parameter width = 8) (
 endmodule
 
 module Arithmetic (
-    input [1:0] op,
+    input op,
     input [31:0] A, B,
     output [31:0] Y
     );
@@ -17,7 +17,7 @@ module Arithmetic (
     assign add = A + B; 
     assign sub = A - B; 
 
-    Mux #(.width(2)) operation (
+    Mux #(.width(32)) operation (
         .s(op),
         .A(add),
         .B(sub),

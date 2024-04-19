@@ -13,7 +13,7 @@ module Arithmetic (
 endmodule
 
 module ALU (
-    input [3:0] op,
+    input op,
     input [31:0] A, B,
     output reg [31:0] Y,
     output reg Z
