@@ -19,7 +19,7 @@ module FSM (
     end
     
     // next state logic 
-    always @ (posedge clk) begin
+    always @ (*) begin
         case (state_prev)
             S0: state_next <= (enable) ? S1 : S0;
             S1: state_next <= S2;
@@ -29,5 +29,5 @@ module FSM (
     end
 
     // output logic
-    assign {A, B, C} = state_prev;
+    assign {C, B, A} = state_prev;
 endmodule
