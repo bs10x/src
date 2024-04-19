@@ -1,7 +1,8 @@
 module Mux #(parameter data = 8) (
     input s,
     input [data-1:0] A, B,
-    output [data-1:0] Y);
+    output [data-1:0] Y
+    );
 
     assign Y = s ? B : A;
 endmodule
@@ -17,12 +18,12 @@ module Arithmetic (
     assign add = A + B; 
     assign sub = A - B; 
 
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) addsub (
         .s(op),
         .A(add),
         .B(sub),
         .Y(Y)
-    );
+        );
 endmodule
 
 module Logic (
@@ -43,21 +44,21 @@ module Logic (
         .A(AND),
         .B(OR),
         .Y(ANDOR)
-    );
+        );
 
     Mux #(.data(32)) xornor (
         .s(op[0]),
         .A(XOR),
         .B(NOR),
         .Y(XORNOR)
-    );
+        );
     
     Mux #(.data(32)) operation (
         .s(op[1]),
         .A(ANDOR),
         .B(XORNOR),
         .Y(Y)
-    );
+        );
 endmodule
 
 module SLT (
@@ -70,12 +71,12 @@ module SLT (
 
     assign slt = (A - B < 0) ? 32'b1 : 32'b0; 
 
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) sltz (
         .s(op),
         .A(slt),
         .B(32'b0),
         .Y(Y)
-    );
+        );
 endmodule
 
 module ALU (
@@ -100,11 +101,11 @@ module ALU (
         .B(B),
         .Y(out_LU)
         );
-    SLT SLT (
+    SLT SLTZ (
         .op(op[2]),
         .A(A),
         .B(B),
-        .Y(out_SLT)
+        .Y(out_SLTZ)
         );
 
     Mux #(.data(32)) AL (
@@ -112,24 +113,16 @@ module ALU (
         .A(out_AU),
         .B(out_LU),
         .Y(out_AL)
-    );
-
-    Mux #(.data(32)) SLTZ (
-        .s(op[2]),
-        .A(out_SLT),
-        .B(32'b0),
-        .Y(out_SLTZ)
-    );
+        );
     
     Mux #(.data(32)) operation (
         .s(op[3]),
         .A(out_AL),
         .B(out_SLTZ),
         .Y(Y)
-    );
+        );
 
     assign Z = ~|Y;
-
 endmodule
 
 

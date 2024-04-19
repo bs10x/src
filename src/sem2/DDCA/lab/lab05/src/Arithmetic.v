@@ -1,7 +1,8 @@
 module Mux #(parameter data = 8) (
     input s,
     input [data-1:0] A, B,
-    output [data-1:0] Y);
+    output [data-1:0] Y
+    );
 
     assign Y = s ? B : A;
 endmodule
@@ -17,10 +18,10 @@ module Arithmetic (
     assign add = A + B; 
     assign sub = A - B; 
 
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) addsub (
         .s(op),
         .A(add),
         .B(sub),
         .Y(Y)
-    );
+        );
 endmodule

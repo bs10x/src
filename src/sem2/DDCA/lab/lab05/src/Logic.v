@@ -1,7 +1,8 @@
 module Mux #(parameter data = 8) (
     input s,
     input [data-1:0] A, B,
-    output [data-1:0] Y);
+    output [data-1:0] Y
+    );
 
     assign Y = s ? B : A;
 endmodule
@@ -24,19 +25,19 @@ module Logic (
         .A(AND),
         .B(OR),
         .Y(ANDOR)
-    );
+        );
 
     Mux #(.data(32)) xornor (
         .s(op[0]),
         .A(XOR),
         .B(NOR),
         .Y(XORNOR)
-    );
+        );
     
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) andorxornor (
         .s(op[1]),
         .A(ANDOR),
         .B(XORNOR),
         .Y(Y)
-    );
+        );
 endmodule

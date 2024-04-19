@@ -16,10 +16,10 @@ module SLT (
 
     assign slt = (A - B < 0) ? 32'b1 : 32'b0; 
 
-    Mux #(.data(32)) operation (
+    Mux #(.data(32)) sltz (
         .s(op),
         .A(slt),
         .B(32'b0),
         .Y(Y)
-    );
+        );
 endmodule
