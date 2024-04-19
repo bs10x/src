@@ -11,7 +11,7 @@ module FSM (
     parameter S1 = 3'b001;
     parameter S2 = 3'b011;
     parameter S3 = 3'b111;
-
+    
     // state holding register
     always @ (posedge clk, posedge reset) begin
         if (reset) state_prev <= S0;
