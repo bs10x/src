@@ -3,7 +3,8 @@ module ALU (
     input [31:0] A, B,
     output reg [31:0] Y,
     output reg Z
-);
+    );
+    
     parameter ADD = 4'b0000;
     parameter SUB = 4'b0010;
     parameter AND = 4'b0100;
