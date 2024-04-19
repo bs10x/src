@@ -17,7 +17,7 @@ module FSM (
         if (reset) state_prev <= S0;
         else state_prev <= state_next;
     end
-
+    
     // next state logic 
     always @ (posedge clk) begin
         case (state_prev)

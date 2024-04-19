@@ -3,6 +3,13 @@
 #
 
 .data
-
+    
 .text
 main:
+
+
+
+
+
+
+
