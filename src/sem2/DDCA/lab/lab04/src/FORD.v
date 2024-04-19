@@ -71,9 +71,9 @@ module Ford (
         .clk(clk),
         .reset(reset),
         .enable(left && !R[0]),
-        .A(L[0]),
+        .C(L[2]),
         .B(L[1]),
-        .C(L[2])
+        .A(L[0])
         );
 
     // right blinker
@@ -81,8 +81,11 @@ module Ford (
         .clk(clk),
         .reset(reset),
         .enable(right && !L[0]),
-        .A(R[0]),
+        .C(R[2]),
         .B(R[1]),
-        .C(R[2])
+        .A(R[0])
         );
+
+        assign {LC, LB, LA} = L;
+        assign {RC, RB, RA} = R;
 endmodule
