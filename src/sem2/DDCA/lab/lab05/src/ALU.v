@@ -1,3 +1,17 @@
+module Arithmetic (
+    input [1:0] op,
+    input [31:0] A, B,
+    output reg [31:0] Y
+    );
+
+    always @ (*) begin
+        case (op)
+            2'b00: Y <= A + B;
+            2'b10: Y <= A - B;
+        endcase
+    end
+endmodule
+
 module ALU (
     input [3:0] op,
     input [31:0] A, B,
@@ -5,7 +19,24 @@ module ALU (
     output reg Z
     );
 
+    Arithmetic AL (
+                    .op(op[1:0]),
+                    .A(A),
+                    .B(B),
+                    .Y(Y)
+                );
 
+    always @ (*) begin
+        case (op[3:2])
+            2'b00: begin
+                
+            end
+            2'b01: Y <= A - B;
+            2'b10: Y <= A & B;
+            default: Y <= 32'b0;
+        endcase
+        Z <= |Y;
+    end
 
 
 
