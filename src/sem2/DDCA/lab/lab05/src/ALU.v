@@ -60,6 +60,24 @@ module Logic (
     );
 endmodule
 
+module SLT (
+    input op,
+    input [31:0] A, B,
+    output [31:0] Y
+    );
+
+    wire [31:0] slt;
+
+    assign slt = (A - B < 0) ? 32'b1 : 32'b0; 
+
+    Mux #(.data(32)) operation (
+        .s(op),
+        .A(slt),
+        .B(32'b0),
+        .Y(Y)
+    );
+endmodule
+
 module ALU (
     input [3:0] op,
     input [31:0] A, B,
@@ -81,6 +99,12 @@ module ALU (
         .A(A),
         .B(B),
         .Y(out_LU)
+        );
+    SLT SLT (
+        .op(op[2]),
+        .A(A),
+        .B(B),
+        .Y(out_SLT)
         );
 
     Mux #(.data(32)) AL (

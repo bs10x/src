@@ -6,21 +6,20 @@ module Mux #(parameter data = 8) (
     assign Y = s ? B : A;
 endmodule
 
-module Arithmetic (
+module SLT (
     input op,
     input [31:0] A, B,
     output [31:0] Y
     );
 
-    wire [31:0] add, sub;
+    wire [31:0] slt;
 
-    assign add = A + B; 
-    assign sub = A - B; 
+    assign slt = (A - B < 0) ? 32'b1 : 32'b0; 
 
     Mux #(.data(32)) operation (
         .s(op),
-        .A(add),
-        .B(sub),
+        .A(slt),
+        .B(32'b0),
         .Y(Y)
     );
 endmodule
