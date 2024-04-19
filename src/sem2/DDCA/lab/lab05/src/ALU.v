@@ -12,7 +12,17 @@ module ALU (
     parameter NOR = 4'b0111;
     parameter SLT = 4'b1010;
 
-    
+    case (OP)
+        // ADD: Y = A + B;
+        // SUB: Y = A - B;
+        // AND: Y = A & B;
+        // OR:  Y = A | B;
+        // XOR: Y = A ^ B;
+        // NOR: Y = ~(A | B);
+        // SLT: Z = (A < B);
+        // default: Y = 32'b0;
+        
+    endcase
 
 
     
