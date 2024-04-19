@@ -70,7 +70,7 @@ module Ford (
     FSM LEFT (
         .clk(clk),
         .reset(reset),
-        .enable(left && !R),
+        .enable(left & ~R),
         .C(LC),
         .B(LB),
         .A(L)
@@ -80,12 +80,12 @@ module Ford (
     FSM RIGHT (
         .clk(clk),
         .reset(reset),
-        .enable(right && !L),
+        .enable(right & ~L),
         .C(RC),
         .B(RB),
         .A(R)
         );
 
-        assign {LC, LB, LA} = L;
-        assign {RC, RB, RA} = R;
+        assign LA = L;
+        assign RA = R;
 endmodule
