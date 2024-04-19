@@ -20,12 +20,9 @@ module ALU (
             OR:  Y <= A | B;
             XOR: Y <= A ^ B;
             NOR: Y <= ~(A | B);
-            SLT: Y <= (A - B >= 0) ? 32'b1 : 32'b0;
+            SLT: Y <= (A - B < 0) ? 32'b1 : 32'b0;
             default: Y <= 32'b0;
         endcase
         Z <= |Y;
     end
-
-    
-
 endmodule
