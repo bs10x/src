@@ -47,7 +47,7 @@ module FSM (
 endmodule
 
 
-module FORD(
+module Ford (
     input clk_sys,
     input left,
     input right,
@@ -68,7 +68,7 @@ module FORD(
     FSM LEFT (
         .clk(clk),
         .reset(reset),
-        .enable(left),
+        .enable(left && !right),
         .A(LA),
         .B(LB),
         .C(LC)
@@ -78,10 +78,9 @@ module FORD(
     FSM RIGHT (
         .clk(clk),
         .reset(reset),
-        .enable(right),
+        .enable(right && !left),
         .A(RA),
         .B(RB),
         .C(RC)
         );
-
 endmodule
