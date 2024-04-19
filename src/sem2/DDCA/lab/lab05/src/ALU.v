@@ -67,39 +67,43 @@ module ALU (
     output Z
     );
 
-    wire [31:0] out_AL;
-    Arithmetic AL (
+    wire [31:0] out_AU, out_LU, out_AL, out_SLT;
+
+    Arithmetic AU (
+        .op(op[1]),
+        .A(A),
+        .B(B),
+        .Y(out_AU)
+        );
+    Logic LU (
         .op(op[1:0]),
         .A(A),
         .B(B),
+        .Y(out_LU)
+        );
+
+    Mux #(.data(32)) AL (
+        .s(op[2]),
+        .A(out_AU),
+        .B(out_LU),
         .Y(out_AL)
-        );
+    );
 
-    Logic LL (
-        .op(op[1:0]),
-        .A(A),
-        .B(B),
+    Mux #(.data(32)) SLT_Z (
+        .s(op[0]),
+        .A(XOR),
+        .B(NOR),
+        .Y(XORNOR)
+    );
+    
+    Mux #(.data(32)) operation (
+        .s(op[1]),
+        .A(ANDOR),
+        .B(XORNOR),
         .Y(Y)
-        );
+    );
 
-    always @ (*) begin
-        case (op[3:2])
-            2'b00: begin
-                
-            end
-            2'b01: Y <= A - B;
-            2'b10: Y <= A & B;
-            default: Y <= 32'b0;
-        endcase
-        Z <= |Y;
-    end
-
-
-
-
-
-
-
+endmodule
 
 
     // parameter ADD = 4'b0000;
@@ -122,4 +126,3 @@ module ALU (
     //     endcase
     //     Z <= |Y;
     // end
-endmodule
