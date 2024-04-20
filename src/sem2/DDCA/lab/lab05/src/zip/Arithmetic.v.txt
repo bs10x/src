@@ -1,3 +1,5 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module Arithmetic (
     input op,
     input [31:0] A, B,
@@ -6,13 +8,22 @@ module Arithmetic (
 
     wire [31:0] add, sub;
 
-    assign add = A + B; 
+    Adder adder (
+        .A(A),
+        .B(B),
+        .S(add),
+        .overflow()
+        );
+
+    // assign add = A + B;
     assign sub = A - B; 
 
-    Mux #(.data(32)) addsub (
+    TwoMux addsub (
         .s(op),
-        .A(add),
-        .B(sub),
+        .d0(add),
+        .d1(sub),
         .Y(Y)
         );
 endmodule
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////

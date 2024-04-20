@@ -1,3 +1,5 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module ALU (
     input [3:0] op,
     input [31:0] A, B,
@@ -6,7 +8,6 @@ module ALU (
     );
 
     wire [31:0] out_AU, out_LU, out_SLT;
-    wire [31:0] out_AL, out_SLTZ;
 
     Arithmetic AU (
         .op(op[1]),
@@ -20,26 +21,23 @@ module ALU (
         .B(B),
         .Y(out_LU)
         );
-    SLT SLTZ (
+    SLT slt (
         .op(op[2]),
         .A(A),
         .B(B),
-        .Y(out_SLTZ)
+        .Y(out_SLT)
         );
 
-    Mux #(.data(32)) AL (
-        .s(op[2]),
-        .A(out_AU),
-        .B(out_LU),
-        .Y(out_AL)
-        );
-    
-    Mux #(.data(32)) operation (
-        .s(op[3]),
-        .A(out_AL),
-        .B(out_SLTZ),
+    FourMux opearation (
+        .s(op[3:2]),
+        .d00(out_AU),
+        .d01(out_LU),
+        .d10(out_SLT),
+        .d11(32'b0),
         .Y(Y)
         );
 
     assign Z = ~|Y;
 endmodule
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
