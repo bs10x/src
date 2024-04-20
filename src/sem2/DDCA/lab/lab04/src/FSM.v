@@ -36,14 +36,32 @@ endmodule
 /*
 
 
-case (state_prev)
-    S0:  6'b000000
-    S1L: 6'b001000
-    S2L: 6'b011000
-    S3L: 6'b111000
-    S1R: 6'b000100
-    S2R: 6'b000110
-    S3R: 6'b000111
-    S8:  6'b111111
+module Dim (
+    input clk,
+    input [5:0] from,
+    output [5:0] to
+    );
+
+
+
+
+
+
+
+
+
+    
+always @ (posedge clk) begin
+    case (state_prev)
+        S0:  6'b000000
+        S1L: 6'b001000
+        S2L: 6'b011000
+        S3L: 6'b111000
+        S1R: 6'b000100
+        S2R: 6'b000110
+        S3R: 6'b000111
+        S8:  6'b111111
+    endcase
+end
 
 */
