@@ -17,6 +17,31 @@ endmodule
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+module Dimmer #(parameter ratio = 1) (
+    input clk_in,
+    input reset,
+    output dim_out
+    );
+    
+    reg [ratio-1:0] clk_count, dim_sum;
+    reg dim_carry;
+    always @ (posedge clk_in) begin
+        if (reset) begin 
+            clk_count <= 0;
+            dim_sum <= 0;
+            dim_carry <=0;
+        end else begin 
+            clk_count <= clk_count + 1;
+            {dim_carry, dim_sum} <= dim_sum + clk_count;
+        end
+    end
+    assign clk_out = &clk_count;
+    assign dim_out = dim_carry;
+endmodule
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module FSM (
     input clk_sys,
     input reset,
@@ -26,7 +51,7 @@ module FSM (
     );
 
 
-    ClockDivisor (.ratio(25)) clk_div (
+    ClockDivisor #(.ratio(25)) clk_div (
         .reset(reset),
         .clk_in(clk_sys),
         .clk_out(clk)
@@ -74,37 +99,3 @@ module FSM (
     // output logic
     assign LED = state_prev;
 endmodule
-
-
-/*
-
-
-module Dim (
-    input clk,
-    input [5:0] from,
-    output [5:0] to
-    );
-
-
-
-
-
-
-
-
-
-    
-always @ (posedge clk) begin
-    case (state_prev)
-        S0:  6'b000000
-        S1L: 6'b001000
-        S2L: 6'b011000
-        S3L: 6'b111000
-        S1R: 6'b000100
-        S2R: 6'b000110
-        S3R: 6'b000111
-        S8:  6'b111111
-    endcase
-end
-
-*/
