@@ -20,7 +20,9 @@ endmodule
 module Dimmer #(parameter ratio = 1) (
     input clk_in,
     input reset,
-    output dim_out
+    output dim_out,
+    input [5:0] state_in,
+    output state_out
     );
     
     reg [ratio-1:0] clk_count, dim_sum;
@@ -29,13 +31,14 @@ module Dimmer #(parameter ratio = 1) (
         if (reset) begin 
             clk_count <= 0;
             dim_sum <= 0;
-            dim_carry <=0;
-        end else begin 
+            dim_carry <= 0;
+        end
+        else begin 
             clk_count <= clk_count + 1;
             {dim_carry, dim_sum} <= dim_sum + clk_count;
         end
     end
-    assign clk_out = &clk_count;
+
     assign dim_out = dim_carry;
 endmodule
 
@@ -58,7 +61,7 @@ module FSM (
         );
 
     // state holding register
-    reg [5:0] state_prev, state_next;
+    reg [5:0] state_prev, state_next, state_out;
     always @ (posedge clk, posedge reset) begin
         if (reset) state_prev <= S00;
         else state_prev <= state_next;
@@ -91,8 +94,18 @@ module FSM (
         endcase
     end
 
-    always @ (posedge clk_sys) begin
+    Dimmer DIM(
+        .clk_in(clk_sys),
+        .reset(reset),
+        .dim_out(state_out)
+        );
 
+    always @ (*) begin
+        Dimmer dim(
+            .clk_in(clk_sys),
+            .reset(reset),
+            .dim_out(state_out)
+            );
 
     end
 
