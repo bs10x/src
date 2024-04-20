@@ -21,13 +21,20 @@ module Dimmer #(parameter ratio = 1) (
     input clk_in,
     input reset,
     output dim_out,
-    input [5:0] state_in,
-    output state_out
+    input [2:0] state_in,
+    output [2:0] state_out
     );
     
+    wire clk_fsm_half;
+    ClockDivisor #(.ratio(ratio-1)) clk_div (
+        .reset(reset),
+        .clk_in(clk_in),
+        .clk_out(clk)
+        );
+
     reg [ratio-1:0] clk_count, dim_sum;
     reg dim_carry;
-    always @ (posedge clk_in) begin
+    always @ (posedge clk_fsm_half) begin
         if (reset) begin 
             clk_count <= 0;
             dim_sum <= 0;
@@ -61,7 +68,7 @@ module FSM (
         );
 
     // state holding register
-    reg [5:0] state_prev, state_next, state_out;
+    reg [5:0] state_prev, state_next;
     always @ (posedge clk, posedge reset) begin
         if (reset) state_prev <= S00;
         else state_prev <= state_next;
@@ -94,21 +101,14 @@ module FSM (
         endcase
     end
 
-    Dimmer DIM(
+    // Dimmer module
+    wire [2:0] state_out_L, state_out_R;
+    Dimmer #(.ratio(25)) DIM_L (
         .clk_in(clk_sys),
         .reset(reset),
-        .dim_out(state_out)
+        .state_out(state_out_L)
         );
 
-    always @ (*) begin
-        Dimmer dim(
-            .clk_in(clk_sys),
-            .reset(reset),
-            .dim_out(state_out)
-            );
-
-    end
-
     // output logic
-    assign LED = state_prev;
+    assign LED = {state_out_L, state_out_R};
 endmodule
