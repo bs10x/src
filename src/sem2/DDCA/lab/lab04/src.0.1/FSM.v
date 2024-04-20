@@ -101,12 +101,19 @@ module FSM (
         endcase
     end
 
-    // Dimmer module
+    // Dimmer modules
     wire [2:0] state_out_L, state_out_R;
     Dimmer #(.ratio(25)) DIM_L (
         .clk_in(clk_sys),
         .reset(reset),
+        .state_in(state_prev[5:3]),
         .state_out(state_out_L)
+        );
+    Dimmer #(.ratio(25)) DIM_R (
+        .clk_in(clk_sys),
+        .reset(reset),
+        .state_in(state_prev[2:0]),
+        .state_out(state_out_R)
         );
 
     // output logic
