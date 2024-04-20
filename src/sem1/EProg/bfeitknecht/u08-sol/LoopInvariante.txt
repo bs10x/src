@@ -1,3 +1,0 @@
-Schreiben Sie hier Ihre Loop Invariante:
-
-0 <= x && s != null && x <= s.length() && count(s.substring(0, x), c) == n

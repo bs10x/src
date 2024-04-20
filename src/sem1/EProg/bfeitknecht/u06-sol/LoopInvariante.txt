@@ -1,3 +1,0 @@
-Schreiben Sie hier Ihre Loop Invariante:
-
-x <= n + 1 && res == (x * (x - 1)) / 2

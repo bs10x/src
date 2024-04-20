@@ -1,7 +1,0 @@
-NETHZ: bfeitknecht
-
-Punkte Programmierpruefung: 0.38
-Punkte Schriftliche Pruefung: 21
-Bonuspunkte: 22.64
-
-

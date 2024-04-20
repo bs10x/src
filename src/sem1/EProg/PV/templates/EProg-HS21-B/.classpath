@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="LabelledGraph/src"/>
+	<classpathentry kind="src" path="LabelledGraph/test"/>
+	<classpathentry kind="src" path="PagerTask/src"/>
+	<classpathentry kind="src" path="PagerTask/test"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,9 +1,0 @@
-1.
-
-<yz> <= Y | ZZZ
-<xyz> <= { X <xyz> <yz> | <yz> <xyz> X }
-
-
-2.
-
-<abc> <= A {CC} { XY {CC} | XZ | A {CC} | B {CC} } B

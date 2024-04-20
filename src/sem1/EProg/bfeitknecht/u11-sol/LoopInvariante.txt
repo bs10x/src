@@ -1,2 +1,0 @@
-Schreiben Sie hier Ihre Loop Invariante:
-Sorted(al, 0, al.length-1) && al.length >= 1 && (0 < next && next <= al.length && candidate == al[next-1]) && value > candidate
