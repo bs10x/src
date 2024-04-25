@@ -83,24 +83,21 @@ module Arithmetic (
     output [31:0] Y
     );
 
-    wire [31:0] add, sub;
-    wire [31:0] invB = ~B + 1;
+    wire [31:0] _B;
+    wire [31:0] inv_B = ~B + 1;
 
-    Adder adder (
-        .A(A),
-        .B(B),
-        .S(add),
-        .overflow()
+    TwoMux b (
+        .s(op),
+        .d0(B),
+        .d1(inv_B),
+        .Y(_B)
         );
 
-    // assign add = A + B;
-    assign sub = A - B; 
-
-    TwoMux addsub (
-        .s(op),
-        .d0(add),
-        .d1(sub),
-        .Y(Y)
+    Adder math (
+        .A(A),
+        .B(_B),
+        .S(Y),
+        .overflow()
         );
 endmodule
 

@@ -44,16 +44,21 @@ endmodule
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module FullAdder (input a, input b, input ci, output so, output co);
+module FullAdder (
+    input a, 
+    input b, 
+    input ci, 
+    output so, 
+    output co);
     
-    wire so0, co0, co1;
+    wire s;
+    wire [1:0] c;
 
-    xor s0 (so0, a, b);
-    xor SUM (so, s0, ci);
-    
-    and c0 (co0, a, b);
-    and c1 (co1, s0, ci);
-    or CARRY (co, c0, c1);
+    xor s0 (s, a, b);
+    xor SUM (so, s, ci);
+    and c0 (c[0], a, b);
+    and c1 (c[1], s, ci);
+    or CARRY (co, c[0], c[1]);
 endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,23 +115,21 @@ module Arithmetic (
     output [31:0] Y
     );
 
-    wire [31:0] add, sub;
+    wire [31:0] _B;
+    wire [31:0] inv_B = ~B + 1;
 
-    Adder adder (
-        .A(A),
-        .B(B),
-        .S(add),
-        .overflow()
+    TwoMux b (
+        .s(op),
+        .d0(B),
+        .d1(inv_B),
+        .Y(_B)
         );
 
-    // assign add = A + B;
-    assign sub = A - B; 
-
-    TwoMux addsub (
-        .s(op),
-        .d0(add),
-        .d1(sub),
-        .Y(Y)
+    Adder math (
+        .A(A),
+        .B(_B),
+        .S(Y),
+        .overflow()
         );
 endmodule
 

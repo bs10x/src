@@ -55,7 +55,7 @@ module Logic (
     assign AND = A & B;
     assign OR = A | B;
     assign XOR = A ^ B;
-    assign NOR = A ~| B;
+    assign NOR = ~(A | B);
 
     FourMux LOGIC (
         .s(op[1:0]),
