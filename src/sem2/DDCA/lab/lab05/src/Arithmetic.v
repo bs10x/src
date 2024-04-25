@@ -84,7 +84,8 @@ module Arithmetic (
     );
 
     wire [31:0] add, sub;
-    wire [31:0] invB = ~B;
+    wire [31:0] invB = ~B + 1;
+
     Adder adder (
         .A(A),
         .B(B),
