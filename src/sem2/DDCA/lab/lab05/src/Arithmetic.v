@@ -1,15 +1,20 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module FullAdder (input a, input b, input ci, output so, output co);
+module FullAdder (
+    input a, 
+    input b, 
+    input ci, 
+    output so, 
+    output co);
     
-    wire so0, co0, co1;
+    wire s;
+    wire [1:0] c;
 
-    xor s0 (so0, a, b);
-    xor SUM (so, s0, ci);
-    
-    and c0 (co0, a, b);
-    and c1 (co1, s0, ci);
-    or CARRY (co, c0, c1);
+    xor s0 (s, a, b);
+    xor SUM (so, s, ci);
+    and c0 (c[0], a, b);
+    and c1 (c[1], s, ci);
+    or CARRY (co, c[0], c[1]);
 endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +84,7 @@ module Arithmetic (
     );
 
     wire [31:0] add, sub;
-
+    wire [31:0] invB = ~B;
     Adder adder (
         .A(A),
         .B(B),
