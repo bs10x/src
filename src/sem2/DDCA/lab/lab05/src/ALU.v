@@ -116,12 +116,11 @@ module Arithmetic (
     );
 
     wire [31:0] _B;
-    wire [31:0] inv_B = ~B + 1;
 
     TwoMux b (
         .s(op),
         .d0(B),
-        .d1(inv_B),
+        .d1(~B),
         .Y(_B)
         );
 
@@ -204,16 +203,10 @@ module ALU (
         .B(B),
         .Y(out_LU)
         );
-    SLT slt (
-        .op(op[2]),
-        .A(A),
-        .B(B),
-        .Y(out_SLT)
-        );
 
     FourMux opearation (
         .s(op[3:2]),
-        .d00(out_AU),
+        .d00({31'b0, out_AU[31]}),
         .d01(out_LU),
         .d10(out_SLT),
         .d11(32'b0),
