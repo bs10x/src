@@ -115,18 +115,18 @@ module Arithmetic (
     output [31:0] Y
     );
 
-    wire [31:0] _B;
+    wire [31:0] addsub;
 
     TwoMux b (
         .s(op),
         .d0(B),
         .d1(~B),
-        .Y(_B)
+        .Y(addsub)
         );
 
     Adder math (
         .A(A),
-        .B(_B),
+        .B(addsub),
         .S(Y),
         .overflow()
         );

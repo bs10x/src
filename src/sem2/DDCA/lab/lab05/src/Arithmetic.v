@@ -84,12 +84,11 @@ module Arithmetic (
     );
 
     wire [31:0] _B;
-    wire [31:0] inv_B = ~B + 1;
 
     TwoMux b (
         .s(op),
         .d0(B),
-        .d1(inv_B),
+        .d1(~B),
         .Y(_B)
         );
 
