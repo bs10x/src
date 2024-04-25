@@ -23,12 +23,13 @@ endmodule
 module Adder (
     input [31:0] A,
     input [31:0] B,
+    input ci,
     output [31:0] S,
     output overflow);
     
     wire [30:0] c;
 
-    FullAdder FA0(.a(A[0]), .b(B[0]), .ci(), .so(S[0]), .co(c[0]));
+    FullAdder FA0(.a(A[0]), .b(B[0]), .ci(ci), .so(S[0]), .co(c[0]));
     FullAdder FA1(.a(A[1]), .b(B[1]), .ci(c[0]), .so(S[1]), .co(c[1]));
     FullAdder FA2(.a(A[2]), .b(B[2]), .ci(c[1]), .so(S[2]), .co(c[2]));
     FullAdder FA3(.a(A[3]), .b(B[3]), .ci(c[2]), .so(S[3]), .co(c[3]));
