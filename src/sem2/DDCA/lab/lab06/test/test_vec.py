@@ -8,7 +8,7 @@ opcodes = {
     5: lambda a, b: a | b,
     6: lambda a, b: a ^ b,
     7: lambda a, b: ~(a | b) & 0xFFFFFFFF,
-    10: lambda a, b: 1 if (a - b) < 0 else 0
+    10: lambda a, b: 1 if a > b else 0
 }
 # Function to format a 32-bit number as 8 groups of 2 hex digits
 def format_hex(n):
