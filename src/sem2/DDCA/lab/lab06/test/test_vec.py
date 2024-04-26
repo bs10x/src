@@ -1,5 +1,13 @@
 import random
 
+# Function to interpret a number as a 32-bit two's complement integer
+def twos_complement(n):
+    return n if n < 0x80000000 else n - 0x100000000
+
+# Function to compare two numbers as 32-bit two's complement integers
+def less_than_twos_complement(a, b):
+    return 1 if twos_complement(a) < twos_complement(b) else 0
+
 # Define the opcodes and their associated operations
 opcodes = {
     0: lambda a, b: a + b & 0xFFFFFFFF,
@@ -8,7 +16,9 @@ opcodes = {
     5: lambda a, b: a | b,
     6: lambda a, b: a ^ b,
     7: lambda a, b: ~(a | b) & 0xFFFFFFFF,
-    10: lambda a, b: 1 if a > b else 0
+    10: less_than_twos_complement
+    # 10: lambda a, b: 1 if twos_complement(a) < twos_complement(b) else 0
+    # 10: lambda a, b: 1 if a > b else 0
 }
 # Function to format a 32-bit number as 8 groups of 2 hex digits
 def format_hex(n):
