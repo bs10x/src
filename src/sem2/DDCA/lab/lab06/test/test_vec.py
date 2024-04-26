@@ -2,7 +2,7 @@ import random
 
 # Function to interpret a number as a 32-bit two's complement integer
 def twos_complement(n):
-    return n if n < 0x80000000 else n - 0x100000000
+    return n - 0x100000000 if (n & 0x80000000) else n
 
 # Function to compare two numbers as 32-bit two's complement integers
 def less_than_twos_complement(a, b):
