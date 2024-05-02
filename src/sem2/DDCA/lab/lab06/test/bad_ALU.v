@@ -30,7 +30,7 @@ reg [31:0] logicsel;
 
 reg [31:0] alu_val; //we need to declare this reg
 reg [31:0] diff;
-wire ss0;  wire ss1; wire Ss2; wire ss3;
+wire ss0;  wire ss1; wire ss2; wire ss3;
 
 assign {ss0,ss1,ss2,ss3} = aluop; // make assigns
 
@@ -47,7 +47,7 @@ begin
             logicsel = ~(a | b);
         else                    // XX11
             logicsel = a ^ b;
-    end
+end
 
 // slt
 always @ (aluop, a, b)
@@ -56,10 +56,10 @@ always @ (aluop, a, b)
         diff <= a - b;			// calculate the difference
         slt <= 0;				// default value
         if (diff[31] == 1)
-            slt <= 1;			// if MSB is 1 slt is 1
+            slt <= 1;		   	// if MSB is 1 slt is 1
     end
 
-// main
+// operation
 always @ (*)
 begin
     case (aluop)
