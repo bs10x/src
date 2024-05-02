@@ -34,7 +34,7 @@ wire ss0;  wire ss1; wire Ss2; wire ss3;
 
 assign {ss0,ss1,Ss2,ss3} = aluop; // make assigns
 
-// define the logicfunction
+// define the logic function
 always @ (*)
 begin
   if (ss1 == 0)
@@ -49,6 +49,7 @@ begin
             logicsel = a ^ b;
     end
 
+// slt
 always @ (aluop, a, b)
     if (aluop == 4'b1010)
     begin
@@ -58,6 +59,7 @@ always @ (aluop, a, b)
             slt <= 1;			// if MSB is 1 slt is 1
     end
 
+// main
 always @ (*)
 begin
     case (aluop)
