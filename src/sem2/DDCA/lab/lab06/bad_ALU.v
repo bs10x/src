@@ -50,12 +50,12 @@ begin
 end
 
 // slt
-always @ (aluop, a, b)
+always @ (aluop)
     if (aluop == 4'b1010)
     begin
         diff <= a - b;			// calculate the difference
         slt <= 32'b0;				// default value
-        if (diff[31] == 1)
+        if (diff[31] == 1'b0)
             slt <= 32'b1;		   	// if MSB is 1 slt is 1
     end
 

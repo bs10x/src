@@ -2,10 +2,12 @@
 # Calculate sum from A to B.
 #
 # Authors: 
-#	X Y, Z Q 
+#	Basil Feitknecht, Camil Schmidt
 #
-# Group: ...
-#
+# use only:
+# ADD, SUB, SLT, XOR, AND, OR, NOR, J, ADDI and BEQ.
+
+
 
 .text
 main:
