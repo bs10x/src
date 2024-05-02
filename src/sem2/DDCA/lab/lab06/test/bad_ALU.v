@@ -32,20 +32,20 @@ reg [31:0] alu_val; //we need to declare this reg
 reg [31:0] diff;
 wire ss0;  wire ss1; wire Ss2; wire ss3;
 
-assign {ss0,ss1,Ss2,ss3} = aluop; // make assigns
+assign {ss0,ss1,ss2,ss3} = aluop; // make assigns
 
 // define the logic function
 always @ (*)
-begin
-  if (ss1 == 0)
-    if (ss0 == 0)
-        logicsel = a & b;
-    else
-        logicsel = a | b;
-        else
-        if (ss0 == 1)
+begin 
+    if (ss2 ==0)                // XX0X
+        if (ss3 == 0)           // XX00
+            logicsel = a & b;   
+        else                    // XX01
+            logicsel = a | b;
+    else                        // XX1X
+        if (ss3 == 1)           // XX10
             logicsel = ~(a | b);
-        else
+        else                    // XX11
             logicsel = a ^ b;
     end
 
@@ -65,7 +65,7 @@ begin
     case (aluop)
         4'b0000 : alu_val = a + b;
         4'b0010 : alu_val = a - b;
-        4'b1011 : alu_val = slt;
+        4'b1010 : alu_val = slt;
         default : alu_val = logicsel;
     endcase
 end
