@@ -54,9 +54,9 @@ always @ (aluop, a, b)
     if (aluop == 4'b1010)
     begin
         diff <= a - b;			// calculate the difference
-        slt <= 0;				// default value
+        slt <= 32'b0;				// default value
         if (diff[31] == 1)
-            slt <= 1;		   	// if MSB is 1 slt is 1
+            slt <= 32'b1;		   	// if MSB is 1 slt is 1
     end
 
 // operation
