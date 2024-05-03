@@ -2,9 +2,7 @@
 # Sum of Absolute Differences Algorithm
 #
 # Authors: 
-#	X Y, Z Q 
-#
-# Group: ...
+#	Basil Feitknecht, Camil Schmid
 #
 
 .text
@@ -78,7 +76,7 @@ end_loop:
 	
 	#..... 
 	
-	# Call to funtion
+	# Call to function
 	
 	# ....
 	  
