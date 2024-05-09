@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 
 module ClockDivisor #(parameter ratio = 1) (
     input clk_in,

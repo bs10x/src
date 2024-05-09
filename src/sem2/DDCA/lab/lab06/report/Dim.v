@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 
 module Dim (
     input [2:0] stateL,
