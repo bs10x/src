@@ -45,6 +45,7 @@ module FORD_test();
         #20;        
         {rightI, leftI, reset, exp_leftO, exp_rightO} = testvec[vec_cnt];
         
+        
         #60;
         
         // Check if output is not what we expect to see

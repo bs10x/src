@@ -45,6 +45,7 @@ module FSM (
     assign stateR = stateR_prev;
 endmodule
 
+// jannis version
 module BlinkingLightsTest();
     reg reset;
     reg left;
