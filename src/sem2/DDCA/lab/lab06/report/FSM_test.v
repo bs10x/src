@@ -67,7 +67,7 @@ module BlinkingLightsTest();
     end
 
     initial begin
-        $readmemb("testvec.mem",testvec);
+        $readmemb("testvec.txt",testvec);
         err_cnt = 0;
         vec_cnt = 0;
     end
@@ -84,7 +84,8 @@ module BlinkingLightsTest();
             else
                 $display("On the left side");
             err_cnt = err_cnt + 1;
-        end else if (lights[~exp_side]!=0) begin
+        end
+        else if (lights[~exp_side]!=0) begin
             $display("Error at %5d ns: r = %b left = %b right = %b", $time, reset,left,right);
             $display("       %b (000 expected)",lights[~exp_side]);
             if (exp_side==1)
