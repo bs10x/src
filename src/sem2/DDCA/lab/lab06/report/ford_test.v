@@ -43,7 +43,7 @@ module FORD_test();
     begin
     
         #20;        
-        {rightI, leftI, reset, exp_leftO[2:0], exp_rightO} = testvec[vec_cnt];
+        {rightI, leftI, reset, exp_leftO, exp_rightO} = testvec[vec_cnt];
         
         #60;
         
