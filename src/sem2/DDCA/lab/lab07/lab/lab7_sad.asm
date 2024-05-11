@@ -68,19 +68,22 @@ main:
 loop:
     # Check if we have traversed all elements of the loop.
     # If so, jump to end_loop
-	beq    $s1,            $s2,        end_loop
-
-    # ....
+	bgt    $s1,            $s2,        end_loop
 
 
+	# for (i = 0; i < image_size; i++) {
+	# 	sad_array[i] = abs_diff(left_image[i], right_image[i]);	
+	# }
+	
     # Load left_image{i} and put the value in the corresponding register
     # before doing the function call
     # ....
 
 
     # Load right_image{i} and put the value in the corresponding register
-
     # ....
+
+
 
     # Call abs_diff
     j       abs_diff
