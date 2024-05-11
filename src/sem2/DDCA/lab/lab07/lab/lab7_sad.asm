@@ -1,9 +1,9 @@
-#       
-# Sum of Absolute Differences Algorithm
-#       
-# Authors:
-#	Basil Feitknecht, Camil Schmid
-#
+    #       
+    # Sum of Absolute Differences Algorithm
+    #       
+    # Authors:
+    #	Basil Feitknecht, Camil Schmid
+    #       
 
 
 .text
@@ -59,10 +59,10 @@ main:
     sw      $t0,            32($s0)
 
 
-    # TODO4: Loop over the elements of left_image and right_image
+    # Loop over the elements of left_image and right_image
     addi    $s1,            $0,         0       # $s1 = i = 0
     addi    $s2,            $0,         9       # $s2 = image_size = 9
-
+    j       loop
 
 
 loop:
@@ -125,6 +125,7 @@ end_loop:
 
 end:
     j       end                                 # Infinite loop at the end of the program.
+
 
 
     # Absolute difference between two integers
