@@ -66,9 +66,9 @@ main:
 
 
 loop:
-    # Check if we have traversed all the elements
-    # of the loop. If so, jump to end_loop:
-
+    # Check if we have traversed all elements of the loop.
+    # If so, jump to end_loop
+	beq    $s1,            $s2,        end_loop
 
     # ....
 

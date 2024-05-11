@@ -11,8 +11,8 @@
 
 .text
 main:
-    addi    $s0,    $0,     0       # A = 5
-    addi    $s1,    $0,     32767   # B = 10
+    addi    $s0,    $0,     5       # A = 5
+    addi    $s1,    $0,     32767   # B = 32767
     addi    $s1,    $s1,    1       # B = B + 1
     addi    $t2,    $0,     0       # S = 0
     j       loop                    # Jump to loop
