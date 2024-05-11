@@ -20,10 +20,5 @@ loop:
     j       loop                            # Jump back to the beginning of the loop
 
 exit:
-    move    $v0,    $t1                     # Move the sum in $t3 to $v0
-    li      $v0,    10                      # Set $v0 to 10 (exit syscall)
-    syscall                                 # Exit the program
-
-exit:
     li      $v0,    10                      # Set $v0 to 10 (exit syscall)
     syscall                                 # Exit the program

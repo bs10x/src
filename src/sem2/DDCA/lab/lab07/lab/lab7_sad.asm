@@ -125,3 +125,13 @@ else:
     lw      $ra,            4($sp)              # restore return address from stack
     addi    $sp,            $sp,        8       # Adjust sp
     jr      $ra                                 # Return
+
+
+
+# int sum(int A[],int n) {
+#  int s = 0;
+
+#  for (int i=0; i < n; i++)
+#    s = s + A[i];
+#  return s;
+# }     
