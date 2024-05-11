@@ -82,9 +82,9 @@ break:
     # recursive_sum(sad_array, 9)
     lw      $a0,            72($s0)             # Load the base address of sad_array into $a0
     li      $a1,            9                   # Load the size of the array into $a1
-    jal     recursive_sum                       # call recursive_sum
+    jal     sum                       # call recursive_sum
 
-    move    $t2,            $v0                 # Store the returned value in $t2
+    move    $v0,            $t2                 # Store the returned value in $t2
     # sw      $v0,            0($t2)              # Store the returned value in $t2
 
     j       end
@@ -104,19 +104,19 @@ abs_diff:
     jr      $ra                                 # Return to the calling function
 
     # Recursive sum of an array of integers
-recursive_sum:
+sum:
     addi    $sp,            $sp,        -8      # Adjust sp
     addi    $t0,            $a1,        -1      # Compute size - 1
     sw      $t0,            0($sp)              # Save size - 1 to stack
     sw      $ra,            4($sp)              # Save return address
-    bne     $a1,            $zero,      else    # size == 0 ?
+    bne     $a1,            $zero,      recurse    # size == 0 ?
     addi    $v0,            $0,         0       # If size == 0, set return value to 0
     addi    $sp,            $sp,        8       # Adjust sp
     jr      $ra                                 # Return
 
-else:
+recurse:
     add     $a1,            $t0,        $0      #update the second argument
-    jal     recursive_sum
+    jal     sum
     lw      $t0,            0($sp)              # Restore size - 1 from stack
     sll     $t1,            $t0,        2       # Multiply size by 4
     add     $t1,            $t1,        $a0     # Compute & arr[ size - 1 ]
