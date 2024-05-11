@@ -5,11 +5,11 @@
     #	Basil Feitknecht, Camil Schmid
     #       
 
-.data   
+# .data   
 
-	image_size:     .word   9
-	left_image:     .word   5, 16, 7, 1, 1, 13, 2, 8, 10
-	right_image:    .word   4, 15, 8, 0, 2, 12, 3, 7, 11
+# image_size:     .word   9
+# left_image:     .word   5, 16, 7, 1, 1, 13, 2, 8, 10
+# right_image:    .word   4, 15, 8, 0, 2, 12, 3, 7, 11
 
 
 .text   
@@ -93,7 +93,7 @@ end_loop:
     addi    $a1,            $0,         9               # Load the size of the array into $a1
     j       recursive_sum                               # call recursive_sum
 
-    sw      $v0,            $t2                         # Store the returned value in $t2
+    sw      $v0,            0($t2)                      # Store the returned value in $t2
 
     j       end
 
