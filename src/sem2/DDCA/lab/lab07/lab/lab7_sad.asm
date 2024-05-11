@@ -5,13 +5,14 @@
     #	Basil Feitknecht, Camil Schmid
     #       
 
-.data
+.data   
+
+left_image: .word   5, 16, 7, 1, 1, 13, 2, 8, 10
 
 
+.text   
 
-.text
-
-main:
+main:       
     # Initializing data in memory...
     # Store in $s0 the address of the first element in memory
     # lui sets the upper 16 bits of the specified register, lower 16 to zero
@@ -68,7 +69,7 @@ main:
     j       loop
 
 
-loop:
+loop:       
     beq     $s1,            $s2,        end_loop    # If i == image_size, jump to end_loop
 
     move    $s0,            $0                      # $s0 = 0, move back to the beginning of the array
@@ -83,25 +84,25 @@ loop:
     j       loop                                    # repeat loop
 
 
-end_loop:
+end_loop:   
     # recursive_sum(sad_array, 9)
     move    $s0,            $0                      # $s0 = 0, move back to the beginning of the array
     lw      $a0,            72($s0)                 # Load the base address of sad_array into $a0
     addi    $a1,            $0,         9           # Load the size of the array into $a1
     j       recursive_sum                           # call recursive_sum
 
-    lw      $v0,            $t2                     # Store the returned value in $t2
+    sw      $v0,            $t2                     # Store the returned value in $t2
 
     j       end
 
 
-end:
+end:        
     j       end                                     # Infinite loop at the end of the program.
 
 
 
     # Absolute difference between two integers
-abs_diff:
+abs_diff:   
     sub     $t1,            $a0,        $a1         # Subtract second integer from first integer
     sra     $t2,            $t1,        31          # Arithmetic right shift to get sign of the difference
     xor     $t1,            $t1,        $t2         # XOR to flip the sign if necessary
@@ -119,7 +120,7 @@ recursive_sum:
     addi    $sp,            $sp,        8           # Adjust sp
     jr      $ra                                     # Return
 
-else:
+else:       
     add     $a1,            $t0,        $0          #update the second argument
     jal     recursive_sum
     lw      $t0,            0($sp)                  # Restore size - 1 from stack
