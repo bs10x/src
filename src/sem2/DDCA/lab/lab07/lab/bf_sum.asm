@@ -8,16 +8,21 @@ main:
     la      $a0,    A                       # Load the base address of array A into $a0
     la      $a1,    n                       # Load the address of n into $a1
     lw      $a1,    0($a1)                  # Load the value of n into $a1
-    li      $t2,    0                       # Initialize $t2 to 0 (loop counter)
-    li      $t3,    0                       # Initialize $t3 to 0 (sum of array elements)
+    li      $t0,    0                       # Initialize $t0 to 0 (loop counter)
+    li      $t1,    0                       # Initialize $t1 to 0 (sum of array elements)
 
 loop:
-    beq     $t2,    $a1,    exit            # If $t2 equals $a1, exit the loop
-    lw      $t4,    0($a0)                  # Load the value at the address stored in $a0 into $t4
-    add     $t3,    $t3,    $t4             # Add the value in $t4 to the sum in $t3
+    beq     $t0,    $a1,    exit            # If $t0 equals $a1, exit the loop
+    lw      $t2,    0($a0)                  # Load the value at the address stored in $a0 into $t2
+    add     $t1,    $t1,    $t2             # Add the value in $t2 to the sum in $t1
     addi    $a0,    $a0,    4               # Increment the address in $a0 by 4 (to point to the next element)
-    addi    $t2,    $t2,    1               # Increment the loop counter $t2 by 1
+    addi    $t0,    $t0,    1               # Increment the loop counter $t0 by 1
     j       loop                            # Jump back to the beginning of the loop
+
+exit:
+    move    $v0,    $t1                     # Move the sum in $t3 to $v0
+    li      $v0,    10                      # Set $v0 to 10 (exit syscall)
+    syscall                                 # Exit the program
 
 exit:
     li      $v0,    10                      # Set $v0 to 10 (exit syscall)
