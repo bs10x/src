@@ -7,7 +7,7 @@
 
 .data   
 
-length: .word   9
+nums: .word   9
 A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
 B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
 SAD:    .space  36
@@ -18,55 +18,13 @@ main:
 
     la      $s0,            A                       # Load the address of left into $s0
     li      $s1,            0                       # $s1 = i = 0
-    sw      $s2,            size                    # $s2 = size
+    sw      $s2,            size                    # $s2 = nums
     la      $s3,            SAD                     # Load the address of sad_array into $s3
-
-    # left_image 			= 		   {5, 16, 7, 1, 1, 13, 2, 8, 10}
-    addi    $t0,            $0,         5           # left_image[0]
-    sw      $t0,            0($s0)
-    addi    $t0,            $0,         16          # left_image[1]
-    sw      $t0,            4($s0)
-    addi    $t0,            $0,         7           # left_image[2]
-    sw      $t0,            8($s0)
-    addi    $t0,            $0,         1           # left_image[3]
-    sw      $t0,            12($s0)
-    addi    $t0,            $0,         1           # left_image[4]
-    sw      $t0,            16($s0)
-    addi    $t0,            $0,         13          # left_image[5]
-    sw      $t0,            20($s0)
-    addi    $t0,            $0,         2           # left_image[6]
-    sw      $t0,            24($s0)
-    addi    $t0,            $0,         8           # left_image[7]
-    sw      $t0,            28($s0)
-    addi    $t0,            $0,         10          # left_image[8]
-    sw      $t0,            32($s0)
-
-    addi    $s0,            $s0,        36          # Move to the next array
-
-    # right_image 			= 		   {4, 15, 8, 0, 2, 12, 3, 7, 11}
-    addi    $t0,            $0,         4           # right_image[0]
-    sw      $t0,            0($s0)
-    addi    $t0,            $0,         15          # right_image[1]
-    sw      $t0,            4($s0)
-    addi    $t0,            $0,         8           # right_image[2]
-    sw      $t0,            8($s0)
-    addi    $t0,            $0,         0           # right_image[3]
-    sw      $t0,            12($s0)
-    addi    $t0,            $0,         2           # right_image[4]
-    sw      $t0,            16($s0)
-    addi    $t0,            $0,         12          # right_image[5]
-    sw      $t0,            20($s0)
-    addi    $t0,            $0,         3           # right_image[6]
-    sw      $t0,            24($s0)
-    addi    $t0,            $0,         7           # right_image[7]
-    sw      $t0,            28($s0)
-    addi    $t0,            $0,         11          # right_image[8]
-    sw      $t0,            32($s0)
 
 
     # Loop over the elements of left_image and right_image
-    addi    $s1,            $0,         0           # $s1 = i = 0
-    addi    $s2,            $0,         9           # $s2 = image_size = 9
+    li      $s1,            0                       # $s1 = i = 0
+    move    $s2,            size                    # $s2 = size
     j       loop
 
 
