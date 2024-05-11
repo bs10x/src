@@ -7,19 +7,19 @@
 
 .data   
 
-nums: .word   9
-A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
-B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
-SAD:    .space  36
+    nums:   .word   9
+    A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
+    B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
+    SAD:    .space  36
 
 .text   
 
 main:   
 
-    la      $s0,            A                       # Load the address of left into $s0
+    la      $s0,            A                       # Load the address of A into $s0
     li      $s1,            0                       # $s1 = i = 0
-    sw      $s2,            size                    # $s2 = nums
-    la      $s3,            SAD                     # Load the address of sad_array into $s3
+    sw      $s2,            nums                    # $s2 = nums
+    la      $s3,            SAD                     # Load the address of SAD into $s3
 
 
     # Loop over the elements of left_image and right_image
@@ -29,7 +29,7 @@ main:
 
 
 loop:   
-    bgt     $s1,            $s2,        end_loop    # If i == image_size, jump to end_loop
+    bgt     $s1,            $s2,        break    # If i == image_size, jump to break
 
     lw      $a0,            0($s0)                  # Load left_image[i] into $a0
     lw      $a1,            36($s0)                 # Load right_image[i] into $a1
@@ -41,7 +41,7 @@ loop:
     j       loop                                    # repeat loop
 
 
-end_loop:
+break:
     # recursive_sum(sad_array, 9)
     move    $s0,            $0                      # $s0 = 0, move back to the beginning of the array
     lw      $a0,            72($s0)                 # Load the base address of sad_array into $a0
@@ -53,8 +53,8 @@ end_loop:
     j       end
 
 
-end:    
-    j       end                                     # Infinite loop at the end of the program.
+END:    
+    j       END                                     # Infinite loop at the end of the program.
 
 
 
