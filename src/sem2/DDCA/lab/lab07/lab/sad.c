@@ -17,8 +17,6 @@ int recursive_sum(int arr[], int size) {
 int main() {
 	int sad_array[9];
 	int image_size = 9; // 3x3 image
-    // int i;
-    // int sad_value;
 	
 	// These vectors must be stored in memory
 	int left_image[9] = {5, 16, 7, 1, 1, 13, 2, 8, 10};
@@ -30,7 +28,7 @@ int main() {
 	
 	int sad_value = recursive_sum(sad_array, image_size);
     
-    printf("SAD value: %d\n", sad_value);
+    printf("SAD: %d\n", sad_value);
     
     return 0;
 }
