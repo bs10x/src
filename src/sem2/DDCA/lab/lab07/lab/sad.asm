@@ -50,7 +50,7 @@ break:
 
     sw      $v0,            0($t2)                  # Store the returned value in $t2
 
-    j       end
+    j       END
 
 
 END:    
@@ -78,7 +78,7 @@ recursive_sum:
     jr      $ra                                     # Return
 
 else:   
-    add     $a1,            $t0,        $0          #update the second argument
+    add     $a1,            $t0,        $0          # update the second argument
     jal     recursive_sum
     lw      $t0,            0($sp)                  # Restore size - 1 from stack
     sll     $t1,            $t0,        2           # Multiply size by 4
@@ -88,3 +88,5 @@ else:
     lw      $ra,            4($sp)                  # restore return address from stack
     addi    $sp,            $sp,        8           # Adjust sp
     jr      $ra                                     # Return
+
+
