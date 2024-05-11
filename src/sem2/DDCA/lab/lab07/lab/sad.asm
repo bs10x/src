@@ -7,20 +7,18 @@
 
 .data   
 
-    size:   .word   9
-    left:   .word   5, 16, 7, 1, 1, 13, 2, 8, 10
-    right:  .word   4, 15, 8, 0, 2, 12, 3, 7, 11
-    sad:    .space  36
+length: .word   9
+A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
+B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
+SAD:    .space  36
 
 .text   
 
 main:   
-    # Initializing data in memory...
-    # Store in $s0 the address of the first element in memory
-    # lui sets the upper 16 bits of the specified register, lower 16 to zero
-    # ori ors together the given immediate to set lower ones
-    lui     $s0,            0x0000                  # Address of first element in the vector
-    ori     $s0,            0x0000
+
+    la      $s0,            A                       # Load the address of left into $s0
+    move    $s1,            $0                      # $s1 = i = 0
+    addi    $s2,            size                    # $s2 = size
 
     # left_image 			= 		   {5, 16, 7, 1, 1, 13, 2, 8, 10}
     addi    $t0,            $0,         5           # left_image[0]
