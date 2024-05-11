@@ -5,13 +5,6 @@
     #	Basil Feitknecht, Camil Schmid
     #       
 
-    # .data
-
-    # image_size:     .word   9
-    # left_image:     .word   5, 16, 7, 1, 1, 13, 2, 8, 10
-    # right_image:    .word   4, 15, 8, 0, 2, 12, 3, 7, 11
-
-
 .text
 
 main:
@@ -72,7 +65,7 @@ main:
 
 
 loop:
-    bgt     $s1,            $s2,        end_loop    # If i == image_size, jump to end_loop
+    bgt     $s1,            $s2,        break    # If i == image_size, jump to break
 
     lw      $a0,            0($s0)                  # Load left_image[i] into $a0
     lw      $a1,            36($s0)                 # Load right_image[i] into $a1
@@ -84,7 +77,7 @@ loop:
     j       loop                                    # repeat loop
 
 
-end_loop:
+break:
     # recursive_sum(sad_array, 9)
 	move    $s0,            $0                      # $s0 = 0, move back to the beginning of the array
     lw      $a0,            72($s0)                 # Load the base address of sad_array into $a0

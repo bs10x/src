@@ -90,39 +90,7 @@ else:
     jr      $ra                                 # Return
 
 
-
-main:   
-    # Initialize $t0 with the number of elements in the array
-    li      $t0,            9
-
-    # Initialize $t1 with 0 to hold the sum
-    li      $t1,            0
-
-    # Load the address of the first element of the array into $s0
-    la      $s0,            A
-
-sum_loop:
-    # Load the current element of the array into $t2
-    lw      $t2,            0($s0)
-
-    # Add the current element to the sum
-    add     $t1,            $t1,        $t2
-
-    # Move to the next element of the array
-    addiu   $s0,            $s0,        4
-
-    # Decrement the number of elements
-    addi    $t0,            $t0,        -1
-
-    # If the number of elements is not zero, repeat the loop
-    bnez    $t0,            sum_loop
-
-    # Store the sum in memory
-    sw      $t1,            sum
-
-
-
-
+    # Sum of an array of integers
 sum:    
     # $a0 = base address of the array
     # $a1 = size of the array
@@ -132,5 +100,6 @@ sum:
     addi    $s0,            4
     addi    $a1,            1
 
-    jr      $ra                                 # Return to the calling function
+    bne     $s1,            $a1,        sum     # if i != size, repeat the loop
+    jr      $ra                                 # return to the calling function
 
