@@ -73,62 +73,29 @@ loop:
     # If so, jump to end_loop
     beq     $s1,            $s2,        end_loop
 
+    sub     $s1,            $s1,        36          # Move back to the beginning of the array
 
-    # for (i = 0; i < image_size; i++) {
-    # 	sad_array[i] = abs_diff(left_image[i], right_image[i]);
-    # }
+    lw      $a0,            0($s0)                  # Load left_image[i] into $a0
+    lw      $a1,            36($s0)                 # Load right_image[i] into $a1
+    j       abs_diff                                # Call abs_diff
+    sw      $v0,            72($s0)                 # Store the result of abs_diff in sad_array[i]
 
-    # Load left_image{i} and put the value in the corresponding register
-    # before doing the function call
-    # ....
-
-
-    # Load right_image{i} and put the value in the corresponding register
-    # ....
-
-
-
-    # Call abs_diff
-    j       abs_diff
-
-    # ....
-
-    # Store the returned value in sad_array[i]
-
-    # ....
-
-
-    # Increment variable i and repeat loop
     addi    $s1,            $s1,        1           # i++
-    j       loop
-
+    addi    $s0,            $s0,        4           # Move to the next element in the array
+    j       loop                                    # repeat loop
 
 
 end_loop:
+    # recursive_sum(sad_array, 9)
+    lw      $a0,            72($s0)                 # Load the base address of sad_array into $a0
+    addi    $a1,            $0,         9           # Load the size of the array into $a1
+    j       recursive_sum                           # call recursive_sum
 
-    #TODO5: Call recursive_sum and store the result in $t2
-    #Calculate the base address of sad_array (first argument
-    #of the function call)and store in the corresponding register
+    lw      $v0,            $t2                     # Store the returned value in $t2
 
-    # call recursive_sum
-    j       recursive_sum
+	j end
 
-    # ...
-
-    # Prepare the second argument of the function call: the size of the array
-
-    #.....
-
-    # Call to function
-
-    # ....
-
-
-    #Store the returned value in $t2
-
-    # .....
-
-
+	
 end:
     j       end                                     # Infinite loop at the end of the program.
 
@@ -136,12 +103,11 @@ end:
 
     # Absolute difference between two integers
 abs_diff:
-    sub     $t1,            $a0,        $a1
-    sra     $t2,            $t1,        31
-    xor     $t1,            $t1,        $t2
-    sub     $v0,            $t1,        $t2
-    jr      $ra
-
+    sub     $t1,            $a0,        $a1         # Subtract second integer from first integer
+    sra     $t2,            $t1,        31          # Arithmetic right shift to get sign of the difference
+    xor     $t1,            $t1,        $t2         # XOR to flip the sign if necessary
+    sub     $v0,            $t1,        $t2         # Subtract the flipped sign from the difference to get absolute difference
+    jr      $ra                                     # Return to the calling function
 
     # Recursive sum of an array of integers
 recursive_sum:
