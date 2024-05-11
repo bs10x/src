@@ -74,7 +74,7 @@ main:
 loop:
     beq     $s1,            $s2,        end_loop    # If i == image_size, jump to end_loop
 
-    xor     $s0,            $s0,        $s0         # $s0 = 0, move back to the beginning of the array
+    # xor     $s0,            $s0,        $s0         # $s0 = 0, move back to the beginning of the array
 
     lw      $a0,            0($s0)                  # Load left_image[i] into $a0
     lw      $a1,            36($s0)                 # Load right_image[i] into $a1
