@@ -61,7 +61,7 @@ main:
     # Loop over the elements of left_image and right_image
     addi    $s1,            $0,         0       # $s1 = i = 0
     addi    $s2,            $0,         9       # $s2 = image_size = 9
-	move    $s0,            $0                  # $s0 = 0, move back to the beginning of the array
+    move    $s0,            $0                  # $s0 = 0, move back to the beginning of the array
     j       loop
 
 
@@ -81,11 +81,11 @@ loop:
 break:
     # recursive_sum(sad_array, 9)
     lw      $a0,            72($s0)             # Load the base address of sad_array into $a0
-    addi    $a1,            $0,         9       # Load the size of the array into $a1
+    li      $a1,            9                   # Load the size of the array into $a1
     jal     recursive_sum                       # call recursive_sum
 
-    move    $t2,            $v0                 # Store the returned value in $t2
-    # sw      $v0,            0($t2)              # Store the returned value in $t2
+    # move    $t2,            $v0                 # Store the returned value in $t2
+    sw      $v0,            0($t2)              # Store the returned value in $t2
 
     j       end
 
