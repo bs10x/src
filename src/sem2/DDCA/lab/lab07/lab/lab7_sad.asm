@@ -61,13 +61,13 @@ main:
     # Loop over the elements of left_image and right_image
     addi    $s1,            $0,         0       # $s1 = i = 0
     addi    $s2,            $0,         9       # $s2 = image_size = 9
+	move    $s0,            $0                  # $s0 = 0, move back to the beginning of the array
     j       loop
 
 
 loop:
     bgt     $s1,            $s2,        break   # If i == image_size, jump to break
 
-    move    $s0,            $0                  # $s0 = 0, move back to the beginning of the array
     lw      $a0,            0($s0)              # Load left_image[i] into $a0
     lw      $a1,            36($s0)             # Load right_image[i] into $a1
     jal     abs_diff                            # Call abs_diff
@@ -80,7 +80,6 @@ loop:
 
 break:
     # recursive_sum(sad_array, 9)
-    move    $s0,            $0                  # $s0 = 0, move back to the beginning of the array
     lw      $a0,            72($s0)             # Load the base address of sad_array into $a0
     addi    $a1,            $0,         9       # Load the size of the array into $a1
     jal     recursive_sum                       # call recursive_sum
@@ -113,7 +112,6 @@ recursive_sum:
     bne     $a1,            $zero,      else    # size == 0 ?
     addi    $v0,            $0,         0       # If size == 0, set return value to 0
     addi    $sp,            $sp,        8       # Adjust sp
-	move $t2, $v0
     jr      $ra                                 # Return
 
 else:
@@ -126,7 +124,6 @@ else:
     add     $v0,            $v0,        $t2     # retval = $v0 + arr[size - 1]
     lw      $ra,            4($sp)              # restore return address from stack
     addi    $sp,            $sp,        8       # Adjust sp
-	move $t2, $v0
     jr      $ra                                 # Return
 
 
