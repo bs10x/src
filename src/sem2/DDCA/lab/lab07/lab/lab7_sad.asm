@@ -78,7 +78,7 @@ loop:
 
     lw      $a0,            0($s0)                  # Load left_image[i] into $a0
     lw      $a1,            36($s0)                 # Load right_image[i] into $a1
-    j       abs_diff                                # Call abs_diff
+    jal     abs_diff                                # Call abs_diff
     sw      $v0,            72($s0)                 # Store the result of abs_diff in sad_array[i]
 
     addi    $s1,            $s1,        1           # i++
@@ -91,7 +91,7 @@ end_loop:
     xor     $s0,            $s0,        $s0         # $s0 = 0, move back to the beginning of the array
     lw      $a0,            72($s0)                 # Load the base address of sad_array into $a0
     addi    $a1,            $0,         9           # Load the size of the array into $a1
-    j       recursive_sum                           # call recursive_sum
+    jal     recursive_sum                           # call recursive_sum
 
     sw      $v0,            0($t2)                  # Store the returned value in $t2
 
