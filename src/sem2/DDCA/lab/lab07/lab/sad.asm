@@ -103,3 +103,31 @@ sum:
     bne     $s1,            $a1,        sum     # if i != size, repeat the loop
     jr      $ra                                 # return to the calling function
 
+
+
+sum_array:
+    # Initialize sum to 0
+    li $v0, 0            # $v0 = sum
+
+    # Loop through the array
+    li $t0, 0            # $t0 = i (loop counter)
+    loop:
+        # Check if we have reached the end of the array
+        bge $t0, $a1, end_loop   # If i >= size, exit loop
+
+        # Load the current element of the array into $t1
+        lw $t1, 0($a0)     # $t1 = array[i]
+
+        # Add the current element to the sum
+        add $v0, $v0, $t1  # sum += array[i]
+
+        # Move to the next element of the array
+        addi $a0, $a0, 4   # Increment the base address by 4 bytes (size of integer)
+        addi $t0, $t0, 1   # Increment loop counter
+
+        # Repeat the loop
+        j loop
+
+    end_loop:
+    # Return the sum
+    jr $ra
