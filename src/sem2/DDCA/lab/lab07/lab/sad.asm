@@ -7,7 +7,7 @@
 
 .data   
 
-nums:   .word   9
+n:   .word   9
 A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
 B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
 SAD:    .space  36
@@ -18,7 +18,7 @@ main:
 
     la      $s0,            A                   # Load the address of A into $s0
     li      $s1,            0                   # $s1 = i = 0
-    sw      $s2,            nums                # $s2 = nums
+    sw      $s2,            n                # $s2 = n
     la      $s3,            SAD                 # Load the address of SAD into $s3
 
 
