@@ -130,7 +130,7 @@ sum:
     lw      $t0,            0($s0)
     add     $t1,            $t1,        $t0
     addi    $s0,            4
-
+    addi    $a1,            1
 
     jr      $ra                                 # Return to the calling function
 
