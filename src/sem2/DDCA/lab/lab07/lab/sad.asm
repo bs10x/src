@@ -17,8 +17,9 @@ SAD:    .space  36
 main:   
 
     la      $s0,            A                       # Load the address of left into $s0
-    move    $s1,            $0                      # $s1 = i = 0
-    addi    $s2,            size                    # $s2 = size
+    li      $s1,            0                       # $s1 = i = 0
+    sw      $s2,            size                    # $s2 = size
+    la      $s3,            SAD                     # Load the address of sad_array into $s3
 
     # left_image 			= 		   {5, 16, 7, 1, 1, 13, 2, 8, 10}
     addi    $t0,            $0,         5           # left_image[0]
