@@ -113,6 +113,7 @@ recursive_sum:
     bne     $a1,            $zero,      else    # size == 0 ?
     addi    $v0,            $0,         0       # If size == 0, set return value to 0
     addi    $sp,            $sp,        8       # Adjust sp
+	move $t2, $v0
     jr      $ra                                 # Return
 
 else:
@@ -125,6 +126,7 @@ else:
     add     $v0,            $v0,        $t2     # retval = $v0 + arr[size - 1]
     lw      $ra,            4($sp)              # restore return address from stack
     addi    $sp,            $sp,        8       # Adjust sp
+	move $t2, $v0
     jr      $ra                                 # Return
 
 
