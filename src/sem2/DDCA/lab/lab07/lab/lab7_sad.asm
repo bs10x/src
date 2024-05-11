@@ -66,7 +66,7 @@ main:
 
 
 loop:
-    bgt     $s1,            $s2,        break   # If i == image_size, jump to break
+    beq     $s1,            $s2,        break   # If i == image_size, jump to break
 
     lw      $a0,            0($s0)              # Load left_image[i] into $a0
     lw      $a1,            36($s0)             # Load right_image[i] into $a1
@@ -84,8 +84,8 @@ break:
     li      $a1,            9                   # Load the size of the array into $a1
     jal     recursive_sum                       # call recursive_sum
 
-    # move    $t2,            $v0                 # Store the returned value in $t2
-    sw      $v0,            0($t2)              # Store the returned value in $t2
+    move    $t2,            $v0                 # Store the returned value in $t2
+    # sw      $v0,            0($t2)              # Store the returned value in $t2
 
     j       end
 
