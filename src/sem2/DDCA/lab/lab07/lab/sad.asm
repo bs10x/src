@@ -1,16 +1,8 @@
-    #       
-    # Sum of Absolute Differences Algorithm
-    #       
-    # Authors:
-    #	Basil Feitknecht, Camil Schmid
-    #       
-
 .data   
 
 n:      .word   9
 A:      .word   5, 16, 7, 1, 1, 13, 2, 8, 10
 B:      .word   4, 15, 8, 0, 2, 12, 3, 7, 11
-SAD:    .space  36
 
 .text   
 
