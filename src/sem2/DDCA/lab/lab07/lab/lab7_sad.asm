@@ -80,7 +80,7 @@ loop:
 
 break:
     # recursive_sum(sad_array, 9)
-    # li      $s0,        0
+    move    $s0,        $0
     lw      $a0,        72($s0)                 # Load the base address of sad_array into $a0
     li      $a1,        9                       # Load the size of the array into $a1
     jal     sum                                 # call recursive_sum
