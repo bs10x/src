@@ -15,7 +15,6 @@ main:
     lui     $s0,        0x0000                  # Address of first element in the vector
     ori     $s0,        0x0000
 
-    # left_image 			= 		   {5, 16, 7, 1, 1, 13, 2, 8, 10}
     addi    $t0,        $0,         5           # left_image[0]
     sw      $t0,        0($s0)
     addi    $t0,        $0,         16          # left_image[1]
@@ -37,7 +36,6 @@ main:
 
     addi    $s0,        $s0,        36          # Move to the next array
 
-    # right_image 			= 		   {4, 15, 8, 0, 2, 12, 3, 7, 11}
     addi    $t0,        $0,         4           # right_image[0]
     sw      $t0,        0($s0)
     addi    $t0,        $0,         15          # right_image[1]
@@ -56,7 +54,6 @@ main:
     sw      $t0,        28($s0)
     addi    $t0,        $0,         11          # right_image[8]
     sw      $t0,        32($s0)
-
 
     # Loop over the elements of left_image and right_image
     move    $s0,        $0                      # $s0 = 0, move back to the beginning of the array
@@ -83,14 +80,13 @@ break:
     li      $a0,        72                      # Load the base address of sad_array into $a0
     li      $a1,        9                       # Load the size of the array into $a1
     jal     sum                                 # call recursive_sum
-    move    $t2,        $v0
+    move    $t2,        $v0						# move returned value to $t2
 
-    j       end
-	    
+    j       end									# enter infinite loop
+
 
 end:
     j       end                                 # Infinite loop at the end of the program.
-
 
 
     # Absolute difference between two integers
@@ -114,7 +110,7 @@ sum:
     jr      $ra                                 # Return
 
 recursion:
-    add     $a1,        $t0,        $0          #update the second argument
+    add     $a1,        $t0,        $0          # update the second argument
     jal     sum
     lw      $t0,        0($sp)                  # Restore size - 1 from stack
     sll     $t1,        $t0,        2           # Multiply size by 4
@@ -124,5 +120,3 @@ recursion:
     lw      $ra,        4($sp)                  # restore return address from stack
     addi    $sp,        $sp,        8           # Adjust sp
     jr      $ra                                 # Return
-
-
