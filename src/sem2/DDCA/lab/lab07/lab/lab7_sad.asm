@@ -59,9 +59,9 @@ main:
 
 
     # Loop over the elements of left_image and right_image
+    move    $s0,        $0                      # $s0 = 0, move back to the beginning of the array
     addi    $s1,        $0,         0           # $s1 = i = 0
     addi    $s2,        $0,         9           # $s2 = image_size = 9
-    move    $s0,        $0                      # $s0 = 0, move back to the beginning of the array
     j       loop
 
 
@@ -80,12 +80,17 @@ loop:
 
 break:
     # recursive_sum(sad_array, 9)
-    # move    $s0,        $0
-    lw      $a0,        72($s0)                 # Load the base address of sad_array into $a0
+    li      $s0,        0
+    lw      $a0,        0($s0)                 # Load the base address of sad_array into $a0
     li      $a1,        9                       # Load the size of the array into $a1
     jal     sum                                 # call recursive_sum
+    move    $t2,        $v0
     j       end
 
+    # PROBLEM #
+    # we iterate somewhere in left image and don't sum but just set $t2 to the value there
+    # we start at base address of left image and go 9
+    #       
 
 end:
     j       end                                 # Infinite loop at the end of the program.
@@ -99,6 +104,7 @@ abs_diff:
     xor     $t1,        $t1,        $t2         # XOR to flip the sign if necessary
     sub     $v0,        $t1,        $t2         # Subtract the flipped sign from the difference to get absolute difference
     jr      $ra                                 # Return to the calling function
+
 
     # Recursive sum of an array of integers
 sum:
