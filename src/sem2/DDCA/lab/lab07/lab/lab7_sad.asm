@@ -80,17 +80,13 @@ loop:
 
 break:
     # recursive_sum(sad_array, 9)
-    li      $s0,        0
-    lw      $a0,        0($s0)                 # Load the base address of sad_array into $a0
+    li      $a0,        72                      # Load the base address of sad_array into $a0
     li      $a1,        9                       # Load the size of the array into $a1
     jal     sum                                 # call recursive_sum
     move    $t2,        $v0
-    j       end
 
-    # PROBLEM #
-    # we iterate somewhere in left image and don't sum but just set $t2 to the value there
-    # we start at base address of left image and go 9
-    #       
+    j       end
+	    
 
 end:
     j       end                                 # Infinite loop at the end of the program.
