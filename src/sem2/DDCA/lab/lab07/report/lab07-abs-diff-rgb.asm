@@ -4,36 +4,14 @@
     # Authors:
     #	Basil Feitknecht, Camil Schmid
     #       
+.data
+L: .word 1, 2, 3
+R: .word 4, 0, 4
+
 
 .text
-
 main:
-    # Initializing data in memory...
-    # Store in $s0 the address of the first element in memory
-    # lui sets the upper 16 bits of the specified register, lower 16 to zero
-    # ori ors together the given immediate to set lower ones
-    lui     $s0,        0x0000                  # Address of first element in the vector
-    ori     $s0,        0x0000
-
-    addi    $t0,        $0,         5           # left_image[0]
-    sw      $t0,        0($s0)
-    addi    $t0,        $0,         16          # left_image[1]
-    sw      $t0,        4($s0)
-    addi    $t0,        $0,         7           # left_image[2]
-    sw      $t0,        8($s0)
-    addi    $t0,        $0,         1           # left_image[3]
-    sw      $t0,        12($s0)
-    addi    $t0,        $0,         1           # left_image[4]
-    sw      $t0,        16($s0)
-    addi    $t0,        $0,         13          # left_image[5]
-    sw      $t0,        20($s0)
-    addi    $t0,        $0,         2           # left_image[6]
-    sw      $t0,        24($s0)
-    addi    $t0,        $0,         8           # left_image[7]
-    sw      $t0,        28($s0)
-    addi    $t0,        $0,         10          # left_image[8]
-    sw      $t0,        32($s0)
-
+   
 
     # Loop over the elements of left_image and right_image
     move    $s0,        $0                      # $s0 = 0, move back to the beginning of the array
