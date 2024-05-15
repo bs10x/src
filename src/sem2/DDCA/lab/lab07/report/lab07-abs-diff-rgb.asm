@@ -34,26 +34,6 @@ main:
     addi    $t0,        $0,         10          # left_image[8]
     sw      $t0,        32($s0)
 
-    addi    $s0,        $s0,        36          # Move to the next array
-
-    addi    $t0,        $0,         4           # right_image[0]
-    sw      $t0,        0($s0)
-    addi    $t0,        $0,         15          # right_image[1]
-    sw      $t0,        4($s0)
-    addi    $t0,        $0,         8           # right_image[2]
-    sw      $t0,        8($s0)
-    addi    $t0,        $0,         0           # right_image[3]
-    sw      $t0,        12($s0)
-    addi    $t0,        $0,         2           # right_image[4]
-    sw      $t0,        16($s0)
-    addi    $t0,        $0,         12          # right_image[5]
-    sw      $t0,        20($s0)
-    addi    $t0,        $0,         3           # right_image[6]
-    sw      $t0,        24($s0)
-    addi    $t0,        $0,         7           # right_image[7]
-    sw      $t0,        28($s0)
-    addi    $t0,        $0,         11          # right_image[8]
-    sw      $t0,        32($s0)
 
     # Loop over the elements of left_image and right_image
     move    $s0,        $0                      # $s0 = 0, move back to the beginning of the array
@@ -89,6 +69,7 @@ end:
     j       end                                 # Infinite loop at the end of the program.
 
 
+
     # Absolute difference between two integers
 abs_diff:
     sub     $t1,        $a0,        $a1         # Subtract second integer from first integer
@@ -97,26 +78,3 @@ abs_diff:
     sub     $v0,        $t1,        $t2         # Subtract the flipped sign from the difference to get absolute difference
     jr      $ra                                 # Return to the calling function
 
-
-    # Recursive sum of an array of integers
-sum:
-    addi    $sp,        $sp,        -8          # Adjust sp
-    addi    $t0,        $a1,        -1          # Compute size - 1
-    sw      $t0,        0($sp)                  # Save size - 1 to stack
-    sw      $ra,        4($sp)                  # Save return address
-    bne     $a1,        $zero,      recursion   # size == 0 ?
-    addi    $v0,        $0,         0           # If size == 0, set return value to 0
-    addi    $sp,        $sp,        8           # Adjust sp
-    jr      $ra                                 # Return
-
-recursion:
-    add     $a1,        $t0,        $0          # update the second argument
-    jal     sum
-    lw      $t0,        0($sp)                  # Restore size - 1 from stack
-    sll     $t1,        $t0,        2           # Multiply size by 4
-    add     $t1,        $t1,        $a0         # Compute & arr[ size - 1 ]
-    lw      $t2,        0($t1)                  # t2 = arr[ size - 1 ]
-    add     $v0,        $v0,        $t2         # retval = $v0 + arr[size - 1]
-    lw      $ra,        4($sp)                  # restore return address from stack
-    addi    $sp,        $sp,        8           # Adjust sp
-    jr      $ra                                 # Return
