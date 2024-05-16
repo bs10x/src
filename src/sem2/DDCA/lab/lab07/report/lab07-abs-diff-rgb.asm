@@ -22,8 +22,9 @@ main:
     move    $a2,            $t2
     move    $a3,            $t3
 
-    sub     $sp,            $sp,    8
-    #       
+    sub     $sp,            $sp,    8   # Reserve space on the stack
+    sw      $t4,            0($sp)      # Save $t4 on the stack
+    sw      $t5,            4($sp)      # Save $t5 on the stack
 
     jal     abs_diff_color
     move    $t9,            $v0         # Save the result in $t9
@@ -40,7 +41,9 @@ abs_diff_color:
     jal     abs_diff                    # abs_diff(G1, G2)
     addi    $t0,            $v0,    0   # Add the result to $t0
 
-
+    sub     $sp,            $sp,    8   # Get the stack stored values
+    sw    $a0,            0($sp)      # Prepare the function arguments
+    sw    $a1,            4($sp)
     jal     abs_diff                    # abs_diff(B1, B2)
     addi    $t0,            $v0,    0   # Add the result to $t0
 
