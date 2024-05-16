@@ -8,8 +8,7 @@
 .text
 
 main:
-    # Initialize the arrays
-    li      $s0,            0
+    li      $s0,            0           # Initialize the counter
     li      $t0,            1           # R1
     li      $t1,            2           # R2
     li      $t2,            3           # G1
