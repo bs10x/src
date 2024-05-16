@@ -27,30 +27,30 @@ main:
     sw      $t5,            4($sp)      # Save $t5 on the stack
 
     jal     abs_diff_color
-    move    $t9,            $v0         # Save the result in $t9
+    move    $t9,            $s0         # Save the result in $t9
     j       end                         # Jump to the end of the program
 
 
     # Absolute difference between three channels
 abs_diff_color:
     jal     abs_diff                    # abs_diff(R1, R2)
-    add     $t0,            $t0,    $0 # Add the result to $t0
+    add     $t0,            $t0,    $v0 # Add the result to $t0
 
     move    $a0,            $a2         # Prepare the function arguments
     move    $a1,            $a3
     jal     abs_diff                    # abs_diff(G1, G2)
-    add     $t0,            $t0,    $0 # Add the result to $t0
+    add     $t0,            $t0,    $v0 # Add the result to $t0
 
     sub     $sp,            $sp,    8   # Get the stack stored values
     sw      $a0,            0($sp)      # Prepare the function arguments
     sw      $a1,            4($sp)
     jal     abs_diff                    # abs_diff(B1, B2)
-    add     $t0,            $t0,    $0 # Add the result to $t0
+    add     $t0,            $t0,    $v0 # Add the result to $t0
 
     move    $v0,            $t0         # Return the result in $v0
 
     # jr      $ra                         # Return to the calling function
-    j end
+    j       end
 
     # Absolute difference, $a0 = l, $a1 = r
 abs_diff:
