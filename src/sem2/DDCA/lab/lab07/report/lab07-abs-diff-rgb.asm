@@ -34,9 +34,14 @@ abs_diff_color:
 
     move    $a0,            $a2         # Prepare the function arguments
     move    $a1,            $a3
-
     jal     abs_diff                    # abs_diff(G1, G2)
     add     $t0,            $v0,    $0  # Add the result to $t0
+
+
+    jal     abs_diff                    # abs_diff(B1, B2)
+    add     $t0,            $v0,    $0  # Add the result to $t0
+
+    move    $v0,            $t0         # Return the result in $v0
 
 
     # Absolute difference, $a0 = l, $a1 = r
