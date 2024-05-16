@@ -40,9 +40,13 @@ abs_diff_color:
     add     $s0,            $t0,    $v0 # Add the result to $t0
 
     sub     $sp,            $sp,    8   # Get the stack stored values
-    sw      $a0,            0($sp)      # Prepare the function arguments
-    sw      $a1,            4($sp)
+    
+    sw      $a0,            0($sp)      # B1
+    add     $sp,            $sp,    4   # go to next stack argument
+    sw      $a1,            0($sp)      # B2
+    add     $sp,            $sp,    4   # go to next stack argument
     jal     abs_diff                    # abs_diff(B1, B2)
+
     add     $s0,            $t0,    $v0 # Add the result to $t0
 
     move    $v0,            $s0         # Return the result in $v0
