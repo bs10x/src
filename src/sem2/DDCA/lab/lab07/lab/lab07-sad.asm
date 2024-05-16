@@ -14,7 +14,7 @@ main:
     # ori ors together the given immediate to set lower ones
     lui     $s0,        0x0000                  # Address of first element in the vector
     ori     $s0,        0x0000
-
+    
     addi    $t0,        $0,         5           # left_image[0]
     sw      $t0,        0($s0)
     addi    $t0,        $0,         16          # left_image[1]

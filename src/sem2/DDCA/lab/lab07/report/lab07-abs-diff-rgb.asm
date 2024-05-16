@@ -25,7 +25,7 @@ main:
     #       
 
     jal     abs_diff_color
-    move    $t9,            $v0         # Save the result in $t9
+    move    $t9,            $v0         # Save the result in $t9    
 
 
     # Absolute difference between three channels
