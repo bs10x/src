@@ -21,8 +21,9 @@ main:
     move    $a1,            $t1
     move    $a2,            $t2
     move    $a3,            $t3
-    
-    
+    #
+    #
+
     jal     abs_diff_color
 
 
