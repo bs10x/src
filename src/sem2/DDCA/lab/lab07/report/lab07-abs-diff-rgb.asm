@@ -25,6 +25,7 @@ main:
     #       
 
     jal     abs_diff_color
+    move    $t9,            $v0         # Save the result in $t9
 
 
     # Absolute difference between three channels
@@ -49,7 +50,7 @@ abs_diff:
     sub     $t1,            $a0,    $a1 # Subtract second integer from first integer
     sra     $t2,            $t1,    31  # Arithmetic right shift to get sign of the difference
     xor     $t1,            $t1,    $t2 # XOR to flip the sign if necessary
-    sub     $v0,            $t1,    $t2 # Subtract flipped sign from difference to get absolute difference
+    sub     $v0,            $t1,    $t2 # Subtract flipped sign from difference to get abs_diff
     jr      $ra                         # Return to the calling function
 
 
