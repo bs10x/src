@@ -21,28 +21,32 @@ main:
     move    $a1,            $t1
     move    $a2,            $t2
     move    $a3,            $t3
-    #       
+
+    sub     $sp,            $sp,    8
     #       
 
     jal     abs_diff_color
-    move    $t9,            $v0         # Save the result in $t9    
+    move    $t9,            $v0         # Save the result in $t9
+    j       end                         # Jump to the end of the program
 
 
     # Absolute difference between three channels
 abs_diff_color:
     jal     abs_diff                    # abs_diff(R1, R2)
-    add     $t0,            $v0,    $0  # Add the result to $t0
+    addi    $t0,            $v0,    0   # Add the result to $t0
 
     move    $a0,            $a2         # Prepare the function arguments
     move    $a1,            $a3
     jal     abs_diff                    # abs_diff(G1, G2)
-    add     $t0,            $v0,    $0  # Add the result to $t0
+    addi    $t0,            $v0,    0   # Add the result to $t0
 
 
     jal     abs_diff                    # abs_diff(B1, B2)
-    add     $t0,            $v0,    $0  # Add the result to $t0
+    addi    $t0,            $v0,    0   # Add the result to $t0
 
     move    $v0,            $t0         # Return the result in $v0
+
+    jr      $ra                         # Return to the calling function
 
 
     # Absolute difference, $a0 = l, $a1 = r
