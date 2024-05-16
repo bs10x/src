@@ -25,9 +25,10 @@ main:
     sub     $sp,            $sp,    8   # Reserve space on the stack
     sw      $t4,            0($sp)      # Save $t4 on the stack
     sw      $t5,            4($sp)      # Save $t5 on the stack
+    add     $sp,            $sp,    8   # Restore the stack pointer
 
     jal     abs_diff_color
-    move    $t9,            $s0         # Save the result in $t9
+    move    $t9,            $v0         # Save the result in $t9
     j       end                         # Jump to the end of the program
 
 
@@ -50,7 +51,7 @@ abs_diff_color:
     move    $v0,            $t0         # Return the result in $v0
 
     # jr      $ra                         # Return to the calling function
-    j       end
+    # j       end
 
     # Absolute difference, $a0 = l, $a1 = r
 abs_diff:
