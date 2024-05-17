@@ -11,10 +11,11 @@
 
 .text
 main:
-    addi    $s0,    $0,     1       # A = 5
-    addi    $s1,    $0,     5   # B = 32767
+    addi    $s0,    $0,     12       # A = 5
+    addi    $s1,    $0,     10   # B = 32767
     addi    $s1,    $s1,    1       # B = B + 1
     addi    $t2,    $0,     0       # S = 0
+    blt	    $s1,    $s0,    end
     j       loop                    # Jump to loop
 
 
