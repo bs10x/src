@@ -148,14 +148,14 @@ module MIPS(
    
    ////////////////////////////////////
 	// Instantiate the Data Memory
-	  DataMemory i_dmem (
+   DataMemory i_dmem (
       // TODO Part 1
-      .input(),   // Clock signal rising edge
+      .input(CLK),   // Clock signal rising edge
       .A(),       // Address for 64 locations [5:0]
-      .WE(),      // Write Enable 1: Write 0: no write
-      .WD(),      // 32-bit data in
-      .RD()       // 32-bit read data
-      );
+      .WE(MemWrite),      // Write Enable 1: Write 0: no write
+      .WD(WriteData),      // 32-bit data in
+      .RD(ReadData)       // 32-bit read data
+   );
 
    // Memory Mapped I/O
    assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address falls into I/O  address range
