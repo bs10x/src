@@ -19,13 +19,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module MIPS(
-             input CLK,                   // Clock signal
-				 input RESET,                 // Reset Active low will set back the Program counter
-				 output [31:0] IOWriteData,   // IO Data to be written to the interface
-				 output  [3:0] IOAddr,        // IO Address we use 4 bits, could also be more
-				 output        IOWriteEn,     // 1: There is a valid IO Write
-				 input  [31:0] IOReadData     // 32bit input from the I/O interface        
-    );
+   input CLK,                   // Clock signal
+   input RESET,                 // Reset Active low will set back the Program counter
+   output [31:0] IOWriteData,   // IO Data to be written to the interface
+   output  [3:0] IOAddr,        // IO Address we use 4 bits, could also be more
+   output        IOWriteEn,     // 1: There is a valid IO Write
+   input  [31:0] IOReadData     // 32bit input from the I/O interface        
+   );
 
    // The MIPS processor
 	// (Mostly) based on the descriptions on the textbook 
@@ -83,9 +83,11 @@ module MIPS(
    ////////////////////////////////////
 	// The Program Counter
 	always @ ( posedge CLK, posedge RESET ) 
+   begin
 	  if    (RESET	  == 1'b1) PC <= 32'h00002FFC; // default program counter 
 	  else                    PC <= PCbar;        // Copy next value to present
-	
+   end
+   
 	// Calculation of the next PC value
    assign PCPlus4  = PC + 4;                             // By default the PC increments by 4
    assign PCBranch = PCPlus4 + {SignImm[29:0],2'b00};    // The branch address see Page 373, Fig 7.10
@@ -95,9 +97,9 @@ module MIPS(
 
    /////////////////////////////////////
    // Instantiate the Instruction Memory
-	  InstructionMemory i_imem (
-                                // TODO Part 1
-                              );
+   InstructionMemory i_imem (
+      // TODO Part 1
+   );
 										
    // Sign extension, replicate the MSB of the Immediate value 
 	assign SignImm = {{16{Instr[15]}},Instr[15:0]};
@@ -108,24 +110,24 @@ module MIPS(
    ////////////////////////////////////
    // Instantiate the Register File
      RegisterFile i_regf (
-                          .A1(Instr[25:21]),   // Address for First Register
-                          .A2(Instr[20:16]),   // Address for Second Register
-                          .A3(WriteReg),       // Address for Write Back
-                          .RD1(SrcA),          // First output directly connected to ALU
-                          .RD2(WriteData),     // Second output
-                          .WD3(Result),        // Output of ALU or Data Memory
-                          .WE3(RegWrite),      // From the control unit
-                          .CLK(CLK)            // System Clock (10 MHz)
-                         );
+      .A1(Instr[25:21]),   // Address for First Register
+      .A2(Instr[20:16]),   // Address for Second Register
+      .A3(WriteReg),       // Address for Write Back
+      .RD1(SrcA),          // First output directly connected to ALU
+      .RD2(WriteData),     // Second output
+      .WD3(Result),        // Output of ALU or Data Memory
+      .WE3(RegWrite),      // From the control unit
+      .CLK(CLK)            // System Clock (10 MHz)
+   );
 
 
    ////////////////////////////////////
    // ALU: first determine the inputs, and then instantiate the ALU
 	assign SrcB = ALUSrc ? SignImm : WriteData ; // ALU input is either immediate or from register
 
-     ALU i_alu (
-                // TODO Part 1
-                );	
+   ALU i_alu (
+      // TODO Part 1
+   );	
 					 
    // Generate the PCSrc signal that tells to take the branch
 	assign PCSrc = Branch & Zero;                // simple AND
@@ -133,12 +135,12 @@ module MIPS(
    ////////////////////////////////////
 	// Instantiate the Data Memory
 	  DataMemory i_dmem (
-                        // TODO Part 1
-                        );
+         // TODO Part 1
+      );
 
    // Memory Mapped I/O
-   assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address
-	                                                  // falls into I/O  address range
+   assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address falls into I/O  address range
+
    // TODO Part 1
    assign IsMemWrite  =                // Is 1 when there is a SW instruction on DataMem address
    assign IOWriteData =                // This line is connected directly to WriteData
@@ -153,8 +155,8 @@ module MIPS(
    ////////////////////////////////////
    // The Control Unit
    ControlUnit i_cont (
-                        //TODO Part 1
-                       );
+      //TODO Part 1
+   );
 
 
 endmodule
