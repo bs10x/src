@@ -18,6 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+
 module MIPS(
    input CLK,                   // Clock signal
    input RESET,                 // Reset Active low will set back the Program counter
