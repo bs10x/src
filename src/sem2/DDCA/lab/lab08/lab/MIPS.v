@@ -98,7 +98,7 @@ module MIPS(
    /////////////////////////////////////
    // Instantiate the Instruction Memory
    InstructionMemory i_imem (
-      // TODO
+      // TODO pt 1
       .A(),   // Address of the Instruction, [5:0]
       .RD(Instr)   // Value at Address, [31:0]
    );
