@@ -51,13 +51,13 @@ module RegisterFile(
 	   .dpra(A2), // Bus [4 : 0] 
 	   .clk(CLK),
 	   .we(WE3),
-	   .dpo(Read2)); // Bus [31 : 0]     
+	   .dpo(Read2)
+	); // Bus [31 : 0]     
 	
-     // For both ports, if the address is 0 
-	  // Then the output will be zero
-	  // Otherwise read the output from the register file 
+	// For both ports, if the address is 0 
+	// Then the output will be zero
+	// Otherwise read the output from the register file 
 
-     assign RD1 = (A1 != 4'b0000) ? Read1 : 0; // Port 1
-	  assign RD2 = (A2 != 4'b0000) ? Read2 : 0; // Port 2
-
+	assign RD1 = (A1 != 4'b0000) ? Read1 : 0; // Port 1
+	assign RD2 = (A2 != 4'b0000) ? Read2 : 0; // Port 2
 endmodule
