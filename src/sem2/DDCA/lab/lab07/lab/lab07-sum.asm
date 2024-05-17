@@ -15,8 +15,10 @@ main:
     addi    $s1,    $0,     10  # B = 32767
     addi    $s1,    $s1,    1   # B = B + 1
     addi    $t2,    $0,     0   # S = 0
-    slt     $t1,    $s1,    $s0 # A < B
-    beq     $t1,    $0,     end # If B < A, jump to loop
+    
+    slt     $t1,    $s0,    $s1 # B < A
+    beq     $t1,    $0,     end # If A < B, jump to loop
+
     j       loop                # Jump to loop
 
 loop:
