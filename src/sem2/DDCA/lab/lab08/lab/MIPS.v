@@ -74,8 +74,7 @@ module MIPS(
 
    // Memory Mapped I/O Signals
    wire        IsIO;      // 1: if Address is in I/O range 0x00007ff0 to 0x0007fff
-	wire        IsMemWrite;// 1: if MemWrite and not IsIO, tells us that we write to memory
-	                       //    and not to the IO
+	wire        IsMemWrite;// 1: if MemWrite and not IsIO, we write to memory, not to the IO
 	wire [31:0] ReadMemIO;  // Read from either Memory or I/O
 	
 //////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +98,8 @@ module MIPS(
    /////////////////////////////////////
    // Instantiate the Instruction Memory
    InstructionMemory i_imem (
-      // TODO Part 1
+
+      
    );
 										
    // Sign extension, replicate the MSB of the Immediate value 
