@@ -175,7 +175,15 @@ module MIPS(
    // The Control Unit
    ControlUnit i_cont (
       //TODO Part 1
+      Op(),
+      Funct(),
+      Jump(),
+      MemtoReg(),
+      MemWrite(),
+      Branch(),
+      ALUControl(),
+      ALUSrc(),
+      RegDst(),
+      RegWrite()
    );
-
-
 endmodule
