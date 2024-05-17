@@ -18,13 +18,14 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module ALU( 
-   input  [31:0] a,
-   input  [31:0] b,
+
+module ALU ( 
+  input  [31:0] a,
+  input  [31:0] b,
 	input  [3:0] aluop,
 	output [31:0] result,
 	output zero
-    );
+  );
 
   wire [31:0] logicout;   // output of the logic block
   wire [31:0] addout;     // adder subtractor out
@@ -37,10 +38,11 @@ module ALU(
 
   // logic select 
   assign logicsel = aluop[1:0];
-  assign logicout = (logicsel == 2'b00) ? a & b :
-                    (logicsel == 2'b01) ? a | b :
-						  (logicsel == 2'b10) ? a ^ b :
-						                      ~(a | b) ;
+  assign logicout =
+    (logicsel == 2'b00) ? a & b :
+    (logicsel == 2'b01) ? a | b :
+    (logicsel == 2'b10) ? a ^ b :
+    ~(a | b) ;
 
   // adder subtractor
   assign n_b = ~b ;  // invert b
@@ -55,7 +57,7 @@ module ALU(
   
   // final out
   assign result = (aluop[2]) ? logicout : arithout;
+  
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
-  
 endmodule
