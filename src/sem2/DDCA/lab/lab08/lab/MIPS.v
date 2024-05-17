@@ -131,7 +131,7 @@ module MIPS(
       // TODO Part 1
       .a(SrcA),
       .b(SrcB),
-      .aluop(WriteReg),
+      .aluop(ALUControl[3:0]),
       .result(ALUResult),
       .zero(Zero)
    );
@@ -167,6 +167,7 @@ module MIPS(
    ////////////////////////////////////
    // The Control Unit
    ControlUnit i_cont (
+      // TODO pt 1
       Op(Instr[31:26]),
       Funct(Instr[5:0]),
       Jump(Jump),
