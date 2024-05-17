@@ -131,7 +131,7 @@ module MIPS(
       // TODO Part 1
       .a(SrcA),
       .b(SrcB),
-      .aluop(),
+      .aluop(WriteReg),
       .result(ALUResult),
       .zero(Zero)
    );
@@ -167,16 +167,15 @@ module MIPS(
    ////////////////////////////////////
    // The Control Unit
    ControlUnit i_cont (
-      //TODO Part 1
-      Op(),
-      Funct(),
-      Jump(),
-      MemtoReg(),
-      MemWrite(),
-      Branch(),
-      ALUControl(),
-      ALUSrc(),
-      RegDst(),
-      RegWrite()
+      Op(Instr[31:26]),
+      Funct(Instr[5:0]),
+      Jump(Jump),
+      MemtoReg(MemtoReg),
+      MemWrite(MemWrite),
+      Branch(Branch),
+      ALUControl(ALUControl),
+      ALUSrc(ALUSrc),
+      RegDst(RegDst),
+      RegWrite(RegWrite)
    );
 endmodule
