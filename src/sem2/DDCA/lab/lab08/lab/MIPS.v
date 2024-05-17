@@ -98,8 +98,8 @@ module MIPS(
    /////////////////////////////////////
    // Instantiate the Instruction Memory
    InstructionMemory i_imem (
-
-      
+      .A(),   // Address of the Instruction, [5:0]
+      .RD()   // Value at Address, [31:0]
    );
 										
    // Sign extension, replicate the MSB of the Immediate value 
@@ -127,7 +127,20 @@ module MIPS(
 	assign SrcB = ALUSrc ? SignImm : WriteData ; // ALU input is either immediate or from register
 
    ALU i_alu (
+      .a(SrcA),
+      .b(SrcB),
+      .aluop(),
+      .result(ALUResult),
+      .zero(Zero)
+      );
       // TODO Part 1
+      /*
+      input  [31:0] a,
+      input  [31:0] b,
+      input  [3:0] aluop,
+      output [31:0] result,
+	   output zero
+      */
    );	
 					 
    // Generate the PCSrc signal that tells to take the branch
@@ -136,7 +149,12 @@ module MIPS(
    ////////////////////////////////////
 	// Instantiate the Data Memory
 	  DataMemory i_dmem (
-         // TODO Part 1
+      // TODO Part 1
+      .input(),   // Clock signal rising edge
+      .A(),       // Address for 64 locations [5:0]
+      .WE(),      // Write Enable 1: Write 0: no write
+      .WD(),      // 32-bit data in
+      .RD()       // 32-bit read data
       );
 
    // Memory Mapped I/O
