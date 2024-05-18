@@ -154,10 +154,10 @@ module MIPS(
    assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address falls into I/O  address range
 
    // TODO PART 1 !!
-   assign IsMemWrite  = (MemWrite & ~IsIO) ? 1 : 0;               // 1: if MemWrite and not IsIO, we write to memory, not to the IO
-   assign IOWriteData =                // This line is connected directly to WriteData
-   assign IOAddr      = ALUResult[3:0]               // The LSB 4 bits of the Address is assigned to IOAddr, [3:0]
-   assign IOWriteEn   =                // Is 1 when there is a SW instruction on IO address 
+   assign IsMemWrite  = (MemWrite & ~IsIO) ? 1 : 0;         // 1: if MemWrite and not IsIO, we write to memory, not to the IO
+   assign IOWriteData = WriteData;                          // This line is connected directly to WriteData
+   assign IOAddr      = ALUResult[3:0];                     // The LSB 4 bits of the Address is assigned to IOAddr, [3:0]
+   assign IOWriteEn   = MemWrite & IsIO;                    // Is 1 when there is a SW instruction on IO address 
 
    assign ReadMemIO   = IsIO ? IOReadData : ReadData;   // Mux selects memory or I/O	
    // Select either the Data Memory (or IO) output or the ALU Result	
