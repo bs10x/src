@@ -98,7 +98,7 @@ module MIPS(
    /////////////////////////////////////
    // Instantiate the Instruction Memory
    InstructionMemory i_imem (
-      // TODO pt 1
+      // TODO PART 1 !!
       .A(PC[7:2]),   // Address of the Instruction, [5:0]
       .RD(Instr)   // Value at Address, [31:0]
    );
@@ -128,7 +128,7 @@ module MIPS(
 	assign SrcB = ALUSrc ? SignImm : WriteData ; // ALU input is either immediate or from register
 
    ALU i_alu (
-      // TODO Part 1
+      // TODO PART 1 !!
       .a(SrcA),
       .b(SrcB),
       .aluop(ALUControl[3:0]),
@@ -142,9 +142,9 @@ module MIPS(
    ////////////////////////////////////
 	// Instantiate the Data Memory
    DataMemory i_dmem (
-      // TODO Part 1
+      // TODO PART 1 !!
       .input(CLK),   // Clock signal rising edge
-      .A(),       // Address for 64 locations [5:0]
+      .A(ALUResult[7:2]),       // Address for 64 locations [5:0]
       .WE(MemWrite),      // Write Enable 1: Write 0: no write
       .WD(WriteData),      // 32-bit data in
       .RD(ReadData)       // 32-bit read data
@@ -153,7 +153,7 @@ module MIPS(
    // Memory Mapped I/O
    assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address falls into I/O  address range
 
-   // TODO Part 1
+   // TODO PART 1 !!
    assign IsMemWrite  =                // Is 1 when there is a SW instruction on DataMem address
    assign IOWriteData =                // This line is connected directly to WriteData
    assign IOAddr      =                // The LSB 4 bits of the Address is assigned to IOAddr
@@ -167,7 +167,7 @@ module MIPS(
    ////////////////////////////////////
    // The Control Unit
    ControlUnit i_cont (
-      // TODO pt 1
+      // TODO PART 1 !!
       Op(Instr[31:26]),
       Funct(Instr[5:0]),
       Jump(Jump),
