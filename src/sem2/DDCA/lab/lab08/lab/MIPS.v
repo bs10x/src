@@ -313,14 +313,21 @@ module ALU (
 endmodule
 
 module reg_half(
-	input [4 : 0] a,
-	input [31 : 0] d,
-	input [4 : 0] dpra,
-	input clk,
-	input we,
-	output [31 : 0] spo,
-	output [31 : 0] dpo
-   );
+	a,
+	d,
+	dpra,
+	clk,
+	we,
+	spo,
+	dpo);
+
+	input [4 : 0] a;
+	input [31 : 0] d;
+	input [4 : 0] dpra;
+	input clk;
+	input we;
+	output [31 : 0] spo;
+	output [31 : 0] dpo;
 
    // synthesis translate_off
 

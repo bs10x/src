@@ -46,18 +46,17 @@ module reg_half(
 	spo,
 	dpo);
 
-
-input [4 : 0] a;
-input [31 : 0] d;
-input [4 : 0] dpra;
-input clk;
-input we;
-output [31 : 0] spo;
-output [31 : 0] dpo;
+	input [4 : 0] a;
+	input [31 : 0] d;
+	input [4 : 0] dpra;
+	input clk;
+	input we;
+	output [31 : 0] spo;
+	output [31 : 0] dpo;
 
 // synthesis translate_off
 
-      DIST_MEM_GEN_V4_1 #(
+    DIST_MEM_GEN_V4_1 #(
 		.C_ADDR_WIDTH(5),
 		.C_DEFAULT_DATA("0"),
 		.C_DEPTH(32),
@@ -108,7 +107,6 @@ output [31 : 0] dpo;
 		.QDPO_SRST(),
 		.QSPO(),
 		.QDPO());
-
 
 // synthesis translate_on
 
