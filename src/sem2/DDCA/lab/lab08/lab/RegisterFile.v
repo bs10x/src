@@ -43,7 +43,9 @@ module RegisterFile(
 	   .dpra(A1), // Bus [4 : 0] 
 	   .clk(CLK),
 	   .we(WE3),
-	   .dpo(Read1)
+	   .dpo(Read1),
+	   .spo()
+	   
 	); // Bus [31 : 0] 
 
 	reg_half i_portB (
@@ -52,7 +54,8 @@ module RegisterFile(
 	   .dpra(A2), // Bus [4 : 0] 
 	   .clk(CLK),
 	   .we(WE3),
-	   .dpo(Read2)
+	   .dpo(Read2),
+	   .spo()
 	); // Bus [31 : 0]     
 	
 	// For both ports, if the address is 0 
