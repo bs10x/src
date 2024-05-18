@@ -160,8 +160,7 @@ module MIPS(
    assign IOWriteEn   = MemWrite & IsIO;                    // Is 1 when there is a SW instruction on IO address 
 
    assign ReadMemIO   = IsIO ? IOReadData : ReadData;   // Mux selects memory or I/O	
-   // Select either the Data Memory (or IO) output or the ALU Result	
-   assign Result = MemtoReg ? ReadMemIO : ALUResult;    // Slightly modified to include above
+   assign Result = MemtoReg ? ReadMemIO : ALUResult;    // Select either the Data Memory (or IO) output or the ALU Result	
 
    ////////////////////////////////////
    // The Control Unit
