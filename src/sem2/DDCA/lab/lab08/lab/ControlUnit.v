@@ -30,7 +30,7 @@ module ControlUnit(
 	output       ALUSrc,
 	output       RegDst,
 	output       RegWrite
-    );
+	);
 	 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEFINE SOME CONSTANTS to make life easier

@@ -181,6 +181,53 @@ module MIPS(
 endmodule
 
 
+module ControlUnit(
+	input  [5:0] Op,
+	input  [5:0] Funct,
+	output       Jump,
+	output       MemtoReg,
+	output       MemWrite,
+	output       Branch,
+	output [5:0] ALUControl,
+	output       ALUSrc,
+	output       RegDst,
+	output       RegWrite
+   );
+	 
+	//////////////////////////////////////////////////////////////////////////////////
+	// DEFINE SOME CONSTANTS to make life easier
+	localparam [5:0] OP_RTYPE = 6'b000000;  // There is an R-Type of Operation
+	localparam [5:0] OP_LW    = 6'b100011;  // The Load Word operation
+	localparam [5:0] OP_SW    = 6'b101011;  // The Store Word operation
+	localparam [5:0] OP_BEQ   = 6'b000100;  // The Branch on Equal operation
+	localparam [5:0] OP_ADDI  = 6'b001000;  // The ADDimmediate operation
+	localparam [5:0] OP_J     = 6'b000010;  // The Jump operation
+
+	//////////////////////////////////////////////////////////////////////////////////
+	// DEFINE THE MAIN CONTROL SIGNALS
+	// The control signals are mostly based on the table 7.5 on page 379
+	// Don't care statements have been mapped to '0' in most cases
+	//
+	// All signals are handled separately, see alternative for an example
+
+	// We will write to registers when OP is Rtype or LW or ADDI 
+	assign RegWrite = (Op == OP_RTYPE) | (Op == OP_LW) | ( Op == OP_ADDI) ; 	 
+	// Select the input of the ALU
+	assign ALUSrc   = (Op == OP_LW) | (Op == OP_SW) | (Op == OP_ADDI) ;
+
+	// Simple assignments
+	assign RegDst   = (Op == OP_RTYPE); // The destination is a register
+	assign Branch   = (Op == OP_BEQ);   // 1: if there is a branch instruction 
+	assign MemWrite = (Op == OP_SW);    // 1: for Store Word
+	assign MemtoReg = (Op == OP_LW);	   // 1: when Load Word
+	assign Jump     = (Op == OP_J);	   // 1: when Jump
+
+	assign ALUControl =
+		ALUSrc ? 6'b100000 :  // if LW, SW or ADDI, perform an ADD
+		Branch ? 6'b100010 :  // if BEQ, perform a SUB
+		Funct;       // per default assume an R-Type and do what Funct says
+endmodule
+
 
 module InstructionMemory(
   input  [5:0] A,   // Address of the Instruction max 64 instructions
@@ -195,3 +242,72 @@ module InstructionMemory(
   end
   assign RD= InsArr[A];   // The Read Data (RD) output corresponds to the Address (A)
 endmodule
+
+
+module ALU ( 
+  input  [31:0] a,
+  input  [31:0] b,
+	input  [3:0] aluop,
+	output [31:0] result,
+	output zero
+  );
+
+  wire [31:0] logicout;   // output of the logic block
+  wire [31:0] addout;     // adder subtractor out
+  wire [31:0] arithout;   // output after alt
+  wire [31:0] n_b;        // inverted b
+  wire [31:0] sel_b;      // select b or n_b;
+  wire [31:0] slt;        // output of the slt extension
+  
+  wire [1:0] logicsel;    // lower two bits of aluop;
+
+  // logic select 
+  assign logicsel = aluop[1:0];
+  assign logicout =
+    (logicsel == 2'b00) ? a & b :
+    (logicsel == 2'b01) ? a | b :
+    (logicsel == 2'b10) ? a ^ b :
+    ~(a | b) ;
+
+  // adder subtractor
+  assign n_b = ~b ;  // invert b
+  assign sel_b = (aluop[1])? n_b : b ;
+  assign addout = a + sel_b + aluop[1];
+  
+  // set less than operator
+  assign slt = {31'b0,addout[31]};
+  
+  // arith out
+  assign arithout = (aluop[3]) ? slt : addout;
+  
+  // final out
+  assign result = (aluop[2]) ? logicout : arithout;
+  
+  // the zero
+  assign zero = (result == 32'b0) ? 1: 0;
+endmodule
+
+
+module DataMemory(
+  input         CLK,  // Clock signal rising edge
+  input   [5:0] A,    // Address for 64 locations
+  input         WE,   // Write Enable 1: Write 0: no write
+  input  [31:0] WD,   // 32-bit data in
+  output [31:0] RD    // 32-bit read data
+  );
+  reg [31:0] DataArr [63:0];   // This is the variable that holds the memory
+  initial
+  begin
+    $readmemh("datamem_h.txt", DataArr);  // Initialize the array with this content
+  end
+
+  assign RD = DataArr[A];      // Read Data (RD) corresponds to address (A)
+
+  always @ ( posedge CLK )     // At rising edge of CLK
+  begin
+    if (WE)                  // if Write Enable (WE) is set
+      DataArr[A] <= WD;     // Copy Write Data (WD) to the address (A)
+  end
+endmodule
+
+
