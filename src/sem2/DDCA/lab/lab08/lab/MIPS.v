@@ -181,6 +181,11 @@ module MIPS(
 endmodule
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module ControlUnit(
 	input  [5:0] Op,
 	input  [5:0] Funct,
@@ -228,7 +233,6 @@ module ControlUnit(
 		Funct;       // per default assume an R-Type and do what Funct says
 endmodule
 
-
 module InstructionMemory(
   input  [5:0] A,   // Address of the Instruction max 64 instructions
 	output [31:0] RD   // Value at Address
@@ -243,6 +247,27 @@ module InstructionMemory(
   assign RD= InsArr[A];   // The Read Data (RD) output corresponds to the Address (A)
 endmodule
 
+module DataMemory(
+  input         CLK,  // Clock signal rising edge
+  input   [5:0] A,    // Address for 64 locations
+  input         WE,   // Write Enable 1: Write 0: no write
+  input  [31:0] WD,   // 32-bit data in
+  output [31:0] RD    // 32-bit read data
+  );
+  reg [31:0] DataArr [63:0];   // This is the variable that holds the memory
+  initial
+  begin
+    $readmemh("datamem_h.txt", DataArr);  // Initialize the array with this content
+  end
+
+  assign RD = DataArr[A];      // Read Data (RD) corresponds to address (A)
+
+  always @ ( posedge CLK )     // At rising edge of CLK
+  begin
+    if (WE)                  // if Write Enable (WE) is set
+      DataArr[A] <= WD;     // Copy Write Data (WD) to the address (A)
+  end
+endmodule
 
 module ALU ( 
   input  [31:0] a,
@@ -287,27 +312,115 @@ module ALU (
   assign zero = (result == 32'b0) ? 1: 0;
 endmodule
 
+module reg_half(
+	input [4 : 0] a,
+	input [31 : 0] d,
+	input [4 : 0] dpra,
+	input clk,
+	input we,
+	output [31 : 0] spo,
+	output [31 : 0] dpo
+   );
 
-module DataMemory(
-  input         CLK,  // Clock signal rising edge
-  input   [5:0] A,    // Address for 64 locations
-  input         WE,   // Write Enable 1: Write 0: no write
-  input  [31:0] WD,   // 32-bit data in
-  output [31:0] RD    // 32-bit read data
-  );
-  reg [31:0] DataArr [63:0];   // This is the variable that holds the memory
-  initial
-  begin
-    $readmemh("datamem_h.txt", DataArr);  // Initialize the array with this content
-  end
+   // synthesis translate_off
 
-  assign RD = DataArr[A];      // Read Data (RD) corresponds to address (A)
+   //    DIST_MEM_GEN_V4_1 #(
+	// 	.C_ADDR_WIDTH(5),
+	// 	.C_DEFAULT_DATA("0"),
+	// 	.C_DEPTH(32),
+	// 	.C_HAS_CLK(1),
+	// 	.C_HAS_D(1),
+	// 	.C_HAS_DPO(1),
+	// 	.C_HAS_DPRA(1),
+	// 	.C_HAS_I_CE(0),
+	// 	.C_HAS_QDPO(0),
+	// 	.C_HAS_QDPO_CE(0),
+	// 	.C_HAS_QDPO_CLK(0),
+	// 	.C_HAS_QDPO_RST(0),
+	// 	.C_HAS_QDPO_SRST(0),
+	// 	.C_HAS_QSPO(0),
+	// 	.C_HAS_QSPO_CE(0),
+	// 	.C_HAS_QSPO_RST(0),
+	// 	.C_HAS_QSPO_SRST(0),
+	// 	.C_HAS_SPO(1),
+	// 	.C_HAS_SPRA(0),
+	// 	.C_HAS_WE(1),
+	// 	.C_MEM_INIT_FILE("no_coe_file_loaded"),
+	// 	.C_MEM_TYPE(2),
+	// 	.C_PARSER_TYPE(1),
+	// 	.C_PIPELINE_STAGES(0),
+	// 	.C_QCE_JOINED(0),
+	// 	.C_QUALIFY_WE(0),
+	// 	.C_READ_MIF(0),
+	// 	.C_REG_A_D_INPUTS(0),
+	// 	.C_REG_DPRA_INPUT(0),
+	// 	.C_SYNC_ENABLE(1),
+	// 	.C_WIDTH(32))
+	// inst (
+	// 	.A(a),
+	// 	.D(d),
+	// 	.DPRA(dpra),
+	// 	.CLK(clk),
+	// 	.WE(we),
+	// 	.SPO(spo),
+	// 	.DPO(dpo),
+	// 	.SPRA(),
+	// 	.I_CE(),
+	// 	.QSPO_CE(),
+	// 	.QDPO_CE(),
+	// 	.QDPO_CLK(),
+	// 	.QSPO_RST(),
+	// 	.QDPO_RST(),
+	// 	.QSPO_SRST(),
+	// 	.QDPO_SRST(),
+	// 	.QSPO(),
+	// 	.QDPO());
 
-  always @ ( posedge CLK )     // At rising edge of CLK
-  begin
-    if (WE)                  // if Write Enable (WE) is set
-      DataArr[A] <= WD;     // Copy Write Data (WD) to the address (A)
-  end
+   // synthesis translate_on
+   // XST black box declaration
+   // box_type "black_box"
+   // synthesis attribute box_type of reg_half is "black_box"
 endmodule
 
+module RegisterFile(
+	input   [4:0] A1,   // selects one of 32 registers
+	output [31:0] RD1,  // register corresponding to A1
+	input   [4:0] A2,   // selects one of 32 registers
+	output [31:0] RD2,  // register corresponding to A2
+	input   [4:0] A3,   // selects the address for writeback
+	input  [31:0] WD3,  // Write-back data, will be written to addess A3
+	input         WE3,  // Write-enable for third port WE3=1 write WD3 to A3
+	input         CLK   // System clock
+   );
+   
+   wire [31:0] Read1;  // output of PortA
+	wire [31:0] Read2;  // output of PortB
+	// once everything works do not forget to add a reset here 
+	// you should not enable WE while there is a reset
+ 
+  	// we instantiate two memories  
+	reg_half i_portA	 (
+	   .a(A3), // Bus [4 : 0] 
+	   .d(WD3), // Bus [31 : 0] 
+	   .dpra(A1), // Bus [4 : 0] 
+	   .clk(CLK),
+	   .we(WE3),
+	   .dpo(Read1)
+	); // Bus [31 : 0] 
 
+	reg_half i_portB (
+	   .a(A3), // Bus [4 : 0] 
+	   .d(WD3), // Bus [31 : 0] 
+	   .dpra(A2), // Bus [4 : 0] 
+	   .clk(CLK),
+	   .we(WE3),
+	   .dpo(Read2)
+	); // Bus [31 : 0]     
+	
+	// For both ports, if the address is 0 
+	// Then the output will be zero
+	// Otherwise read the output from the register file 
+
+	assign RD1 = (A1 != 4'b0000) ? Read1 : 0; // Port 1
+	assign RD2 = (A2 != 4'b0000) ? Read2 : 0; // Port 2
+endmodule
