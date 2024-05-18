@@ -143,7 +143,7 @@ module MIPS(
 	// Instantiate the Data Memory
    DataMemory i_dmem (
       // TODO PART 1 !!
-      .input(CLK),   // Clock signal rising edge
+      .CLK(CLK),   // Clock signal rising edge
       .A(ALUResult[7:2]),       // Address for 64 locations [5:0]
       .WE(MemWrite),      // Write Enable 1: Write 0: no write
       .WD(WriteData),      // 32-bit data in
@@ -167,15 +167,31 @@ module MIPS(
    // The Control Unit
    ControlUnit i_cont (
       // TODO PART 1 !!
-      Op(Instr[31:26]),
-      Funct(Instr[5:0]),
-      Jump(Jump),
-      MemtoReg(MemtoReg),
-      MemWrite(MemWrite),
-      Branch(Branch),
-      ALUControl(ALUControl),
-      ALUSrc(ALUSrc),
-      RegDst(RegDst),
-      RegWrite(RegWrite)
+      .Op(Instr[31:26]),
+      .Funct(Instr[5:0]),
+      .Jump(Jump),
+      .MemtoReg(MemtoReg),
+      .MemWrite(MemWrite),
+      .Branch(Branch),
+      .ALUControl(ALUControl),
+      .ALUSrc(ALUSrc),
+      .RegDst(RegDst),
+      .RegWrite(RegWrite)
    );
+endmodule
+
+
+
+module InstructionMemory(
+  input  [5:0] A,   // Address of the Instruction max 64 instructions
+	output [31:0] RD   // Value at Address
+  );
+
+ reg [31:0] InsArr [63:0];  // Array holding the memory 64 entries each 32 bits
+ 
+ initial
+  begin
+    $readmemh("insmem_h.txt", InsArr);  // Initialize the array with this content
+  end
+  assign RD= InsArr[A];   // The Read Data (RD) output corresponds to the Address (A)
 endmodule
