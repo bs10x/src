@@ -8,51 +8,46 @@
 .text
 
 main:
-    li      $s0,            0           # Initialize the counter
-
     # Prepare the function arguments
     li      $a0,            1           # R1
-    li      $a1,            2           # R2
-    li      $a2,            3           # G1
-    li      $a3,            4           # G2
+    li      $a1,            5           # R2
+    li      $a2,            1           # G1
+    li      $a3,            10          # G2
+    li      $t0,            5           # B1
+    li      $t1,            1           # B2
 
     sub     $sp,            $sp,    8   # Reserve space on the stack
 
-    li      $sp,            5           # Save $a4 on the stack, B1
-    add     $sp,            $sp,    4   # go to next stack argument
-
-    li      $sp,            6           # Save $a5 on the stack, B2
-    add     $sp,            $sp,    4   # go to next stack argument
+    sw      $t0,            0($sp)      # Save $a4 on the stack, B1
+    sw      $t1,            4($sp)      # Save $a4 on the stack, B1
 
     jal     abs_diff_color
     move    $t9,            $v0         # Save the result in $t9
     j       end                         # Jump to the end of the program
 
-
     # Absolute difference between three channels
 abs_diff_color:
+    sub     $sp,            $sp,    4   # Reserve space on the stack
+    sw      $ra,            0($sp)      # Save return address
+
     jal     abs_diff                    # abs_diff(R1, R2)
-    add     $s0,            $t0,    $v0 # Add the result to $t0
+    move    $t0,            $v0         # write the result to $t0
 
     move    $a0,            $a2         # Prepare the function arguments
     move    $a1,            $a3
     jal     abs_diff                    # abs_diff(G1, G2)
-    add     $s0,            $t0,    $v0 # Add the result to $t0
+    add     $t0,            $t0,    $v0 # Add the result to $s0
 
-    sub     $sp,            $sp,    8   # Get the stack stored values
-    
-    sw      $a0,            0($sp)      # B1
-    add     $sp,            $sp,    4   # go to next stack argument
-    sw      $a1,            0($sp)      # B2
-    add     $sp,            $sp,    4   # go to next stack argument
+    lw      $a0,            4($sp)      # B1
+    lw      $a1,            8($sp)      # B2
     jal     abs_diff                    # abs_diff(B1, B2)
+    add     $t0,            $t0,    $v0 # Add the result to $t0
 
-    add     $s0,            $t0,    $v0 # Add the result to $t0
+    lw      $ra,            0($sp)      # restore return address from stack
+    add     $sp,            $sp,    12  # reset stack
 
-    move    $v0,            $s0         # Return the result in $v0
-
-    # jr      $ra                         # Return to the calling function
-    # j       end
+    move    $v0,            $t0         # Return the result in $v0
+    jr      $ra                         # Return to the calling function
 
     # Absolute difference, $a0 = l, $a1 = r
 abs_diff:
