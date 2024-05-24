@@ -20,8 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module top(
   input             FPGACLK,
-  // TODO PART II for Lab 8
-  // add input port to read the switch value for speed control of the snake
+  input             speed,
   input             RESET,
   output     [6:0]  LED,
   output reg [3:0]  AN
@@ -43,6 +42,7 @@ module top(
                                // The counter is large to allow enough time
                                // for each LED to fully light up. 
                                // we could probably increase it a bit further
+  reg [1:0] speed;             // Speed of the snake
 
   // Signals for composing the input
   wire  [1:0]  IOin;           // output of the multiplexer
