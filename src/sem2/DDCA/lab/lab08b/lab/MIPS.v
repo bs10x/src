@@ -72,8 +72,8 @@ module MIPS(
 	wire        RegDst;    // Destination Register 1: Instr[15:11] 0: Instr[20:15]
 	wire        RegWrite;  // 1: We will write back to the RegisterFile
 
-   // Memory Mapped I/O Signals
-   wire        IsIO;      // 1: if Address is in I/O range 0x00007ff0 to 0x0007fff
+   	// Memory Mapped I/O Signals
+   	wire        IsIO;      // 1: if Address is in I/O range 0x00007ff0 to 0x0007fff
 	wire        IsMemWrite;// 1: if MemWrite and not IsIO, we write to memory, not to the IO
 	wire [31:0] ReadMemIO;  // Read from either Memory or I/O
 	
@@ -83,16 +83,16 @@ module MIPS(
    ////////////////////////////////////
 	// The Program Counter
 	always @ ( posedge CLK, posedge RESET ) 
-   begin
-	  if    (RESET	  == 1'b1) PC <= 32'h00002FFC; // default program counter 
-	  else                    PC <= PCbar;        // Copy next value to present
-   end
+	begin
+		if    (RESET	  == 1'b1) PC <= 32'h00002FFC; // default program counter 
+		else                    PC <= PCbar;        // Copy next value to present
+	end
    
 	// Calculation of the next PC value
-   assign PCPlus4  = PC + 4;                             // By default the PC increments by 4
-   assign PCBranch = PCPlus4 + {SignImm[29:0],2'b00};    // The branch address see Page 373, Fig 7.10
+	assign PCPlus4  = PC + 4;                             // By default the PC increments by 4
+   	assign PCBranch = PCPlus4 + {SignImm[29:0],2'b00};    // The branch address see Page 373, Fig 7.10
 	assign PCCalc = PCSrc ? PCBranch : PCPlus4;           // Multiplexer selects Branch or only +4
-   assign PCJump = {PCPlus4[31:28], Instr[25:0], 2'b00}; // The Jump value
+   	assign PCJump = {PCPlus4[31:28], Instr[25:0], 2'b00}; // The Jump value
 	assign PCbar  = Jump  ? PCJump   : PCCalc;            // Multiplexer selects Jump or Normal
 
    /////////////////////////////////////
