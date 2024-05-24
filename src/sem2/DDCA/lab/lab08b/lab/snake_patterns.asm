@@ -12,7 +12,7 @@ pattern:
         0x00200000, 0x00004000, 0x00000080, 0x00000001,
         0x00000002, 0x00000004, 0x00000008, 0x00000400,
         0x00020000, 0x01000000, 0x02000000, 0x04000000
-loopcnt:    .word   0x001e8484
+loopcnt:    .word   0x001e8484, 0x00000000, 0x00000000, 0x00000000      # array of values for loopcounter, bigger => slower
 
 .text   
 main:
@@ -32,6 +32,6 @@ forward:
     addi    $t2,    $0,         0                  # clear $t2 counter
 
 wait:       
-    beq     $t2,    $t3,        forward
+    beq     $t2,    (4)$t3,        forward
     addi    $t2,    $t2,        1                  # increment counter
     j       wait
