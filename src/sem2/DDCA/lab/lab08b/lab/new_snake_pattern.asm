@@ -32,7 +32,7 @@ forward:
     addi    $t2,        $0,         0               # clear $t2 counter
 
 wait:       
-    beq     $t2,        $t3,        forward
+    bgt     $t2,        $t3,        forward
     lw      $t1,        0x7ff4($0)                  # read the speed controll value
     addi    $t1,        $t1,        1
     add     $t2,        $t2,        $t1             # increment counter
