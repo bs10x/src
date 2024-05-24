@@ -23,8 +23,8 @@ loopcnt:
 main:
     # reg to hold starting address of speed
     lw      $t1,    0x7ff4($0)                      # read the value from the switches (speed controll)
+    # lw      $t6,    0x7ff4($0)                      # read the value from the switches (speed controll)
     lw      $t3,    loopcnt($t1)                    # initialize a  large loopcounter (so that the snake does not crawl SUPERFAST)
-    lw      $t6,    0x7ff4($0)                      # read the value from the switches (speed controll)
     addi    $t5,    $0,         48                  # initialize the length of the display pattern (in bytes)
 
 restart:    
