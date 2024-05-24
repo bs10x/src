@@ -17,6 +17,7 @@ loopcnt:    .word   0x001e8484
 .text   
 main:
     lw      $t3,    loopcnt                        # initialize a  large loopcounter (so that the snake does not crawl SUPERFAST)
+    lw      $t6,    0x00007ff0($0)                      # read the value from the display
     addi    $t5,    $0,         48                 # initialize the length of the display pattern (in bytes)
 
 restart:    
