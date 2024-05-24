@@ -35,5 +35,5 @@ wait:
     beq     $t2,        $t3,        forward
     lw      $t1,        0x7ff4($0)                  # read the speed controll value
     addi    $t1,        $t1,        1
-    addi    $t2,        $t2,        $t1             # increment counter
+    add     $t2,        $t2,        $t1             # increment counter
     j       wait
