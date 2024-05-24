@@ -11,6 +11,7 @@ pattern:    .word   0x00200000, 0x00004000, 0x00000080, 0x00000001, 0x00000002, 
 loopcnt:    .word   0x001e8484
 
 .text   
+main:
     lw      $t3,    loopcnt                                                                                                                                         # initialize a  large loopcounter (so that the snake does not crawl SUPERFAST)
     addi    $t5,    $0,         48                                                                                                                                  # initialize the length of the display pattern (in bytes)
 
