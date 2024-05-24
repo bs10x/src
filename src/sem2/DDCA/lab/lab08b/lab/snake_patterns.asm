@@ -12,12 +12,12 @@ pattern:
         0x00200000, 0x00004000, 0x00000080, 0x00000001,
         0x00000002, 0x00000004, 0x00000008, 0x00000400,
         0x00020000, 0x01000000, 0x02000000, 0x04000000
-loopcnt:    .word   0x001e8484, 0x00000000, 0x00000000, 0x00000000      # array of values for loopcounter, bigger => slower
+loopcnt:    .word   0x001e8484
 
 .text   
 main:
     lw      $t3,    loopcnt                        # initialize a  large loopcounter (so that the snake does not crawl SUPERFAST)
-    lw      $t6,    0x00007ff0($0)                      # read the value from the display
+    lw      $t6,    0x7ff4($0)                      # read the value from the switches (speed controll)
     addi    $t5,    $0,         48                 # initialize the length of the display pattern (in bytes)
 
 restart:    
@@ -32,6 +32,6 @@ forward:
     addi    $t2,    $0,         0                  # clear $t2 counter
 
 wait:       
-    beq     $t2,    (4)$t3,        forward
+    beq     $t2,    0x7ff4($t3),        forward
     addi    $t2,    $t2,        1                  # increment counter
     j       wait
