@@ -28,31 +28,31 @@ module MIPS(
    input  [31:0] IOReadData     // 32bit input from the I/O interface        
    );
 
-   // The MIPS processor
+   	// The MIPS processor
 	// (Mostly) based on the descriptions on the textbook 
 	// Digital Design and Computer Architecture
 	// Chapter 7, Section 7.3, pages 368-381
 
 //////////////////////////////////////////////////////////////////////////////////
-   // Signal Declarations
+   	// Signal Declarations
 	// Refer to Figure 7.14 page 379 for names 
 
-   // Instruction Decoding
+	// Instruction Decoding
 	wire [31:0] Instr;     // The output of the Instruction memory
-   wire [31:0] SignImm;   // 32-bit extended Immediate value
-   wire  [4:0] WriteReg;  // Address of the register for write back
+   	wire [31:0] SignImm;   // 32-bit extended Immediate value
+   	wire  [4:0] WriteReg;  // Address of the register for write back
 
 	// Address controls 
 	reg  [31:0] PC;        // The Program counter (registered)
 	wire [31:0] PCbar;     // Next state value of the Program counter, PC' in the diagram
-   wire [31:0] PCCalc;    // Calculated value for the (next) PC
-   wire [31:0] PCJump;    // Value for immediate jump
+   	wire [31:0] PCCalc;    // Calculated value for the (next) PC
+   	wire [31:0] PCJump;    // Value for immediate jump
 	wire [31:0] PCBranch;  // Value calculated for the branch instructions
 	wire [31:0] PCPlus4;   // The current value of PC + 4, default next memory address
 
-   // ALU related
-   wire [31:0] SrcA;      // One input of the ALU
-   wire [31:0] SrcB;      // Other input of the ALU
+   	// ALU related
+   	wire [31:0] SrcA;      // One input of the ALU
+   	wire [31:0] SrcB;      // Other input of the ALU
 	wire [31:0] ALUResult; // The output of the ALU
 	wire        Zero;      // The Zero flag, 1: if ALUResult == 0 
 	
@@ -95,23 +95,23 @@ module MIPS(
    	assign PCJump = {PCPlus4[31:28], Instr[25:0], 2'b00}; // The Jump value
 	assign PCbar  = Jump  ? PCJump   : PCCalc;            // Multiplexer selects Jump or Normal
 
-   /////////////////////////////////////
-   // Instantiate the Instruction Memory
-   InstructionMemory i_imem (
+   	/////////////////////////////////////
+   	// Instantiate the Instruction Memory
+	InstructionMemory i_imem (
       // TODO PART 1 !!
       .A(PC[7:2]),   // Address of the Instruction, [5:0]
       .RD(Instr)   // Value at Address, [31:0]
    );
 										
-   // Sign extension, replicate the MSB of the Immediate value 
+   	// Sign extension, replicate the MSB of the Immediate value 
 	assign SignImm = {{16{Instr[15]}},Instr[15:0]};
 
-   // Determine the Write Back address for the Register File
+   	// Determine the Write Back address for the Register File
 	assign WriteReg = RegDst ? Instr[15:11] : Instr[20:16];
 	
-   ////////////////////////////////////
-   // Instantiate the Register File
-   RegisterFile i_regf (
+   	////////////////////////////////////
+   	// Instantiate the Register File
+	RegisterFile i_regf (
       .A1(Instr[25:21]),   // Address for First Register
       .A2(Instr[20:16]),   // Address for Second Register
       .A3(WriteReg),       // Address for Write Back
@@ -123,32 +123,32 @@ module MIPS(
    );
 
 
-   ////////////////////////////////////
-   // ALU: first determine the inputs, and then instantiate the ALU
+   	////////////////////////////////////
+   	// ALU: first determine the inputs, and then instantiate the ALU
 	assign SrcB = ALUSrc ? SignImm : WriteData ; // ALU input is either immediate or from register
 
-   ALU i_alu (
+	ALU i_alu (
       // TODO PART 1 !!
       .a(SrcA),
       .b(SrcB),
       .aluop(ALUControl[3:0]),
       .result(ALUResult),
       .zero(Zero)
-   );
+	);
 					 
    // Generate the PCSrc signal that tells to take the branch
 	assign PCSrc = Branch & Zero;                // simple AND
    
-   ////////////////////////////////////
+	////////////////////////////////////
 	// Instantiate the Data Memory
-   DataMemory i_dmem (
-      // TODO PART 1 !!
-      .CLK(CLK),   // Clock signal rising edge
-      .A(ALUResult[7:2]),       // Address for 64 locations [5:0]
-      .WE(MemWrite),      // Write Enable 1: Write 0: no write
-      .WD(WriteData),      // 32-bit data in
-      .RD(ReadData)       // 32-bit read data
-   );
+   	DataMemory i_dmem (
+		// TODO PART 1 !!
+		.CLK(CLK),   // Clock signal rising edge
+		.A(ALUResult[7:2]),       // Address for 64 locations [5:0]
+		.WE(MemWrite),      // Write Enable 1: Write 0: no write
+		.WD(WriteData),      // 32-bit data in
+		.RD(ReadData)       // 32-bit read data
+	);
 
    // Memory Mapped I/O
    assign IsIO = (ALUResult[31:4] == 28'h00007ff) ? 1 : 0; // 1: when datamemory address falls into I/O  address range
