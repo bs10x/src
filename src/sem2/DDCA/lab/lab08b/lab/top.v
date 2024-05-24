@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module top(
   input             FPGACLK,
-  input             speed,
+  // input             speed,
   input             RESET,
   output     [6:0]  LED,
   output reg [3:0]  AN
@@ -42,7 +42,7 @@ module top(
                                // The counter is large to allow enough time
                                // for each LED to fully light up. 
                                // we could probably increase it a bit further
-  reg [1:0] speed;             // Speed of the snake
+  // reg [1:0] speed;             // Speed of the snake
 
   // Signals for composing the input
   wire  [1:0]  IOin;           // output of the multiplexer
@@ -86,7 +86,7 @@ clockdiv ClockDiv (
   // Create the 32 bit IOReadData based on IOAddr value. Remember IOAddr is a 4-bit
   // value.
     
-  // assign IOReadData = ;
+  assign IOReadData = (IOAddr == 4b'0100)? 1 : 0;
 
 
   // Register to save the 28-bit Value
