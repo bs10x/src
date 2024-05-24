@@ -69,10 +69,10 @@ clockdiv ClockDiv (
   always @ ( * )  // combinational process
   begin
     case (DispCount[15:14])
-        2'b00:   begin AN = 4'b1110; DispDigit = DispReg[6:0];  end   // LSB
-        2'b01:   begin AN = 4'b1101; DispDigit = DispReg[13:7];  end   // 2nd digit
-        2'b10:   begin AN = 4'b1011; DispDigit = DispReg[20:14]; end   // 3rd digit
-        2'b11:   begin AN = 4'b0111; DispDigit = DispReg[27:21]; end   // MSB, default
+      2'b00:   begin AN = 4'b1110; DispDigit = DispReg[6:0];  end   // LSB
+      2'b01:   begin AN = 4'b1101; DispDigit = DispReg[13:7];  end   // 2nd digit
+      2'b10:   begin AN = 4'b1011; DispDigit = DispReg[20:14]; end   // 3rd digit
+      2'b11:   begin AN = 4'b0111; DispDigit = DispReg[27:21]; end   // MSB, default
     endcase  
   end
 		
