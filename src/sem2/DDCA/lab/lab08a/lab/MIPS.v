@@ -34,7 +34,7 @@ module MIPS(
 	// Chapter 7, Section 7.3, pages 368-381
 
 //////////////////////////////////////////////////////////////////////////////////
-   // Signal Declarations
+// Signal Declarations
 	// Refer to Figure 7.14 page 379 for names 
 
    // Instruction Decoding
@@ -178,6 +178,38 @@ module MIPS(
       .RegWrite(RegWrite)
    );
 endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
