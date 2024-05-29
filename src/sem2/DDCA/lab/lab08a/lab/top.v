@@ -68,6 +68,7 @@ clockdiv ClockDiv (
   // 1.6ms  == 65536/4 * 100ns
   always @ ( * )  // combinational process
   begin
+    // 00_(16*0)
     case (DispCount[15:14])
         2'b00:   begin AN = 4'b1110; DispDigit = DispReg[6:0];  end   // LSB
         2'b01:   begin AN = 4'b1101; DispDigit = DispReg[13:7];  end   // 2nd digit
