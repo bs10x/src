@@ -22,7 +22,7 @@
 module ALU( 
   input  [31:0] a,
   input  [31:0] b,
-  input  [3:0] aluop,
+  input  [5:0] aluop,
   output [31:0] result,
   output zero
  );
@@ -35,6 +35,10 @@ module ALU(
   wire [31:0] slt;        // output of the slt extension
   
   wire [1:0] logicsel;    // lower two bits of aluop;
+
+  // localparam [5:0] FUNCT_SRL   = 6'b000010;  // The Shift Right Logical operation
+  // localparam [5:0] FUNCT_MULU  = 6'b011001;  // The Multiply Unsigned operation
+  // localparam [5:0] FUNCT_MFLO =  6'b010010;  // The Move From LO operation
   
   // logic select 
   assign logicsel = aluop[1:0];
