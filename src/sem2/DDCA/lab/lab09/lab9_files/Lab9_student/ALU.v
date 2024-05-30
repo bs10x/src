@@ -23,6 +23,7 @@ module ALU(
   input  [31:0] a,
   input  [31:0] b,
   input  [5:0] aluop,
+  input  [4:0] shamt,
   output [31:0] result,
   output zero
  );

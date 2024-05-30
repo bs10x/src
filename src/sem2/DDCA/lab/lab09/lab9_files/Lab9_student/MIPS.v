@@ -123,7 +123,7 @@ module MIPS(
   ALU i_alu (
     .a(SrcA),               // First ALU input, direct from register file
     .b(SrcB),               // Second ALU input, from the multiplexer
-    .aluop(ALUControl[3:0]),// ALU operation, at the moment only last 4 bits
+    .aluop(ALUControl[5:0]),// ALU operation, at the moment only last 4 bits
     .result(ALUResult),     // 32-bit output
     .zero(Zero)             // The Zero flag
    );
