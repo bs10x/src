@@ -24,6 +24,8 @@ module ALU(
   input  [31:0] b,
   input  [5:0] aluop,
   input  [4:0] shamt,
+  input CLK,
+  input RESET,
   output [31:0] result,
   output zero
  );
@@ -57,15 +59,18 @@ module ALU(
   
   // final out
   assign result = (aluop[2]) ? logicout : arithout;
+  assign result = (aluop==6'b000010) ? (b >> shamt) : result;
 
-// FUNCT_SRL   = 6'b000010;
-// FUNCT_MULU  = 6'b011001;
-// FUNCT_MFLO =  6'b010010;
+  // FUNCT_SRL   = 6'b000010;
+  // FUNCT_MULU  = 6'b011001;
+  // FUNCT_MFLO =  6'b010010;
   reg LO [31:0];
 
-  assign LO = a * b;
+  always @ (posedge CLK) begin
 
-  assign result = (aluop==6'b000010) ? (b >> shamt) : result;
+  end
+
+
 
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
