@@ -61,7 +61,11 @@ module ALU(
 // FUNCT_SRL   = 6'b000010;
 // FUNCT_MULU  = 6'b011001;
 // FUNCT_MFLO =  6'b010010;
-  assign result = (aluop==6b')
+  reg LO [31:0];
+
+  assign LO = a * b;
+
+  assign result = (aluop==6'b000010) ? (b >> shamt) : result;
 
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
