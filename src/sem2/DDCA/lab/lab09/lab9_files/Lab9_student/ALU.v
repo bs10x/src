@@ -64,13 +64,12 @@ module ALU(
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
 
-
-  always @ (*) begin
+  reg [31:0] tmp;
+  always @ (aluop) begin
     case (aluop)
-      FUNCT_SRL: result <= a >> shamt;
-      FUNCT_MULU: result <= a * b;
-      FUNCT_MFLO: result <= a;
+      FUNCT_SRL: tmp <= a >> shamt;
+      FUNCT_MULU: tmp = a * b;
+      FUNCT_MFLO: tmp = a;
     endcase
   end
-  
 endmodule
