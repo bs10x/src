@@ -37,9 +37,9 @@ module ALU(
   
   wire [1:0] logicsel;    // lower two bits of aluop;
 
-  // localparam [5:0] FUNCT_SRL   = 6'b000010;  // The Shift Right Logical operation
-  // localparam [5:0] FUNCT_MULU  = 6'b011001;  // The Multiply Unsigned operation
-  // localparam [5:0] FUNCT_MFLO =  6'b010010;  // The Move From LO operation
+  localparam [5:0] FUNCT_SRL   = 6'b000010;  // The Shift Right Logical operation
+  localparam [5:0] FUNCT_MULU  = 6'b011001;  // The Multiply Unsigned operation
+  localparam [5:0] FUNCT_MFLO =  6'b010010;  // The Move From LO operation
   
   // logic select 
   assign logicsel = aluop[1:0];
@@ -63,5 +63,14 @@ module ALU(
   assign result = (aluop[2]) ? logicout : arithout;
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
+
+
+  always @ (*) begin
+    case (aluop)
+      FUNCT_SRL: result <= a >> shamt;
+      FUNCT_MULU: result <= a * b;
+      FUNCT_MFLO: result <= a;
+    endcase
+  end
   
 endmodule
