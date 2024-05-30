@@ -125,6 +125,9 @@ module MIPS(
     .b(SrcB),               // Second ALU input, from the multiplexer
     .aluop(ALUControl[5:0]),// ALU operation, at the moment only last 4 bits
     .result(ALUResult),     // 32-bit output
+    .CLK(CLK),              // Clock signal
+    .RESET(RESET),          // Reset signal
+    .shamt(Instr[10:6]),    // Shift amount for shift operations
     .zero(Zero)             // The Zero flag
    );
 

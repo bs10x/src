@@ -61,19 +61,20 @@ module ALU(
   assign result = (aluop[2]) ? logicout : arithout;
   assign result = (aluop==6'b000010) ? (b >> shamt) : result;
 
-  // FUNCT_SRL   = 6'b000010;
-  // FUNCT_MULU  = 6'b011001;
-  // FUNCT_MFLO =  6'b010010;
-  reg LO [31:0];
-
+  reg [31:0] LO;
   always @ (posedge CLK) begin
-
+    if (RESET) begin
+      LO <= 32'b0;
+    end
+    else begin
+      if (aluop == 6'b011001) begin
+        LO <= a * b;
+      end
+    end
   end
 
-
+  assign result = (aluop == 6'b010010) ? LO : result;
 
   // the zero
   assign zero = (result == 32'b0) ? 1: 0;
-
-
 endmodule
