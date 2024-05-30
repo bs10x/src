@@ -19,17 +19,17 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ControlUnit(
-      input  [5:0] Op,
-      input  [5:0] Funct,
-      output       Jump,
-      output       MemtoReg,
-      output       MemWrite,
-      output       Branch,
-      output [5:0] ALUControl,   // Current ALU is 4 bits, this is 6 bit for future
-      output       ALUSrc,
-      output       RegDst,
-      output       RegWrite
-    );
+  input  [5:0] Op,
+  input  [5:0] Funct,
+  output       Jump,
+  output       MemtoReg,
+  output       MemWrite,
+  output       Branch,
+  output [5:0] ALUControl,   // Current ALU is 4 bits, this is 6 bit for future
+  output       ALUSrc,
+  output       RegDst,
+  output       RegWrite
+);
 	 
 //////////////////////////////////////////////////////////////////////////////////
 // DEFINE SOME CONSTANTS to make life easier
