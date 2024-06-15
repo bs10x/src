@@ -1,0 +1,7 @@
+[submodule "sem1/EProg/bfeitknecht"]
+	path = sem1/EProg/bfeitknecht
+	url = https://gitlab.inf.ethz.ch/course-eprog2023/students/bfeitknecht.git
+
+[submodule "sem2/PProg/pprog-bfeitknecht"]
+	path = sem2/PProg/pprog-bfeitknecht
+	url = https://gitlab.inf.ethz.ch/COURSE-PPROG24/pprog-bfeitknecht.git
