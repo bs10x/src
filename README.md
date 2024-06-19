@@ -1,1 +1,3 @@
-Sat Jun 15 12:32:39 CEST 2024
+# source of code
+
+This repo contains my code sources for my studies at ETH.
