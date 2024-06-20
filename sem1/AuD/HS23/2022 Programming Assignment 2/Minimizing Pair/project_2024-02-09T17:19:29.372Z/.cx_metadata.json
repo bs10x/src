@@ -1,0 +1,9 @@
+{
+  "cx_description": "r",
+  "cx_description/en.md": "r",
+  "public": "r",
+  "public/short.out": "r",
+  "public/long.out": "r",
+  "public/short.in": "r",
+  "public/long.in": "r"
+}

@@ -1,0 +1,19 @@
+{
+  "In.java": "r",
+  "Main.java": "e",
+  "Out.java": "r",
+  "algorithms": "r",
+  "algorithms/Algorithms.java": "r",
+  "algorithms/Graph.java": "r",
+  "public": "r",
+  "public/custom.in": "e",
+  "public/custom.out": "e",
+  "public/sample.in": "r",
+  "public/sample.out": "r",
+  "public/test1.in": "r",
+  "public/test1.out": "r",
+  "public/test2.in": "r",
+  "public/test2.out": "r",
+  "public/test3.in": "r",
+  "public/test3.out": "r"
+}

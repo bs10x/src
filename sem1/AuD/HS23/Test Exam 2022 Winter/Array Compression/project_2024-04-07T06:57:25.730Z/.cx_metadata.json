@@ -1,0 +1,12 @@
+{
+  "cx_description": "r",
+  "cx_description/en.md": "r",
+  "cx_description/de.md": "r",
+  "public": "r",
+  "public/example.in": "r",
+  "public/example.out": "r",
+  "public/small.out": "r",
+  "public/small.in": "r",
+  "public/large.in": "r",
+  "public/large.out": "r"
+}

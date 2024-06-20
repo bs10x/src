@@ -1,3 +1,3 @@
 # source of code
 
-This repo contains my code sources for my studies at ETH.
+This repo contains source code of my courses at ETH.

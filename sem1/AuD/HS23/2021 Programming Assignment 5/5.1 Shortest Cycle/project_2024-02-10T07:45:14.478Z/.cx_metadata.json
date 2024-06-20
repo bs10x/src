@@ -1,0 +1,17 @@
+{
+  "In.java": "r",
+  "Main.java": "e",
+  "Out.java": "r",
+  "cx_description": "r",
+  "cx_description/conf.yml": "r",
+  "cx_description/en.md": "r",
+  "public": "r",
+  "public/custom.in": "e",
+  "public/custom.out": "e",
+  "public/example.in": "r",
+  "public/example.out": "r",
+  "public/large.out": "r",
+  "public/small.out": "r",
+  "public/small.in": "r",
+  "public/large.in": "r"
+}

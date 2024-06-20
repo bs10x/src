@@ -1,0 +1,18 @@
+{
+  "cx_description": "r",
+  "cx_description/en.md": "r",
+  "cx_description/de.md": "r",
+  "public": "r",
+  "public/2-max_children.out": "r",
+  "public/1-leaves.out": "r",
+  "public/1-leaves.in": "r",
+  "public/2-max_children.in": "r",
+  "public/3-longest_cycle_small.in": "r",
+  "public/3-longest_cycle_small.out": "r",
+  "public/4-longest_cycle_large.out": "r",
+  "public/4-longest_cycle_large.in": "r",
+  "public/5-min_mst_small.out": "r",
+  "public/5-min_mst_small.in": "r",
+  "public/6-min_mst_large.out": "r",
+  "public/6-min_mst_large.in": "r"
+}
